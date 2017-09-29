@@ -1,19 +1,13 @@
 var mongoose=require('mongoose');
 var {Schema}=mongoose;
+var Rating=require('Ratings.js');
+var Professor=require('Professors.js');
 
-var bcrypt=require('bcrypt-nodejs');
-
-var userSchema= new Schema({
-  email:String,
-  password:String
+var courseSchema = new Schema({
+  name:String,
+  id:String,
+  ratings:[Rating],
+  professors:[Professor],
 });
 
-userSchema.methods.storeHashedPassword=function(password){
-    this.password=bcrypt.hashSync(password, bcrypt.genSaltSync(8)); //hash and store password
-};
-
-userSchema.methods.validPassword=function(password){
-  return bcrypt.compareSync(password, this.password); //compare passwords
-};
-
-module.exports = mongoose.model('user',userSchema);
+module.exports = mongoose.model('Course',courseSchema);
