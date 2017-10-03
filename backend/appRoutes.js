@@ -3,7 +3,6 @@ const path = require('path');
 module.exports = function(app,passport,nev){
    app.use('/users',require('connect-ensure-login').ensureLoggedIn('/login'))
 
-
   app.post('/account/signup',(req,res)=>{
     require('./service/signup.js')(req,res,nev)
   })
@@ -57,5 +56,8 @@ module.exports = function(app,passport,nev){
     })
   })
 
+    app.post('/course/add_rating', (req,res)=>{
+        require('./service/add_rating.js')(req,res)
+    })
 
 };
