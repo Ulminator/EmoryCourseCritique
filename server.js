@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash())
+app.use(express.static(path.join(__dirname, 'public')));
 
 require('./config/nev.js')(nev);
 require('./config/passport.js')(passport);
