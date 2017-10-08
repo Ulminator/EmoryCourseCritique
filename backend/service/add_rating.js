@@ -25,6 +25,7 @@ module.exports = function(req,res){
                         });
                     this_rating.save();
                 }
+                res.json({message: "success"});
             });
         } else {
             // Rating doesn't exist
@@ -41,6 +42,7 @@ module.exports = function(req,res){
                 comment: comment
                 });
             new_rating.save();
+            res.json({message: "success"});
         }
     });
 };
