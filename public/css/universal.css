@@ -1,8 +1,9 @@
  
 /*home start */
+html, body { height: 100%; }
 
  body {
-    display: flex;
+    display: block;
     min-height: 100vh;
     flex-direction: column;
   }
