@@ -1,26 +1,18 @@
 const path = require('path');
 
-module.exports = function(app,passport,nev){
+module.exports = function(app,passport,nev,transport){
    app.use('/users',require('connect-ensure-login').ensureLoggedIn('/login'))
 
-  app.post('/account/signup',(req,res)=>{
-    require('./service/signup.js')(req,res,nev)
-  })
 
-  app.get('/account/signup', (req,res)=>{
-    res.render('signup',{message:req.flash('signup message')});
-  }) //renders sign up page with possible flash messages
+  app.post('/account/signup',(req,res,next)=>{
+    require('./service/signup.js')(req,res,nev,next)
+  })
 
   app.post('/account/login',passport.authenticate('local-login',
     {
-      successReturnToOrRedirect:'/',
-      failureRedirect:'/login',
-      failureFlash:true
-    } //if there is a return to then return ,else go to home page
+      successReturnToOrRedirect:'/users/currentUser',
+      } //if there is a return to then return ,else go to home page
   ));
-  app.get('/account/login',(req,res)=>{
-    res.render('login',{message:req.flash('login message')}); //show login ejs with possible flash messages
-  });
 
   app.get('/users/currentUser',
   (req,res)=>{
@@ -34,30 +26,55 @@ module.exports = function(app,passport,nev){
     res.redirect('/');
   })
 
-  app.get('/account/verification/:URL',function(req,res){
+  app.get('/account/verification/:URL',function(req,res,next){
     var url=req.params.URL;
     nev.confirmTempUser(url,function(err,user){
       if(err){
-        return res.status(404).send({message:"confirming temp user failed"})
+        // return res.status(404).send({message:"confirming temp user failed"})
+        return next(err)
       }
       if(user){
           req.login(user,function(err){
             if(err){
-              res.status(404).send({message:"error when login"})
+              return next(err)
             }
             res.redirect('/users/currentUser')
           })
 
       }
       else{
-        res.json({message:"something went wrong"})
+        res.json({errormessage:"could not find this user"})
       }
 
     })
   })
 
-    app.post('/course/add_rating', (req,res)=>{
+  app.post('/course/add_rating', (req,res)=>{
         require('./service/add_rating.js')(req,res)
+  })
+  app.post('/account/resend-verification',function(req,res,next){
+    var email=req.body.email;
+    nev.resendVerificationEmail(email,function(err,userFound){
+      if(err){
+        // return res.status(404).send("ERROR:sending email failed")
+        return next(err)
+      }
+      if(userFound){
+        res.json({message:"another verification email has just been sent"})
+      }
+      else{
+        res.json({message:"verification code expired, please sign up again"})
+      }
     })
+  })
+
+  app.post('/account/forgot',(req,res,next)=>{
+    require('./service/forgotPass.js')(req,res,next,transport)
+  })
+
+  app.post('/account/reset/:token',(req,res,next)=>{
+    require('./service/resetPass.js')(req,res,next)
+  })
+
 
 };

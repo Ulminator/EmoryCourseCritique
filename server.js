@@ -9,6 +9,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const flash=require('connect-flash');
 const nev=require('email-verification')(mongoose);
+const nodemailer=require('nodemailer')
+var transport=nodemailer.createTransport({
+  service:'Gmail',
+  auth:{
+    'user':"emorycoursecritique@gmail.com",
+     pass:'coursecritique1'
+  }
+})
 
 const winston=require('winston')
 
@@ -32,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('./config/nev.js')(nev);
 require('./config/passport.js')(passport);
-require('./backend/appRoutes')(app,passport,nev);
+require('./backend/appRoutes')(app,passport,nev,transport);
 
 
 app.get('/', (request, response) => {
@@ -40,7 +48,19 @@ app.get('/', (request, response) => {
 });
 
 app.use('/api', api);
-
+// app.use(function(err,req,res,next){
+//   if(err.status&&err.status>100&err.status<500){
+//     res.status(err.status)
+//   }
+//   else{
+//     res.status(500)
+//   }
+//   res.json({error:{
+//     error:err,
+//     message:err.message,
+//     stack:err.stack
+//   }})
+// })
 app.listen(PORT, error => {
     error
     ? console.error(error)
