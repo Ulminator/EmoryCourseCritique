@@ -1,5 +1,6 @@
 const path = require('path');
 var Rating=require(path.join(__dirname,'..','/models/ratings.js'));
+var Professor=require(path.join(__dirname,'..','/models/professor.js'));
 
 module.exports = function(req,res){
     var class_id = req.body.class_id;
@@ -14,7 +15,7 @@ module.exports = function(req,res){
             // Rating already exists
             Rating.findOne({'class_id': class_id, 'prof_id': prof_id}, function(err, this_rating) {
                 if (err) {
-                    // findOne error
+                    // Rating findOne error
                 } else {
                     this_rating.rating_count++;
                     this_rating.ratings.push({
@@ -24,6 +25,15 @@ module.exports = function(req,res){
                         comment: comment,
                         });
                     this_rating.save();
+                    // Add rating to professor
+                    Professor.findOne({id: prof_id}, function(err, this_professor) {
+                        if (err) {
+                            // Professor findOne error
+                        } else {
+                            this_professor.ratings.push(this_rating.id);
+                            this_professor.save();
+                        }
+                    });
                 }
                 res.json({message: "success"});
             });
@@ -42,6 +52,15 @@ module.exports = function(req,res){
                 comment: comment
                 });
             new_rating.save();
+            // Add rating to professor
+            Professor.findOne({id: prof_id}, function(err, this_professor) {
+                if (err) {
+                    // Professor findOne error
+                } else {
+                    this_professor.ratings.push(this_rating.id);
+                    this_professor.save();
+                }
+            });
             res.json({message: "success"});
         }
     });
