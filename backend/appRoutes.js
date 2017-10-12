@@ -1,4 +1,5 @@
 const path = require('path');
+var querymen = require('querymen');
 
 module.exports = function(app,passport,nev,transport){
    app.use('/users',require('connect-ensure-login').ensureLoggedIn('/login'))
@@ -49,9 +50,18 @@ module.exports = function(app,passport,nev,transport){
     })
   })
 
-  app.post('/course/add_rating', (req,res)=>{
+    // Get course page when clicked in search
+    app.get('/course', querymen.middleware({
+        course: {type: String, paths: ['course']}
+    }), function(req, res) {
+        require('./service/get_course.js')(res, req.querymen.query);
+    });
+
+    // Add a rating to a course
+    app.post('/course/add_rating', (req,res)=>{
         require('./service/add_rating.js')(req,res)
-  })
+    })
+  
   app.post('/account/resend-verification',function(req,res,next){
     var email=req.body.email;
     nev.resendVerificationEmail(email,function(err,userFound){
