@@ -49,6 +49,12 @@ module.exports = function(app,passport,nev,transport){
 
     })
   })
+    
+    // Get a course list from the search on the main page
+    // e.g. /search?q=AAS100&page=1&sort=course_num
+    app.get('/search', querymen.middleware(), function(req, res) {
+        require('./service/search.js')(req, res);
+    });
 
     // Get course page when clicked in search
     app.get('/course', querymen.middleware({
