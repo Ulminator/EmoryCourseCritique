@@ -1,17 +1,18 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
-import Body from  "./components/Body";
-import Footer from "./components/Footer"
+import ReviewBody from  "./components/ReviewBody";
 
-class MainPageContainer extends Component {
+
+class ReviewPageContainer extends Component {
   render() {
-    
+
     return(
 
-      <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}>
-        <Body />
-        <Footer />
-      </div>
+      <rbody >
+
+        <ReviewBody />
+
+      </rbody>
     )
   }
 };
@@ -29,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainPageContainer);
+)(ReviewPageContainer);

@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import MainPageContainer from './MainPageContainer';
 import SignUpPageContainer from './SignUpPageContainer';
 import LoginPageContainer from './LoginPageContainer';
+import ReviewPageContainer from './ReviewPageContainer';
+
 
 export default class Routes extends Component {
    render() {

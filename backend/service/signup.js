@@ -1,15 +1,13 @@
 const path = require('path');
 var User=require(path.join(__dirname,'..','/models/Users.js'));
 
-module.exports = function(req,res,nev){
+module.exports = function(req,res,nev,next){
   var email=req.body.email;
   var pw=req.body.password;
   var newUser=new User({email:email,password:pw});
-  console.log(newUser);
   nev.createTempUser(newUser, function(err, existingUser,newTempUser){
-    console.log(existingUser,newTempUser);
     if(err){
-      return res.status(404).send("ERROR: creating new user failed")
+      return next(err)
     }
     if(existingUser){
       return res.json({
@@ -20,7 +18,6 @@ module.exports = function(req,res,nev){
       var URL= newTempUser[nev.options.URLFieldName];
       nev.sendVerificationEmail(email,URL,function(err,info){
         if (err){
-          console.log(err);
           return res.status(404).send("ERROR: sending email failed")
         }
         res.json({
@@ -33,7 +30,7 @@ module.exports = function(req,res,nev){
     else{
       nev.resendVerificationEmail(email,function(err,userFound){
         if(err){
-          return res.status(404).send("ERROR:sending email failed")
+          return next(err)
         }
         if(userFound){
           res.json({message:"another verification email has just been sent"})

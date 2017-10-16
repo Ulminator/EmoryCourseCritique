@@ -7,7 +7,9 @@ var userSchema= new Schema({
   email:String,
   password:String,
   comments:[String],
-  rated_classes:[Schema.Types.ObjectId] 
+  rated_classes:[Schema.Types.ObjectId],
+  resetPasswordToken:String,
+  resetPasswordExpires:Date
 });
 
 userSchema.methods.storeHashedPassword=function(password){
