@@ -11,6 +11,8 @@ html, body { height: 100%; }
   main {
     flex: 1 0 auto;
   }
+
+
       
 
 .bodyWrapper{
@@ -51,7 +53,19 @@ html, body { height: 100%; }
 
 /* review start */
 
+rbody {
+      padding-left: 300px;
+      background-color: #eeeeee;
+      display: block;
+    }
 
+    @media only screen and (max-width : 992px) {
+      rbody {
+        padding-left: 0;
+        background-color: #eeeeee;
+        display: block;
+      }
+    }
 
 
 
