@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import MainPageContainer from './MainPageContainer';
 import SignUpPageContainer from './SignUpPageContainer';
 import LoginPageContainer from './LoginPageContainer';
+import ReviewPageContainer from './ReviewPageContainer';
 
 
 export default class Routes extends Component {
@@ -12,9 +13,9 @@ export default class Routes extends Component {
        <div>
          <Switch>
          <Route path="/" exact={true} component={MainPageContainer}/>
-           //<Route path="/" exact={true} component={MainPageContainer}/>
-           //<Route path="/signup" exact={true} component={SignUpPageContainer}/>
-           <Route path="/loginn" exact={true} component={LoginPageContainer}/>
+          <Route path="/review" exact={true} component={ReviewPageContainer}/>
+           <Route path='/signup' exact={true} component={SignUpPageContainer}/>
+           <Route path="/login" exact={true} component={LoginPageContainer}/>
          </Switch>
        </div>
      )

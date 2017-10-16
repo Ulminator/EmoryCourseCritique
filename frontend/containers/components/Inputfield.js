@@ -30,7 +30,7 @@ class Inputfield extends React.Component {
             search
           </i>
         </label>
-        <i className="material-icons">close</i>
+        <i className="material-icons">close</i> 
       </div>
     );
   }
