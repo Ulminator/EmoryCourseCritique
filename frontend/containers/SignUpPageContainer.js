@@ -20,7 +20,7 @@ class SignUpPageContainer extends Component {
   }
 
   signup() {
-            // Send a POST request
+        // Send a POST request
         console.log(this.state.email)
         console.log(this.state.password)
         axios({
@@ -30,31 +30,84 @@ class SignUpPageContainer extends Component {
             email: this.state.email,
             password: this.state.password
           }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
         });
   }
   render() {
     return(
       <div>
-        <h2>SignUp</h2>
-        <div>
+
+      <div className = "header">
+          <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
+      </div>
+
+      <div className = "register-body">
+        <div className = "register-body-main-component">
+          <div className = "register-body-title">Sign Up</div>
+
+          <div className = "first-last-name">
+          <div className = "name-col">
+          <input
+           type="text"
+           placeholder="First name"
+           className="user-input"
+          />
+          </div>
+
+          <div className = "name-col">
+          <input
+           type="text"
+           placeholder="Last name"
+           className="user-input"
+          />
+          </div>
+          </div>
+
+
+          <div className = "inputs-sizes">
           <input
            type="text"
            value={this.state.email}
-           placeholder="email"
+           placeholder="Email Address"
+           className="user-input"
            onChange={(event) => this.updateEmail(event)}
           />
-          <br />
+          </div>
+
+          <div className = "inputs-sizes">
           <input
            type="text"
            value={this.state.password}
-           placeholder="password"
+           placeholder="Password"
+           className="user-input"
            onChange={(event) => this.updatePassword(event)}
           />
-          <br />
+          </div>
+
+          <div className = "inputs-sizes">
+          <input
+           type="text"
+           placeholder="Repeat Password"
+           className="user-input"
+          />
+          </div>
+
+          <div className="submit-button-row">
           <button
-          type="button" onClick={() => this.signup()}>
-          Sign Up!
+          type="button"
+          className="submit-button"
+          onClick={() => this.signup()}>
+          Submit
           </button>
+          </div>
+
+
+          </div>
         </div>
       </div>
     )
