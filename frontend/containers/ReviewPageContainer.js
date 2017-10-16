@@ -5,13 +5,13 @@ import ReviewBody from  "./components/ReviewBody";
 
 class ReviewPageContainer extends Component {
   render() {
-    
+
     return(
 
       <rbody >
 
         <ReviewBody />
-        
+
       </rbody>
     )
   }

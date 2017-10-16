@@ -12,9 +12,9 @@ export default class Routes extends Component {
       return(
        <div>
          <Switch>
-         <Route path="/" exact={true} component={MainPageContainer}/>
-          <Route path="/review" exact={true} component={ReviewPageContainer}/>
-           <Route path='/signup' exact={true} component={SignUpPageContainer}/>
+           <Route path="/" exact={true} component={SignUpPageContainer}/>
+           {/* <Route path="/" exact={true} component={MainPageContainer}/> */}
+           <Route path="/signup" exact={true} component={SignUpPageContainer}/>
            <Route path="/login" exact={true} component={LoginPageContainer}/>
          </Switch>
        </div>

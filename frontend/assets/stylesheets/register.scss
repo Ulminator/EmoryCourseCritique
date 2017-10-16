@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+
+.register-body {
+  background-color: #00477F;
+  height: 570px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  height: 60px;
+  font-family: 'Raleway', sans-serif;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 37px;
+  color: #00477F;
+}
+
+.header-title-emory{
+  font-weight:600;
+}
+
+.header-title {
+  margin-left: 15px;
+}
+
+.register-body-title{
+  padding-left: 9px;
+  font-family: 'Raleway', sans-serif;
+  color: yellow;
+  font-size: 25px;
+  font-weight:600;
+}
+
+.register-body-main-component{
+  height: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.first-last-name {
+ display: flex;
+}
+
+.name-col{
+  flex: 1; /* additionally, equal width */
+
+  padding: 9px;
+}
+
+.user-input{
+  width: 100%;
+  padding: 10px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+}
+.user-input:focus{
+  border: 1px solid red;
+}
+
+.submit-button{
+  background-color: #00477F;
+  border: 2px solid yellow;
+  border-radius: 8px;
+  color: yellow;
+  padding: 10px 25px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  font-weight:600;
+  -webkit-transition-duration: 0.7s;
+  transition-duration: 0.7s;
+}
+
+.submit-button:hover{
+  background-color: yellow;
+  color: #00477F;
+}
+
+.inputs-sizes{
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+.submit-button-row {
+  display: flex;
+  justify-content: center;
+}
