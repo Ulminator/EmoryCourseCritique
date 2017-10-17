@@ -6,9 +6,18 @@ class SignUpPageContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      firstname: "",
+      lastname: "",
       email: "",
       password: ""
     }
+  }
+  updateFirstname(event){
+    this.setState({firstname: event.target.value});
+  }
+
+  updateLastname(event){
+    this.setState({lastname: event.target.value});
   }
 
   updateEmail(event){
@@ -21,12 +30,16 @@ class SignUpPageContainer extends Component {
 
   signup() {
         // Send a POST request
+        console.log(this.state.firstname)
+        console.log(this.state.lastname)
         console.log(this.state.email)
         console.log(this.state.password)
         axios({
           method: 'post',
           url: 'http://localhost:3000/account/signup',
           data: {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
             email: this.state.email,
             password: this.state.password
           }
