@@ -2,7 +2,7 @@
 
 .register-body {
   background-color: #00477F;
-  height: 570px;
+  height: 590px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,18 +60,17 @@
   border-radius: 4px;
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
+  color: white;
 }
-.user-input:focus{
-  border: 1px solid red;
-}
+
 
 .submit-button{
   background-color: #00477F;
   border: 2px solid yellow;
   border-radius: 8px;
   color: yellow;
-  padding: 10px 25px;
+  padding: 3px 25px;
   font-family: 'Raleway', sans-serif;
   font-size: 18px;
   font-weight:600;
@@ -92,4 +91,70 @@
 .submit-button-row {
   display: flex;
   justify-content: center;
+}
+
+.register-body-success{
+  background-color: #00477F;
+  height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-body-main-component-success{
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.register-body-title-success{
+  padding-left: 9px;
+    font-family: 'Raleway', sans-serif;
+    color: yellow;
+    font-size: 25px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+}
+
+.inputs-sizes-success{
+  padding-left: 9px;
+  padding-right: 9px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+}
+
+.login-body-main-component{
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+}
+
+.login-body-title{
+    font-family: 'Raleway', sans-serif;
+    color: yellow;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.forgot-password-button{
+  background-color: #00477F;
+  border: 1px solid #00477F;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.forgot-password-button:hover{
+  color: grey;
+}
+
+.inputs-sizes-password{
+  height: 120px;
+  padding-left: 9px;
 }
