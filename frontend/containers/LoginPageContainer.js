@@ -32,6 +32,7 @@ class LoginPageContainer extends Component {
         })
         .then(function (response) {
           console.log(response);
+            window.location.replace("http://localhost:3000/");
         })
         .catch(function (error) {
           console.log(error);
@@ -40,28 +41,54 @@ class LoginPageContainer extends Component {
   render() {
     return(
       <div>
-        <h2>Login</h2>
-        <div>
-          <input
-           type="text"
-           value={this.state.email}
-           placeholder="email"
-           onChange={(event) => this.updateEmail(event)}
-          />
-          <br />
-          <input
-           type="text"
-           value={this.state.password}
-           placeholder="password"
-           onChange={(event) => this.updatePassword(event)}
-          />
-          <br />
-          <button
-          type="button" onClick={() => this.login()}>
-          Login!
-          </button>
-        </div>
+
+      <div className = "header">
+          <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
       </div>
+
+      <div className = "register-body">
+        <div className = "login-body-main-component">
+          <div className = "register-body-title">Login</div>
+              <div>
+
+                <div className="inputs-sizes">
+                  <input
+                   type="text"
+                   value={this.state.email}
+                   placeholder="Email Address"
+                   className="user-input"
+                   onChange={(event) => this.updateEmail(event)}
+                  />
+                </div>
+
+                <div className="inputs-sizes-password">
+                  <input
+                   type="password"
+                   value={this.state.password}
+                   placeholder="Password"
+                   className="user-input"
+                   onChange={(event) => this.updatePassword(event)}
+                  />
+                  <button
+                  type="button"
+                  className="forgot-password-button">
+                  Forgot your password?
+                  </button>
+                </div>
+
+                <div className="submit-button-row">
+                  <button
+                  className="submit-button"
+                  type="button" onClick={() => this.login()}>
+                  Login!
+                  </button>
+                </div>
+
+              </div>
+              </div>
+            </div>
+
+        </div>
     )
   }
 };
