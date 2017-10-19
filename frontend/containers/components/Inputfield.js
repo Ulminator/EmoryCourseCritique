@@ -10,22 +10,15 @@ class Inputfield extends React.Component {
           className="autocomplete"
           placeholder="Search for a class"
           required
-          autofocus="autofocus"
+          autoFocus="autoFocus"
+          autoComplete ="off"
         />
         <label
-          className="label-icon"
-          htmlFor="search"
-          style={{
-            color: "#9e9e9e !important"
-          }}
+          className="label-icon inputOverride"
+          htmlFor="search" 
         >
           <i
-            className="material-icons"
-            style={{
-              position: "absolute",
-              bottom: 12,
-              color: "black !important"
-            }}
+            className="material-icons inputIconOverride"
           >
             search
           </i>

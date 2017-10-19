@@ -43,7 +43,7 @@ require('./config/passport.js')(passport);
 require('./backend/appRoutes')(app,passport,nev,transport);
 
 
-app.get('/', (request, response) => {
+app.get('*', (request, response) => {
     response.sendFile(__dirname + '/public/index.html'); // For React/Redux
 });
 

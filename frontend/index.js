@@ -4,6 +4,7 @@ import { configureStore, history } from './store/configureStore';
 import Root from './containers/Root';
 
 import './assets/stylesheets/base.scss';
+import './assets/stylesheets/register.scss';
 
 const store = configureStore();
 
