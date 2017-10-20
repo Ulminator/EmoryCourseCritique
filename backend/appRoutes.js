@@ -23,19 +23,20 @@ module.exports = function(app,passport,nev,transport){
         return next(err)
       }
       if(!user){
+        res.status(401)
         return res.json({message:info.message})
       }
       req.login(user,function(err){
         if(err){
           return next(err)
         }
-        console.log(req.session);
-        console.log(req.session.returnTo);
         if(!req.session.returnTo){
           return res.redirect('/')
         }else{
-          console.log(111);
-          return res.redirect(String(req.session.returnTo))
+          var url=req.session.returnTo;
+          console.log(url);
+          delete req.session.returnTo;
+          return res.json({"redirectUrl":url})
         }
       })
     })(req,res,next)

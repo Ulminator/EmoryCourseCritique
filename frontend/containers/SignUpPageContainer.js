@@ -63,7 +63,7 @@ class SignUpPageContainer extends Component {
           window.location.replace("http://localhost:3000/success");
         })
         .catch(function (error) {
-          console.log(error);
+          console.log(error.response.data.message);
         });
       }
   }
