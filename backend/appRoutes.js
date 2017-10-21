@@ -9,11 +9,38 @@ module.exports = function(app,passport,nev,transport){
     require('./service/signup.js')(req,res,nev,next)
   })
 
-  app.post('/account/login',passport.authenticate('local-login',
-    {
-      successReturnToOrRedirect:'/users/currentUser',
-      } //if there is a return to then return ,else go to home page
-  ));
+  // app.post('/account/login',passport.authenticate('local-login',
+  //   {
+  //     successReturnToOrRedirect:'/users/currentUser',
+  //     } //if there is a return to then return ,else go to home page
+  // ));
+
+  app.post('/account/login',function(req,res,next){
+    passport.authenticate('local-login',function(err,user,info){
+
+
+      if(err){
+        return next(err)
+      }
+      if(!user){
+        res.status(401)
+        return res.json({message:info.message})
+      }
+      req.login(user,function(err){
+        if(err){
+          return next(err)
+        }
+        if(!req.session.returnTo){
+          return res.redirect('/')
+        }else{
+          var url=req.session.returnTo;
+          console.log(url);
+          delete req.session.returnTo;
+          return res.json({"redirectUrl":url})
+        }
+      })
+    })(req,res,next)
+  })
 
   app.get('/users/currentUser',
   (req,res)=>{
