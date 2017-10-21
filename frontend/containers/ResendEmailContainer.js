@@ -2,50 +2,41 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-class LoginPageContainer extends Component {
+class ResendEmailContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: "",
-      password: ""
+      email: ""
     }
   }
 
   updateEmail(event){
     this.setState({email: event.target.value});
-    console.log(this.state.email)
   }
 
-  updatePassword(event){
-    this.setState({password: event.target.value});
-  }
-  redirectResend(){
-    window.location.replace("http://localhost:3000/account/resend");
-  }
-  login() {
+  resend() {
         // Send a POST request
         console.log(this.state.email)
-        console.log(this.state.password)
         axios({
           method: 'post',
-          url: 'http://localhost:3000/account/login',
+          url: 'http://localhost:3000/account/forgot',
           data: {
-            email: this.state.email,
-            password: this.state.password
+            email: this.state.email
           }
         })
         .then(function (response) {
           console.log(response);
-          console.log(response.request.responseURL)
-          window.location.replace(response.request.responseURL);
+          window.location.replace("http://localhost:3000/success");
         })
         .catch(function (error) {
           console.log(error);
         });
   }
+
   render() {
+
     return(
-      <div>
+<div>
 
       <div className = "header">
           <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
@@ -53,7 +44,7 @@ class LoginPageContainer extends Component {
 
       <div className = "register-body">
         <div className = "login-body-main-component">
-          <div className = "register-body-title">Login</div>
+          <div className = "register-body-title">Reset your password</div>
               <div>
 
                 <div className="inputs-sizes">
@@ -66,27 +57,12 @@ class LoginPageContainer extends Component {
                   />
                 </div>
 
-                <div className="inputs-sizes-password">
-                  <input
-                   type="password"
-                   value={this.state.password}
-                   placeholder="Password"
-                   className="user-input"
-                   onChange={(event) => this.updatePassword(event)}
-                  />
-                  <button
-                  type="button"
-                  onClick={() => this.redirectResend()}
-                  className="forgot-password-button">
-                  Forgot your password?
-                  </button>
-                </div>
-
                 <div className="submit-button-row">
                   <button
                   className="submit-button"
-                  type="button" onClick={() => this.login()}>
-                  Login!
+                  type="button"
+                  onClick={() => this.resend()}>
+                  Resend Email
                   </button>
                 </div>
 
@@ -94,17 +70,19 @@ class LoginPageContainer extends Component {
               </div>
             </div>
 
-        </div>
+
+
+</div>
     )
   }
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return{
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
   }
 }
@@ -112,4 +90,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginPageContainer);
+)(ResendEmailContainer);

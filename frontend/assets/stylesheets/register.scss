@@ -158,3 +158,11 @@
   height: 120px;
   padding-left: 9px;
 }
+
+.login-body-main-component{
+  height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+}

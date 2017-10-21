@@ -49,7 +49,7 @@ module.exports = function(app,passport,nev,transport){
 
     })
   })
-    
+
     // Get a course list from the search on the main page
     // e.g. /search?q=AAS100&page=1&sort=course_num
     app.get('/search', querymen.middleware(), function(req, res) {
@@ -67,7 +67,7 @@ module.exports = function(app,passport,nev,transport){
     app.post('/course/add_rating', (req,res)=>{
         require('./service/add_rating.js')(req,res)
     })
-  
+
   app.post('/account/resend-verification',function(req,res,next){
     var email=req.body.email;
     nev.resendVerificationEmail(email,function(err,userFound){
@@ -87,9 +87,11 @@ module.exports = function(app,passport,nev,transport){
   app.post('/account/forgot',(req,res,next)=>{
     require('./service/forgotPass.js')(req,res,next,transport)
   })
+  //[email: ____]
 
   app.post('/account/reset/:token',(req,res,next)=>{
     require('./service/resetPass.js')(req,res,next)
+    //account/reset/wfjer3r4
   })
 
 
