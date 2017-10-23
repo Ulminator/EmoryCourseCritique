@@ -13,10 +13,14 @@ class LoginPageContainer extends Component {
 
   updateEmail(event){
     this.setState({email: event.target.value});
+    console.log(this.state.email)
   }
 
   updatePassword(event){
     this.setState({password: event.target.value});
+  }
+  redirectResend(){
+    window.location.replace("http://localhost:3000/account/resend");
   }
   login() {
         // Send a POST request
@@ -79,6 +83,7 @@ class LoginPageContainer extends Component {
                   />
                   <button
                   type="button"
+                  onClick={() => this.redirectResend()}
                   className="forgot-password-button">
                   Forgot your password?
                   </button>

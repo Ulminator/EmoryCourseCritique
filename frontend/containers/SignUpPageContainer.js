@@ -10,7 +10,11 @@ class SignUpPageContainer extends Component {
       lastname: "",
       email: "",
       password: "",
-      repeated: ""
+      repeated: "",
+
+      formErrors: {Email: '', Password: ''},
+      emailValid: false,
+      passwordValid: false
     }
   }
 
@@ -35,17 +39,69 @@ class SignUpPageContainer extends Component {
     this.setState({repeated: event.target.value});
   }
 
+  validateFieldName(fieldName){
+    let fieldValidationErrors = this.state.formErrors;
+    switch (fieldName) {
+      case "email":
+        var emailStatus = this.checkEmail();
+        this.state.emailValid = (emailStatus.length == 0) ? true : false;
+        fieldValidationErrors.Email = emailStatus;
+        break;
+      case "password":
+        var passwordStatus = this.checkPwd();
+        this.state.passwordValid = (passwordStatus.length == 0) ? true : false;
+        fieldValidationErrors.Password = passwordStatus;
+        default:
+        break;
+    }
+  }
+
+  checkEmail(){
+    var str = this.state.email;
+    var reg = /^[a-zA-Z0-9_.%+-]+@emory.edu$/
+    if (reg.test(str)){
+      return("")
+    }
+    else{
+      return(" must end with @emory.edu.");
+    }
+  }
+
+  checkPwd() {
+    var str = this.state.password;
+    if (str.length < 6) {
+        return(" is too short. Must be at least 6 characters.");
+    } else if (str.length > 50) {
+        return(" is too long.");
+    } else if (str.search(/\d/) == -1) {
+        return(" must contain at least one number.");
+    } else if (str.search(/[a-zA-Z]/) == -1) {
+        return(" must contain at least one letter.");
+    } else if (str.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+\.\,\;\:]/) != -1) {
+        return(" contains an invalid character.");
+    }
+    return("");
+  }
 
   signup() {
         // Send a POST request
-        console.log(this.state.firstname)
-        console.log(this.state.lastname)
-        console.log(this.state.repeated)
-        console.log(this.state.email)
-        console.log(this.state.password)
+        // console.log(this.state.firstname)
+        // console.log(this.state.lastname)
+        // console.log(this.state.repeated)
+        // console.log(this.state.email)
+        // console.log(this.state.password)
+        this.validateFieldName("email")
+        this.validateFieldName("password")
 
         if (this.state.password !== this.state.repeated) {
           console.log("password didn't match")
+        }
+        else if (!this.state.emailValid | !this.state.passwordValid){
+          for (var x in this.state.formErrors){
+            if(this.state.formErrors[x].length!=0){
+              alert(x + this.state.formErrors[x])
+            }
+          }
         } else {
         axios({
           method: 'post',

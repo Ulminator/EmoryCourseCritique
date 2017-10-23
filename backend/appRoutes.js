@@ -114,9 +114,11 @@ module.exports = function(app,passport,nev,transport){
   app.post('/account/forgot',(req,res,next)=>{
     require('./service/forgotPass.js')(req,res,next,transport)
   })
+  //[email: ____]
 
   app.post('/account/reset/:token',(req,res,next)=>{
     require('./service/resetPass.js')(req,res,next)
+    //account/reset/wfjer3r4
   })
 
 

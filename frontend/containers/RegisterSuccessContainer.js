@@ -10,13 +10,13 @@ class RegisterSuccessContainer extends Component {
           <div className = "register-body-main-component-success">
             <div className="register-body-title-success"><h2>Success!</h2></div>
                 <div className="inputs-sizes-success">
-                  <h3>Please verify your account through your email</h3>
+                  <h3>An email has been sent to you!</h3>
                 </div>
                 <div className="submit-button-row">
                   <button
                   type="button"
                   className = "submit-button">
-                  resend verification link
+                  click here to resend email
                 </button>
             </div>
           </div>
