@@ -6,6 +6,6 @@ module.exports = function(req, res) {
     var query = req.querymen;
     console.log(query);
     Course.find(query.query, query.select, query.cursor).then(function(courses) {
-        res.json(courses);
+        return res.json(courses);
     });
 };

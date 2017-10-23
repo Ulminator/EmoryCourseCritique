@@ -5,6 +5,23 @@ import Card from "./Card";
 import Footer from "./Footer";
 
 class ReviewBody extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      courses: [],
+      
+    }
+    //this.onUpdate = this.onUpdate.bind(this);
+  }
+
+  onUpdate(val) {
+    this.setState({
+      courses: val
+    })
+    
+  }
+
+
   render() {
     return (
       <div>
@@ -25,7 +42,7 @@ class ReviewBody extends React.Component {
           >
             <div className="nav-wrapper">
               <form>
-                <Inputfield />
+                <Inputfield onUpdate={this.onUpdate.bind(this)}/>
               </form>
             </div>
           </nav>
@@ -61,7 +78,8 @@ class ReviewBody extends React.Component {
         >
           <div className="row">
             <div className="col s12">
-              <Card />
+
+              <Card passedVal={this.state.courses}/>
               
             </div>
           </div>
