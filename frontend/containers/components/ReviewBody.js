@@ -3,6 +3,8 @@ import SideNav from "./SideNav";
 import Inputfield from "./Inputfield";
 import Card from "./Card";
 import Footer from "./Footer";
+import axios from 'axios';
+import { connect } from 'react-redux';
 
 class ReviewBody extends React.Component {
   constructor(props) {
@@ -21,8 +23,41 @@ class ReviewBody extends React.Component {
     
   }
 
+  componentWillMount() {
+
+    console.log(location.search);
+
+    var self=this;
+    axios.get('/test'+location.search)
+        .then(function (response) {
+          
+            self.setState({
+              courses:response.data
+              
+            })
+          
+           
+           //console.log(response.data);
+
+          //window.location.replace(location.search)
+          //windows.location = 
+          //this.props.history.push('/search');
+          
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+  }
+
 
   render() {
+    console.log(this.state.courses);
+    var cards = [];
+    for (var i = 0; i < this.state.courses.length; i++) {
+      cards.push(<Card cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} key={i}/>);
+      console.log(this.state.courses[i]);
+    }
     return (
       <div>
         <SideNav />
@@ -42,7 +77,7 @@ class ReviewBody extends React.Component {
           >
             <div className="nav-wrapper">
               <form>
-                <Inputfield onUpdate={this.onUpdate.bind(this)}/>
+                <Inputfield/>
               </form>
             </div>
           </nav>
@@ -79,7 +114,7 @@ class ReviewBody extends React.Component {
           <div className="row">
             <div className="col s12">
 
-              <Card passedVal={this.state.courses}/>
+              {cards}
               
             </div>
           </div>
@@ -95,4 +130,17 @@ class ReviewBody extends React.Component {
   }
 }
 
-export default ReviewBody;
+const mapStateToProps = (state) => {
+  return{ 
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewBody);

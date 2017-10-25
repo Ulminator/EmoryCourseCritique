@@ -12,58 +12,28 @@ class Inputfield extends React.Component {
       courses: []
       
     }
-    //this.updateInputValue = this.updateInputValue.bind(this);
-    //this._handleKeyPress = this._handleKeyPress.bind(this);
-    this.search = this.search.bind(this);
+    this.updateInputValue = this.updateInputValue.bind(this);
+    this._handleKeyPress = this._handleKeyPress.bind(this);
+    
   }
 
   updateInputValue(event) {
     this.setState({inputValue: event.target.value});
   }
   
-  search() {
-        // Send a GET request
-        console.log(this.state.inputValue);
-        
-        var querystring = require('querystring');
-        var url = '/search?'+querystring.stringify({
-            q: this.state.inputValue
-        });
-        var self=this;
-        axios.get('/test?'+querystring.stringify({
-            q: this.state.inputValue
-        }))
-        .then(function (response) {
-          
-            self.setState({
-              courses:response.data
-              
-            })
-          
-           window.location.replace(url);
-           
-           console.log(response.data);
-
-          //window.location.replace(location.search)
-          //windows.location = 
-          //this.props.history.push('/search');
-          
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        this.forceUpdate();
-        console.log(this.state.courses);
-        //console.log(this);
-        this.props.onUpdate([this.state.courses]);
-  } 
+  
 
   _handleKeyPress(e) {
     if (e.key === 'Enter') {
       console.log(this);
       e.preventDefault();
       //console.log(this);
-      this.search();
+      var querystring = require('querystring');
+        var url = '/search?'+querystring.stringify({
+            q: this.state.inputValue
+        });
+      window.location.replace(url);
+      
       
     }
   }
@@ -82,8 +52,8 @@ class Inputfield extends React.Component {
           autoFocus="autoFocus"
           autoComplete ="off"
           value={this.state.inputValue.bind} 
-          onChange={this.updateInputValue.bind(this)}
-          onKeyPress={this._handleKeyPress.bind(this)}
+          onChange={this.updateInputValue}
+          onKeyPress={this._handleKeyPress}
         />
         <label
           className="label-icon inputOverride"

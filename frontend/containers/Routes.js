@@ -18,10 +18,10 @@ export default class Routes extends Component {
            <Route path="/signup" exact={true} component={SignUpPageContainer}/>
            <Route path="/success" exact={true} component={RegisterSuccessContainer}/>
            <Route path="/login" exact={true} component={LoginPageContainer}/>
-<<<<<<< HEAD
+
            <Route path="/search" exact={true} component={ReviewPageContainer}/>
            <Route path="/resend" exact={true} component={ResendEmailContainer}/>
->>>>>>> 88108d0277351c9514aef9d33e1e19a2cb9661b1
+
          </Switch>
        </div>
      )
