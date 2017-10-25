@@ -30,6 +30,7 @@ module.exports = function(req, res) {
         var this_resp = [];
         // Iterate thrugh courses
         for (var i = 0; i < courses.length; i++) {
+            console.log(courses[i]);
             console.log(courses[i].course_num);
             // Iterate through each professor in each course
             for (var j = 0; j < courses[i].professors.length; j++) {
@@ -37,7 +38,7 @@ module.exports = function(req, res) {
                 Professor.findOne({'name': courses[i].professors[j]}, function(err, professor) {
                     if (err) {
                         // error finding a professor
-                    } else {
+                    } else if (courses[i]) {
                         // Find matching rating
                         Rating.findOne({'class_id': courses[i].course_num, 'prof_id': professor._id}, function(err, rating) {
                             if (err) {
