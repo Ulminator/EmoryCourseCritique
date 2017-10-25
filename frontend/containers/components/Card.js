@@ -11,15 +11,17 @@ class Card extends React.Component {
   }
 
   render() {
+    
+
     return (
       <div className="card-panel white black-text">
         <h4>
-          Rating:<span
+          {this.props.cnum}:<span
             style={{
               color: "#66bb6a"
             }}
           >
-             Good
+            {this.props.cname}
           </span>
         </h4>
         <span
@@ -35,7 +37,7 @@ class Card extends React.Component {
             fontWeight: 300
           }}
         >
-          {this.props.passedVal}
+
         </span>
       </div>
     );

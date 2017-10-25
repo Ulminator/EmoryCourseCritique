@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component {
   render() {
@@ -6,8 +7,8 @@ class NavBar extends React.Component {
       <nav className= "navOverride z-depth-0">
         <div className="nav-wrapper">
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><a href="sass.html">Login</a></li>
-            <li><a href="badges.html">Sign Up</a></li>
+            <li><Link to='/login'>Login</Link></li>
+            <li><Link to='/signup'>Signup</Link></li>
             <li><a href="collapsible.html"></a></li>
           </ul>
         </div>
