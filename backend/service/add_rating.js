@@ -42,6 +42,9 @@ module.exports = function(req,res,next){
                     // Rating findOne error
                 } else {
                     this_rating.rating_count++;
+                    this_rating.total_workload+=workload_rating;
+                    this_rating.total_overall+=overall_rating;
+                    this_rating.total_difficulty+=difficulty_rating;
                     this_rating.ratings.push({
                         difficulty: Number(difficulty_rating),
                         overall: Number(overall_rating),
@@ -50,16 +53,8 @@ module.exports = function(req,res,next){
                         });
                     this_rating.save();
                     // Add rating to professor
-                    Professor.findOne({id: prof_id}, function(err, this_professor) {
-                        if (err) {
-                            // Professor findOne error
-                        } else {
-                            this_professor.ratings.push(this_rating.id);
-                            this_professor.save();
-                        }
-                    });
                 }
-                res.json({message: "success"});
+                return res.json({message: "success"});
             });
         } else {
             // Rating doesn't exist
@@ -68,6 +63,9 @@ module.exports = function(req,res,next){
                 class_id: class_id,
                 prof_id: prof_id,
                 rating_count: 1,
+                total_workload=workload_rating;
+                total_overall=overall_rating;
+                total_difficulty=difficulty_rating;
                 });
             new_rating.ratings.push({
                 difficulty: Number(difficulty_rating),
