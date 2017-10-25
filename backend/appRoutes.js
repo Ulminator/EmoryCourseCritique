@@ -44,7 +44,6 @@ module.exports = function(app,passport,nev,transport){
 
   app.get('/users/currentUser',
   (req,res)=>{
-    console.log(req.isAuthenticated());
     res.json({user:req.session.passport.user})
 
   }) //middleware to ensure login
@@ -91,8 +90,8 @@ module.exports = function(app,passport,nev,transport){
     });
 
     // Add a rating to a course
-    app.post('/course/add_rating', (req,res)=>{
-        require('./service/add_rating.js')(req,res)
+    app.post('/course/add_rating', (req,res,next)=>{
+        require('./service/add_rating.js')(req,res,next)
     })
 
   app.post('/account/resend-verification',function(req,res,next){
