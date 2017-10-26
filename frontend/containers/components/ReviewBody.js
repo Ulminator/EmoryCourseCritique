@@ -13,19 +13,11 @@ class ReviewBody extends React.Component {
       courses: [],
       
     }
-    //this.onUpdate = this.onUpdate.bind(this);
   }
 
-  onUpdate(val) {
-    this.setState({
-      courses: val
-    })
-    
-  }
+  
 
   componentWillMount() {
-
-    console.log(location.search);
 
     var self=this;
     axios.get('/test'+location.search)
@@ -36,12 +28,6 @@ class ReviewBody extends React.Component {
               
             })
           
-           
-           //console.log(response.data);
-
-          //window.location.replace(location.search)
-          //windows.location = 
-          //this.props.history.push('/search');
           
         })
         .catch(function (error) {
@@ -53,10 +39,12 @@ class ReviewBody extends React.Component {
 
   render() {
     console.log(this.state.courses);
+    if(this.state.courses[0]){
+      var thiscourse=this.state.courses[0].course_num;
+    }
     var cards = [];
     for (var i = 0; i < this.state.courses.length; i++) {
-      cards.push(<Card cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} key={i}/>);
-      console.log(this.state.courses[i]);
+      cards.push(<Card cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} professor={this.state.courses[i].professor} rating={this.state.courses[i].average_overall} key={i}/>);
     }
     return (
       <div>
@@ -98,7 +86,7 @@ class ReviewBody extends React.Component {
               fontWeight: 300
             }}
           >
-            Showing Results for CS370
+            Showing Results for {thiscourse}
           </h5>
         </div>
         <div

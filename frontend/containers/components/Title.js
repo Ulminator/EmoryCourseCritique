@@ -2,20 +2,9 @@ import React from "react";
 import Inputfield from "./Inputfield";
 
 class Title extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      courses: [],
-      
-    }
-    //this.onUpdate = this.onUpdate.bind(this);
-  }
+  
 
-  onUpdate(val) {
-    this.setState({
-      courses: val
-    })
-  }
+  
 
   render() {
     return (
@@ -53,7 +42,7 @@ class Title extends React.Component {
             >
               <div className="nav-wrapper">
                 <form>
-                  <Inputfield onUpdate={this.onUpdate.bind(this)}/>
+                  <Inputfield />
                 </form>
               </div>
             </nav>

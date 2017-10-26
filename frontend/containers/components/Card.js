@@ -29,7 +29,7 @@ class Card extends React.Component {
             fontWeight: 400
           }}
         >
-          Review
+          {this.props.professor}
         </span>{" "}
         <br />
         <span
@@ -37,7 +37,7 @@ class Card extends React.Component {
             fontWeight: 300
           }}
         >
-
+        Rating: {this.props.rating}
         </span>
       </div>
     );

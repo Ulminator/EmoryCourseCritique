@@ -26,40 +26,75 @@ module.exports = function(req, res) {
         res.json();
     });
     */
+    var this_resp = [];
     Course.find(query.query, query.select, query.cursor).then(function(courses) {
-        var this_resp = [];
-        // Iterate thrugh courses
+        
+        var count=0;
         for (var i = 0; i < courses.length; i++) {
-            console.log(courses[i]);
-            console.log(courses[i].course_num);
-            // Iterate through each professor in each course
-            for (var j = 0; j < courses[i].professors.length; j++) {
+        	count+=courses[i].professors.length;
+    	}
+    	console.log(count);
+    	// Iterate thrugh courses
+        courses.forEach(function(courseItem) {
+        	// Iterate through each professor in each course
+            courseItem.professors.forEach(function(profName) {
+                
                 // Find matching professor
-                Professor.findOne({'name': courses[i].professors[j]}, function(err, professor) {
+                Professor.findOne({'name': profName}, function(err, professor) {
                     if (err) {
                         // error finding a professor
-                    } else if (courses[i]) {
+                    } else if (courseItem) {
                         // Find matching rating
-                        Rating.findOne({'class_id': courses[i].course_num, 'prof_id': professor._id}, function(err, rating) {
+                        Rating.findOne({'class_id': courseItem.course_num, 'prof_id': professor._id}, function(err, rating) {
                             if (err) {
                                 // error finding a rating
-                            } else {
+                                console.log(profName);
                                 var course_professor_rating = {
-                                    course_num: courses[i].course_num,
-                                    professor: courses[i].professors[j],
+                                    course_num: courseItem.course_num,
+                                    course_name: courseItem.course_name,
+                                    professor: profName,
+                                    average_difficulty: 'null',
+                                    average_overall: 'null',
+                                    average_workload: 'null'
+                                }
+                                // add card to response
+                                sendcprof(course_professor_rating);
+                                
+
+                            } else {
+                            	console.log(profName);
+                                var course_professor_rating = {
+                                    course_num: courseItem.course_num,
+                                    course_name: courseItem.course_name,
+                                    professor: profName,
                                     average_difficulty: rating.total_difficulty / rating.rating_count,
                                     average_overall: rating.total_overall / rating.rating_count,
                                     average_workload: rating.total_workload / rating.rating_count
                                 }
                                 // add card to response
-                                this_resp.push(course_professor_rating);
+                                sendcprof(course_professor_rating);
                             }
-                        });
+
+                        }); 
+
                     }
                 });
-            }
+                
+            });
+            
+        });
+
+        // Pass data to sendJson
+        function sendcprof(send) {
+            this_resp.push(send);
+            count--;
+            if(count==0)
+               sendJson(this_resp);
         }
-        // Average Scores
-        return res.json(this_resp);
+        
     });
+    function sendJson(send){
+    	console.log(send);
+    	return res.json(send); 
+	}
 };
