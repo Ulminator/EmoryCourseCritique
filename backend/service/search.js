@@ -16,7 +16,9 @@ module.exports = function(req, res) {
                 dept: course.dept,
                 credits: course.credits,
                 ger: course.ger,
-                opus_id: course.opus_id
+                opus_id: course.opus_id,
+                professors: course.professors,
+                description: course.description,
             });
             Course.remove({_id: course.id}, function(err) {
                 
@@ -95,6 +97,6 @@ module.exports = function(req, res) {
     });
     function sendJson(send){
     	console.log(send);
-    	return res.json(send); 
+    	return res.end(JSON.stringify(send)); 
 	}
 };
