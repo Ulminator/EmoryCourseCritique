@@ -4,7 +4,7 @@ var Course = require(path.join(__dirname,'..','/models/course.js'));
 var Rating = require(path.join(__dirname,'..','/models/ratings.js'));
 var Professor = require(path.join(__dirname,'..','/models/professor.js'));
 
-module.exports = function(req, res) {
+module.exports = function(req, res,next) {
     var query = req.querymen;
     /*
     // Iterate through all courses and add keywords -- only run once
@@ -21,7 +21,7 @@ module.exports = function(req, res) {
                 description: course.description,
             });
             Course.remove({_id: course.id}, function(err) {
-                
+
             });
             new_course.save();
         });
@@ -30,7 +30,7 @@ module.exports = function(req, res) {
     */
     var this_resp = [];
     Course.find(query.query, query.select, query.cursor).then(function(courses) {
-        
+
         var count=0;
         for (var i = 0; i < courses.length; i++) {
         	count+=courses[i].professors.length;
@@ -40,15 +40,19 @@ module.exports = function(req, res) {
         courses.forEach(function(courseItem) {
         	// Iterate through each professor in each course
             courseItem.professors.forEach(function(profName) {
-                
+
                 // Find matching professor
                 Professor.findOne({'name': profName}, function(err, professor) {
                     if (err) {
+                        return next(err)
                         // error finding a professor
                     } else if (courseItem) {
                         // Find matching rating
                         Rating.findOne({'class_id': courseItem.course_num, 'prof_id': professor._id}, function(err, rating) {
-                            if (err) {
+                            if(err){
+                              return next(err)
+                            }
+                            if (!rating) {
                                 // error finding a rating
                                 console.log(profName);
                                 var course_professor_rating = {
@@ -61,7 +65,7 @@ module.exports = function(req, res) {
                                 }
                                 // add card to response
                                 sendcprof(course_professor_rating);
-                                
+
 
                             } else {
                             	console.log(profName);
@@ -77,13 +81,13 @@ module.exports = function(req, res) {
                                 sendcprof(course_professor_rating);
                             }
 
-                        }); 
+                        });
 
                     }
                 });
-                
+
             });
-            
+
         });
 
         // Pass data to sendJson
@@ -93,10 +97,10 @@ module.exports = function(req, res) {
             if(count==0)
                sendJson(this_resp);
         }
-        
+
     });
     function sendJson(send){
     	console.log(send);
-    	return res.end(JSON.stringify(send)); 
+    	return res.end(JSON.stringify(send));
 	}
 };
