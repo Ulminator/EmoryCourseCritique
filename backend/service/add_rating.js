@@ -1,4 +1,5 @@
 const path = require('path');
+const async = require('async');
 var Rating=require(path.join(__dirname,'..','/models/ratings.js'));
 var Professor=require(path.join(__dirname,'..','/models/professor.js'));
 var Course=require(path.join(__dirname,'..','/models/course.js'));
@@ -12,26 +13,30 @@ module.exports = function(req,res,next){
     var workload_rating = req.body.workload_rating;
     var comment = req.body.comment;
 
-    var user_id=(req.session.passport.user);
+    var user_id=(req.user);
     if(!user_id){
       res.status(401)
       return res.json({message:"user is not authenticated"})
     }
 
-    User.findOne({'_id':user_id},function(err, user){
-      console.log(user);
-      if(err){
-        return next(err)
-      }
-      User.findOne({'rated_classes.course': class_id, 'rated_classes.professor': prof_id},function(err,this_rating){
-        if(this_rating){
+    function checkUser(user_id,done){
+      User.findOne({'_id':user_id,'rated_classes.course': class_id, 'rated_classes.professor': prof_id},function(err,user){
+        if(err){
+          return next(err)
+        }
+        if(user){
+          console.log(user);
           console.log(1111);
           return res.json({message:"This user has already rated this course"})
         }
+        else{
+          console.log(222);
+          done(null,user_id)
+        }
       })
-    })
+    }
 
-    Rating.findOne({'class_id': class_id, 'prof_id': prof_id}, function(err, this_rating) {
+    function updateRating(user_id, done){Rating.findOne({'class_id': class_id, 'prof_id': prof_id}, function(err, this_rating) {
         if (this_rating) {
             // Rating already exists
                 if (err) {
@@ -49,6 +54,7 @@ module.exports = function(req,res,next){
                         comment: comment,
                         });
                     this_rating.save();
+                    done(null, user_id)
                     // Add rating to professor
                 }
         } else {
@@ -79,25 +85,36 @@ module.exports = function(req,res,next){
                     // Professor findOne error
                 } else {
                     this_professor.ratings.push(new_rating._id);
+                    console.log(this_professor);
                     this_professor.save();
                 }
             });
+            console.log(class_id);
             Course.findOne({"course_num": class_id}, function(err, this_course) {
                 if (err) {
                   return next(err)
                     // Professor findOne error
                 } else {
                     this_course.ratings.push(new_rating._id);
+                    console.log(this_course);
                     this_course.save();
                 }
             });
           });
-            return res.json({message: "success"});
+          done(null, user_id)
         }
-    });
-    User.findOne({"_id":user_id},function(err,user){
-      console.log(user);
+    })};
+    function updateUser(user_id,done){User.findOne({"_id":user_id},function(err,user){
       user.rated_classes.push({course:class_id,professor:prof_id});
+      user.comments.push(comment)
       user.save();
-    })
+      done(null,user_id)
+    })}
+
+    async.waterfall([(done)=>(done(null,user_id)),
+      checkUser,
+      updateRating,
+      updateUser,
+      (err,id)=>{return res.json({"message":"success"})}
+    ]);
 };

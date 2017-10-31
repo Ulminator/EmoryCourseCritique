@@ -6,8 +6,9 @@ var Professor = require(path.join(__dirname,'..','/models/professor.js'));
 
 module.exports = function(req, res,next) {
     var query = req.querymen;
-    /*
+
     // Iterate through all courses and add keywords -- only run once
+    /*
     Course.find().then(function(courses) {
         courses.forEach(function(course) {
             var new_course = new Course({
@@ -19,6 +20,7 @@ module.exports = function(req, res,next) {
                 opus_id: course.opus_id,
                 professors: course.professors,
                 description: course.description,
+                ratings:course.ratings
             });
             Course.remove({_id: course.id}, function(err) {
 
@@ -28,6 +30,8 @@ module.exports = function(req, res,next) {
         res.json();
     });
     */
+
+
     var this_resp = [];
     Course.find(query.query, query.select, query.cursor).then(function(courses) {
 
