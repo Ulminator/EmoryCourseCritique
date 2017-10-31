@@ -52,7 +52,7 @@ module.exports = function(req, res,next) {
                         // error finding a professor
                     } else if (courseItem) {
                         // Find matching rating
-                        Rating.findOne({'class_id': courseItem.course_num, 'prof_id': professor._id}, function(err, rating) {
+                        Rating.findOne({'class_id': courseItem.course_num, 'prof_id': profName}, function(err, rating) {
                             if(err){
                               return next(err)
                             }
