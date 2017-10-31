@@ -1,9 +1,91 @@
+import ReactStars from 'react-stars'
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios';
 
 class RatePageContainer extends Component {
-  render() {
+    constructor(props) {
+      super(props)
+      this.state = {
+        courseId: "",
+        profID: "",
+        comment:"",
+        difficulty: 0.0,
+        overall: 0.0,
+        workload: 0.0
+      }
+    }
+
+    //course name & professor name
+    updateCourse(event){
+      this.setState({courseId: event.target.value});
+      console.log(this.state.courseId)
+    }
+
+    updateProfessor(event){
+      this.setState({profID: event.target.value});
+      console.log(this.state.profID)
+    }
+
+    updateComment(event){
+      this.setState({comment: event.target.value});
+      console.log(this.state.comment)
+    }
+
+    submitReview() {
+          // Send a POST request
+          axios({
+            method: 'post',
+            url: 'http://localhost:3000/course/add_rating',
+            data: {
+              class_id: this.state.courseId,
+              prof_id: this.state.profID,
+              difficulty_rating: this.state.difficulty,
+              overall_rating: this.state.overall,
+              workload_rating: this.state.workload,
+              comment: this.state.comment
+            }
+          })
+          .then(function (response) {
+            console.log(response.status);
+            // if(response.data.message){
+            //   alert(response.data.message)
+            // }
+            // if(response.data.redirectUrl){
+            //   window.location.replace('http://localhost:3000'+response.data.redirectUrl)
+            // }else{
+            //
+            //   window.location.replace("http://localhost:3000/");
+            // }
+          })
+          .catch(function (error) {
+            console.log(error.response.data.message);
+          });
+
+        }
+
+render() {
+
+  const overallRating = (newRating) => {
+    this.state.overall = (newRating)
+    console.log("overall rating is:" + this.state.overall)
+    console.log("difficulty rating is:" + this.state.difficulty)
+    console.log("workload rating is:" +this.state.workload)
+  }
+
+  const difficultyRating = (newRating) => {
+    this.state.difficulty = (newRating)
+    console.log("overall rating is:" + this.state.overall)
+    console.log("difficulty rating is:" + this.state.difficulty)
+    console.log("workload rating is:" +this.state.workload)
+  }
+
+  const workloadRating = (newRating) => {
+    this.state.workload = (newRating)
+    console.log("overall rating is:" + this.state.overall)
+    console.log("difficulty rating is:" + this.state.difficulty)
+    console.log("workload rating is:" +this.state.workload)
+  }
 
     return(
       <div>
@@ -20,56 +102,68 @@ class RatePageContainer extends Component {
                 <div className="inputs-sizes">
                   <input
                    type="text"
+                   value={this.state.courseId}
                    placeholder="Course your reviewing"
                    className="user-input"
+                   onChange= {(event) => this.updateCourse(event)}
                   />
                 </div>
 
                 <div className="inputs-sizes">
                   <input
                    type="text"
+                   value={this.state.profID}
                    placeholder="Professor of course"
                    className="user-input"
+                   onChange={(event) => this.updateProfessor(event)}
                   />
                 </div>
 
                 <div className="inputs-sizes-rate">
                 <div className = "reate-body-title">Easiness</div>
-                  <fieldset className="rating">
-                      <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                      <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                      <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                      <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                      <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                </fieldset>
+                <ReactStars
+                  count={5}
+                  value={this.state.difficulty}
+                  onChange={difficultyRating}
+                  size={24}
+                  color2={'#ffd700'} />
               </div>
 
               <div className="inputs-sizes-rate">
               <div className = "reate-body-title">Workload</div>
-                <fieldset className="rating">
-                    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-              </fieldset>
+                  <ReactStars
+                    count={5}
+                    value={this.state.workload}
+                    onChange={workloadRating}
+                    size={24}
+                    color2={'#ffd700'} />
             </div>
 
             <div className="inputs-sizes-rate">
             <div className = "reate-body-title">Overall</div>
-              <fieldset className="rating">
-                  <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                  <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                  <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                  <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                  <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-            </fieldset>
-          </div>
+                <ReactStars
+                  count={5}
+                  value={this.state.overall}
+                  onChange={overallRating}
+                  size={24}
+                  color2={'#ffd700'} />
+            </div>
+
+
+            <div className="inputs-sizes">
+              <input
+               type="text"
+               value={this.state.comment}
+               placeholder="comments on the course"
+               className="user-input"
+               onChange= {(event) => this.updateComment(event)}
+              />
+            </div>
 
                 <div className="submit-button-row">
                   <button
                   className="submit-button"
-                  type="button">
+                  type="button" onClick={() => this.submitReview()}>
                   submit review!
                   </button>
                 </div>
