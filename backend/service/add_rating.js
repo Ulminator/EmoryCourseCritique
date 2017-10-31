@@ -13,30 +13,27 @@ module.exports = function(req,res,next){
     var comment = req.body.comment;
 
 
-    var user_id=req.session.passport.user;
-    if(!user_id){
-      res.status(401)
-      return res.json({message:"user is not authenticated"})
-    }
+    // var user_id=req.session.passport.user;
+    // if(!user_id){
+    //   res.status(401)
+    //   return res.json({message:"user is not authenticated"})
+    // }
 
-    User.findOne({'_id':user_id},function(err, user){
-      if(err){
-        return next(err)
-      }
-      user.rated_classes.findOne({'class_id': class_id, 'prof_id': prof_id},function(err,this_rating){
-        if(this_rating){
-          return res.json({message:"This user has already rated this course"})
-        }
-        else{
-          user.rated_classes.push({{'class_id': class_id, 'prof_id': prof_id}});
-        }
-      })
-    })
+    // User.findOne({'_id':user_id},function(err, user){
+    //   if(err){
+    //     return next(err)
+    //   }
+    //   user.rated_classes.findOne({'class_id': class_id, 'prof_id': prof_id},function(err,this_rating){
+    //     if(this_rating){
+    //       return res.json({message:"This user has already rated this course"})
+    //     }
+    //   })
+    // })
 
-    Rating.count({'class_id': class_id, 'prof_id': prof_id}, function(err, count) {
+    Rating.count({'course_num': class_id, 'name': prof_id}, function(err, count) {
         if (count > 0) {
             // Rating already exists
-            Rating.findOne({'class_id': class_id, 'prof_id': prof_id}, function(err, this_rating) {
+            Rating.findOne({'couese_num': class_id, 'name': prof_id}, function(err, this_rating) {
                 if (err) {
                   return next(err);
                     // Rating findOne error
@@ -63,9 +60,9 @@ module.exports = function(req,res,next){
                 class_id: class_id,
                 prof_id: prof_id,
                 rating_count: 1,
-                total_workload=workload_rating;
-                total_overall=overall_rating;
-                total_difficulty=difficulty_rating;
+                total_workload:workload_rating,
+                total_overall:overall_rating,
+                total_difficulty:difficulty_rating
                 });
             new_rating.ratings.push({
                 difficulty: Number(difficulty_rating),
@@ -73,27 +70,34 @@ module.exports = function(req,res,next){
                 workload: Number(workload_rating),
                 comment: comment
                 });
-            new_rating.save();
+            new_rating.save(function(err){
             // Add rating to professor
-            Professor.findOne({id: prof_id}, function(err, this_professor) {
+            if(err){
+              return next(err)
+            }
+            Professor.findOne({name:prof_id}, function(err, this_professor) {
                 if (err) {
                   return next(err)
                     // Professor findOne error
                 } else {
-                    this_professor.ratings.push(this_rating.id);
+                    this_professor.ratings.push(new_rating._id);
                     this_professor.save();
                 }
             });
-            Course.findOne({id: prof_id}, function(err, this_course) {
+            Course.findOne({"course_num": class_id}, function(err, this_course) {
                 if (err) {
                   return next(err)
                     // Professor findOne error
                 } else {
-                    this_course.ratings.push(this_rating.id);
+                    this_course.ratings.push(new_rating._id);
                     this_course.save();
                 }
             });
+          });
             res.json({message: "success"});
         }
     });
+    // User.findOne({"_id":user_id},function(user,err){
+    //   user.rated_classes.push(class_id);
+    // })
 };

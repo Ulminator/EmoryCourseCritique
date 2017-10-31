@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 var {Schema}=mongoose;
 
 var ratingSchema=new Schema({
-  class_id:{type:Schema.Types.ObjectId, required:true},
-  prof_id:{type:Schema.Types.ObjectId,required:true},
+  class_id:{type:String,required:true},
+  prof_id:{type:String,required:true},
   rating_count: Number,
   total_difficulty:Number,
   total_overall:Number,
