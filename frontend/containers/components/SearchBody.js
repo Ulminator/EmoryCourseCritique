@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-class ReviewBody extends React.Component {
+class SearchBody extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -131,4 +131,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ReviewBody);
+)(SearchBody);
