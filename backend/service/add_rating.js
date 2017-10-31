@@ -2,7 +2,7 @@ const path = require('path');
 var Rating=require(path.join(__dirname,'..','/models/ratings.js'));
 var Professor=require(path.join(__dirname,'..','/models/professor.js'));
 var Course=require(path.join(__dirname,'..','/models/course.js'));
-var Users=require(path.join(__dirname,'..','/models/Users.js'));
+var User=require(path.join(__dirname,'..','/models/Users.js'));
 
 module.exports = function(req,res,next){
     var class_id = req.body.class_id;
@@ -12,28 +12,28 @@ module.exports = function(req,res,next){
     var workload_rating = req.body.workload_rating;
     var comment = req.body.comment;
 
-
-    var user_id=req.session.passport.user;
+    var user_id=(req.session.passport.user);
     if(!user_id){
       res.status(401)
       return res.json({message:"user is not authenticated"})
     }
 
     User.findOne({'_id':user_id},function(err, user){
+      console.log(user);
       if(err){
         return next(err)
       }
-      user.rated_classes.findOne({'class_id': class_id, 'prof_id': prof_id},function(err,this_rating){
+      User.findOne({'rated_classes.course': class_id, 'rated_classes.professor': prof_id},function(err,this_rating){
         if(this_rating){
+          console.log(1111);
           return res.json({message:"This user has already rated this course"})
         }
       })
     })
 
-    Rating.count({'course_num': class_id, 'name': prof_id}, function(err, count) {
-        if (count > 0) {
+    Rating.findOne({'class_id': class_id, 'prof_id': prof_id}, function(err, this_rating) {
+        if (this_rating) {
             // Rating already exists
-            Rating.findOne({'couese_num': class_id, 'name': prof_id}, function(err, this_rating) {
                 if (err) {
                   return next(err);
                     // Rating findOne error
@@ -51,8 +51,6 @@ module.exports = function(req,res,next){
                     this_rating.save();
                     // Add rating to professor
                 }
-                return res.json({message: "success"});
-            });
         } else {
             // Rating doesn't exist
             console.log(class_id);
@@ -94,10 +92,12 @@ module.exports = function(req,res,next){
                 }
             });
           });
-            res.json({message: "success"});
+            return res.json({message: "success"});
         }
     });
-    User.findOne({"_id":user_id},function(user,err){
-      user.rated_classes.push(class_id);
+    User.findOne({"_id":user_id},function(err,user){
+      console.log(user);
+      user.rated_classes.push({course:class_id,professor:prof_id});
+      user.save();
     })
 };
