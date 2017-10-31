@@ -1,16 +1,16 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
-import ReviewBody from  "./components/ReviewBody";
+import SearchBody from  "./components/SearchBody";
 
 
-class ReviewPageContainer extends Component {
+class SearchPageContainer extends Component {
   render() {
 
     return(
 
       <rbody >
 
-        <ReviewBody />
+        <SearchBody />
 
       </rbody>
     )
@@ -30,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ReviewPageContainer);
+)(SearchPageContainer);
