@@ -13,22 +13,22 @@ module.exports = function(req,res,next){
     var comment = req.body.comment;
 
 
-    // var user_id=req.session.passport.user;
-    // if(!user_id){
-    //   res.status(401)
-    //   return res.json({message:"user is not authenticated"})
-    // }
+    var user_id=req.session.passport.user;
+    if(!user_id){
+      res.status(401)
+      return res.json({message:"user is not authenticated"})
+    }
 
-    // User.findOne({'_id':user_id},function(err, user){
-    //   if(err){
-    //     return next(err)
-    //   }
-    //   user.rated_classes.findOne({'class_id': class_id, 'prof_id': prof_id},function(err,this_rating){
-    //     if(this_rating){
-    //       return res.json({message:"This user has already rated this course"})
-    //     }
-    //   })
-    // })
+    User.findOne({'_id':user_id},function(err, user){
+      if(err){
+        return next(err)
+      }
+      user.rated_classes.findOne({'class_id': class_id, 'prof_id': prof_id},function(err,this_rating){
+        if(this_rating){
+          return res.json({message:"This user has already rated this course"})
+        }
+      })
+    })
 
     Rating.count({'course_num': class_id, 'name': prof_id}, function(err, count) {
         if (count > 0) {
@@ -97,7 +97,7 @@ module.exports = function(req,res,next){
             res.json({message: "success"});
         }
     });
-    // User.findOne({"_id":user_id},function(user,err){
-    //   user.rated_classes.push(class_id);
-    // })
+    User.findOne({"_id":user_id},function(user,err){
+      user.rated_classes.push(class_id);
+    })
 };

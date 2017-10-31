@@ -3,7 +3,7 @@ var querymen = require('querymen');
 
 module.exports = function(app,passport,nev,transport){
    app.use('/users',require('connect-ensure-login').ensureLoggedIn('/login'))
-
+   app.use('/rate',require('connect-ensure-login').ensureLoggedIn('/login'))
 
   app.post('/account/signup',(req,res,next)=>{
     require('./service/signup.js')(req,res,nev,next)
@@ -80,7 +80,7 @@ module.exports = function(app,passport,nev,transport){
     // e.g. /search?q=AAS100&page=1&sort=course_num
     app.get('/test', querymen.middleware(), function(req, res) {
         require('./service/search.js')(req, res);
-    }); 
+    });
 
     // Get course page when clicked in search
     app.get('/course', querymen.middleware({
