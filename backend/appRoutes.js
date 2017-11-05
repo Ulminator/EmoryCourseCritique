@@ -89,6 +89,14 @@ module.exports = function(app,passport,nev,transport){
         require('./service/get_course.js')(res, req.querymen.query);
     });
 
+    // Get course page when clicked in search
+    app.get('/rating', querymen.middleware({
+        course: {type: String, paths: ['course']},
+        prof: {type: String, paths: ['prof']}
+    }), function(req, res) {
+        require('./service/get_ratings.js')(res, req.querymen.query);
+    });
+
     // Add a rating to a course
     app.post('/course/add_rating', (req,res,next)=>{
         require('./service/add_rating.js')(req,res,next)
