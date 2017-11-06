@@ -24,7 +24,7 @@ class Card extends React.Component {
             prof: pname
         });
 
-           window.location.replace(url2);       
+           window.location.href = url2;       
   }
 
   
