@@ -48,6 +48,9 @@ class SearchBody extends React.Component {
   render() {
     
     var cards = [];
+    var querystring = require('querystring');
+    var parsed = querystring.parse(location.search);
+    var input = Object.values(parsed)[0];
 
     console.log(this.props);
     
@@ -99,7 +102,7 @@ class SearchBody extends React.Component {
               fontWeight: 300
             }}
           >
-            Showing Results for {thiscourse}
+            Showing Results for {input}
           </h5>
         </div>
         <div

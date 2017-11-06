@@ -105,7 +105,7 @@ class ReviewBody extends React.Component {
               fontWeight: 300
             }}
           >
-            Showing Results for {thiscourse}
+            Showing Reviews for {this.state.reviewCourse}
           </h5>
         </div>
         <div
@@ -121,6 +121,33 @@ class ReviewBody extends React.Component {
           <div className="row">
             <div className="col s12">
 
+              <div className="card-panel white black-text" >
+                <h4>
+                  Course:<span
+                    style={{
+                      color: "#66bb6a"
+                    }}
+                  >
+                    {this.state.reviewCourse}
+                  </span>
+                </h4>
+                <span
+                  style={{
+                    fontWeight: 400
+                  }}
+                >
+                  Professor: {this.state.reviewProfessor}
+                </span>{" "}
+                
+                <br />
+                <span
+                  style={{
+                    fontWeight: 300
+                  }}
+                >
+
+                </span>
+              </div>
               {cards}
               
             </div>
