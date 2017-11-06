@@ -7,12 +7,14 @@ import Footer from "./Footer";
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-class SearchBody extends React.Component {
+class ReviewBody extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      courses: [],
-      
+
+      reviewCourse: '',
+      reviewProfessor: '',
+      ratings: []
     }
 
   }
@@ -22,21 +24,27 @@ class SearchBody extends React.Component {
   componentWillMount() {
     console.log('mount');
     console.log(location.search);
-          var self=this;
-      axios.get('/test'+location.search)
+    
+      var self=this;
+      var url= '/testtwo'+location.search;
+      console.log(url);
+    axios.get(url)
         .then(function (response) {
+          console.log(response);
           
+            
             self.setState({
-              courses:response.data,
-
-            })
-          
+              ratings:response.data.ratings,
+              reviewCourse: response.data.class_id,
+              reviewProfessor: response.data.prof_id,
+              
+            }) 
+          //history.pushState(null, '', url2);
           
         })
         .catch(function (error) {
           console.log(error);
         });
-      
     
 
   }
@@ -51,13 +59,11 @@ class SearchBody extends React.Component {
 
     console.log(this.props);
     
-      console.log(this.state.courses);
-      if(this.state.courses[0]){
-        var thiscourse=this.state.courses[0].course_num;
+      var thiscourse='reviews';
+      for (var i = 0; i < this.state.ratings.length; i++) {
+        cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} key={i}/>);
       }
-      for (var i = 0; i < this.state.courses.length; i++) {
-        cards.push(<Card cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} professor={this.state.courses[i].professor} rating={this.state.courses[i].average_overall} key={i}/>);
-      }
+    
     
     return (
       <div >
@@ -144,4 +150,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SearchBody);
+)(ReviewBody);

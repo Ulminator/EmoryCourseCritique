@@ -18,28 +18,13 @@ class Card extends React.Component {
     pname=pname.replace(", ","_");
     console.log(pname);
     var querystring = require('querystring');
-        var url = '/rating?'+querystring.stringify({
+        
+        var url2 = '/rating?'+querystring.stringify({
             course: this.props.cnum,
             prof: pname
         });
 
-    var self=this;
-    axios.get(url)
-        .then(function (response) {
-          console.log(response);
-          self.props.showReviews(response.data);
-            /*
-            self.setState({
-              ratings:response.data
-              
-            }) */
-          
-          
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        
+           window.location.replace(url2);       
   }
 
   

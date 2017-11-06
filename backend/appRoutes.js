@@ -90,7 +90,7 @@ module.exports = function(app,passport,nev,transport){
     });
 
     // Get course page when clicked in search
-    app.get('/rating', querymen.middleware({
+    app.get('/testtwo', querymen.middleware({
         course: {type: String, paths: ['course']},
         prof: {type: String, paths: ['prof']}
     }), function(req, res) {
