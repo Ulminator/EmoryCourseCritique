@@ -33,7 +33,7 @@ class Card extends React.Component {
     
 
     return (
-      <div className="card-panel white black-text" onClick={this.onClick}>
+      <div className="card-panel white black-text" onClick={this.onClick} onMouseOver="" style={{cursor: 'pointer'}}>
         <h4>
           {this.props.cnum}:<span
             style={{
