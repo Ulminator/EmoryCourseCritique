@@ -1,31 +1,41 @@
-import React, {Component} from 'react'
+import React, {PropTypes} from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-class LoginPageContainer extends Component {
+import { LoginAction } from '../actions.js'
+
+
+class LoginPageContainer extends React.Component {
   constructor(props) {
     super(props)
+    console.log(props);
     this.state = {
       email: "",
       password: ""
     }
   }
 
+  updateLogin() {
+    this.props.loginState();
+  }
+
   updateEmail(event){
     this.setState({email: event.target.value});
-    console.log(this.state.email)
   }
 
   updatePassword(event){
     this.setState({password: event.target.value});
   }
   redirectResend(){
-    window.location.replace("http://localhost:3000/account/resend");
+    this.props.history.push('/resend')
+    // window.location.replace("http://localhost:3000/resend");                  /*Fixed the resend url*/
   }
   login() {
         // Send a POST request
         console.log(this.state.email)
-        console.log(this.state.password)
+        //this refers to the window object when referenced inside a fucntion
+        var self = this;
+
         axios({
           method: 'post',
           url: 'http://localhost:3000/account/login',
@@ -40,10 +50,15 @@ class LoginPageContainer extends Component {
             alert(response.data.message)
           }
           if(response.data.redirectUrl){
-            window.location.replace('http://localhost:3000'+response.data.redirectUrl)
+            self.props.history.push(response.data.redirectUrl)
+            // window.location.replace('http://localhost:3000'+response.data.redirectUrl)
           }else{
-
-            window.location.replace("http://localhost:3000/");
+            // console.log("LOGIN SUCCESS")
+            // console.log(self.props);
+            self.updateLogin();
+            // console.log(self.props)
+            self.props.history.push('/')
+            // window.location.replace("http://localhost:3000/");
           }
         })
         .catch(function (error) {
@@ -53,7 +68,6 @@ class LoginPageContainer extends Component {
   render() {
     return(
       <div>
-
       <div className = "header">
           <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
       </div>
@@ -108,15 +122,17 @@ class LoginPageContainer extends Component {
 
 const mapStateToProps = state => {
   return{
+    state
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
+    loginState: () => dispatch(LoginAction())
   }
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LoginPageContainer);
