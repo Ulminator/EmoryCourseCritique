@@ -7,12 +7,19 @@ import Footer from "./Footer";
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-class SearchBody extends React.Component {
+class ReviewBody extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      courses: [],
-      
+
+      reviewCourse: '',
+      reviewProfessor: '',
+      ratings: [],
+      count: Number,
+      total_difficulty:Number,
+      total_overall:Number,
+      total_workload:Number
+
     }
 
   }
@@ -22,21 +29,30 @@ class SearchBody extends React.Component {
   componentWillMount() {
     console.log('mount');
     console.log(location.search);
-          var self=this;
-      axios.get('/test'+location.search)
+    
+      var self=this;
+      var url= '/testtwo'+location.search;
+      console.log(url);
+    axios.get(url)
         .then(function (response) {
+          console.log(response);
           
+            
             self.setState({
-              courses:response.data,
-
-            })
-          
+              ratings:response.data.ratings,
+              reviewCourse: response.data.class_id,
+              reviewProfessor: response.data.prof_id,
+              count: response.data.rating_count,
+              total_difficulty: response.data.total_difficulty,
+              total_workload: response.data.total_workload,
+              total_overall: response.data.total_overall
+            }) 
+          //history.pushState(null, '', url2);
           
         })
         .catch(function (error) {
           console.log(error);
         });
-      
     
 
   }
@@ -48,23 +64,20 @@ class SearchBody extends React.Component {
   render() {
     
     var cards = [];
-    var querystring = require('querystring');
-    var parsed = querystring.parse(location.search);
-    var input = Object.values(parsed)[0];
+
+    console.log(this.state.total_overall/this.state.count);
 
     console.log(this.props);
     
-      console.log(this.state.courses);
-      if(this.state.courses[0]){
-        var thiscourse=this.state.courses[0].course_num;
+      var thiscourse='reviews';
+      for (var i = 0; i < this.state.ratings.length; i++) {
+        cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} key={i}/>);
       }
-      for (var i = 0; i < this.state.courses.length; i++) {
-        cards.push(<Card cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} professor={this.state.courses[i].professor} rating={this.state.courses[i].average_overall} key={i}/>);
-      }
+    
     
     return (
       <div >
-        <SideNav />
+        <SideNav avg_overall={(this.state.total_overall/this.state.count).toFixed(2)} />
         <div
           style={{
             margin: "0 auto",
@@ -102,7 +115,7 @@ class SearchBody extends React.Component {
               fontWeight: 300
             }}
           >
-            Showing Results for {input}
+            Showing Reviews for {this.state.reviewCourse}
           </h5>
         </div>
         <div
@@ -118,6 +131,33 @@ class SearchBody extends React.Component {
           <div className="row">
             <div className="col s12">
 
+              <div className="card-panel white black-text" >
+                <h4>
+                  Course:<span
+                    style={{
+                      color: "#66bb6a"
+                    }}
+                  >
+                    {this.state.reviewCourse}
+                  </span>
+                </h4>
+                <span
+                  style={{
+                    fontWeight: 400
+                  }}
+                >
+                  Professor: {this.state.reviewProfessor}
+                </span>{" "}
+                
+                <br />
+                <span
+                  style={{
+                    fontWeight: 300
+                  }}
+                >
+
+                </span>
+              </div>
               {cards}
               
             </div>
@@ -147,4 +187,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SearchBody);
+)(ReviewBody);

@@ -52,7 +52,7 @@ module.exports = function(req, res,next) {
                         // error finding a professor
                     } else if (courseItem) {
                         // Find matching rating
-                        Rating.findOne({'class_id': courseItem.course_num, 'prof_id': professor._id}, function(err, rating) {
+                        Rating.findOne({'class_id': courseItem.course_num, 'prof_id': profName}, function(err, rating) {
                             if(err){
                               return next(err)
                             }
@@ -77,9 +77,9 @@ module.exports = function(req, res,next) {
                                     course_num: courseItem.course_num,
                                     course_name: courseItem.course_name,
                                     professor: profName,
-                                    average_difficulty: rating.total_difficulty / rating.rating_count,
-                                    average_overall: rating.total_overall / rating.rating_count,
-                                    average_workload: rating.total_workload / rating.rating_count
+                                    average_difficulty: (rating.total_difficulty / rating.rating_count).toFixed(2),
+                                    average_overall: (rating.total_overall / rating.rating_count).toFixed(2),
+                                    average_workload: (rating.total_workload / rating.rating_count).toFixed(2)
                                 }
                                 // add card to response
                                 sendcprof(course_professor_rating);

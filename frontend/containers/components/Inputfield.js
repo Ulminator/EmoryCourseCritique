@@ -32,7 +32,7 @@ class Inputfield extends React.Component {
         var url = '/search?'+querystring.stringify({
             q: this.state.inputValue
         });
-      window.location.replace(url);
+      window.location.href= url;
       
       
     }

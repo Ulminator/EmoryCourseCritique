@@ -13,23 +13,23 @@ class SortBy extends React.Component {
                 fontWeight: 500
               }}
             >
-              Professor
+              Date
             </span>
             <i className="material-icons">arrow_drop_down</i>
           </a>
           <div className="collapsible-body">
             <ul>
               <li>
-                <a href="#!">Ratings</a>
+                <a href="#!">Date</a>
               </li>
               <li>
-                <a href="#!">Professors</a>
+                <a href="#!">Overall</a>
               </li>
               <li>
-                <a href="#!">Winrate</a>
+                <a href="#!">Difficulty</a>
               </li>
               <li>
-                <a href="#!">Something else</a>
+                <a href="#!">Workload</a>
               </li>
             </ul>
           </div>

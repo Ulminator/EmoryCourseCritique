@@ -43,7 +43,7 @@ class SideNav extends React.Component {
             paddingBottom: 5
           }}
         >
-          <h2 className="center">4.6</h2>
+          <h2 className="center">{this.props.avg_overall}</h2>
         </li>
         <li className="divider" />
         <li>
