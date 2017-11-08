@@ -84,12 +84,6 @@ class SignUpPageContainer extends Component {
   }
 
   signup() {
-        // Send a POST request
-        // console.log(this.state.firstname)
-        // console.log(this.state.lastname)
-        // console.log(this.state.repeated)
-        // console.log(this.state.email)
-        // console.log(this.state.password)
         this.validateFieldName("email")
         this.validateFieldName("password")
 
@@ -116,7 +110,8 @@ class SignUpPageContainer extends Component {
 
         .then(function (response) {
           console.log(response);
-          window.location.replace("http://localhost:3000/success");
+          this.props.history.push('/success')
+          // window.location.replace("http://localhost:3000/success");
         })
         .catch(function (error) {
           console.log(error.response.data.message);
@@ -207,6 +202,7 @@ class SignUpPageContainer extends Component {
 
 const mapStateToProps = state => {
   return{
+    state
   }
 }
 
