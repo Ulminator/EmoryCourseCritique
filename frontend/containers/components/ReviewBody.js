@@ -14,7 +14,12 @@ class ReviewBody extends React.Component {
 
       reviewCourse: '',
       reviewProfessor: '',
-      ratings: []
+      ratings: [],
+      count: Number,
+      total_difficulty:Number,
+      total_overall:Number,
+      total_workload:Number
+
     }
 
   }
@@ -37,7 +42,10 @@ class ReviewBody extends React.Component {
               ratings:response.data.ratings,
               reviewCourse: response.data.class_id,
               reviewProfessor: response.data.prof_id,
-              
+              count: response.data.rating_count,
+              total_difficulty: response.data.total_difficulty,
+              total_workload: response.data.total_workload,
+              total_overall: response.data.total_overall
             }) 
           //history.pushState(null, '', url2);
           
@@ -57,6 +65,8 @@ class ReviewBody extends React.Component {
     
     var cards = [];
 
+    console.log(this.state.total_overall/this.state.count);
+
     console.log(this.props);
     
       var thiscourse='reviews';
@@ -67,7 +77,7 @@ class ReviewBody extends React.Component {
     
     return (
       <div >
-        <SideNav />
+        <SideNav avg_overall={(this.state.total_overall/this.state.count).toFixed(2)} />
         <div
           style={{
             margin: "0 auto",
