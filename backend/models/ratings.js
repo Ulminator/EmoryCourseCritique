@@ -8,7 +8,7 @@ var ratingSchema=new Schema({
   total_difficulty:Number,
   total_overall:Number,
   total_workload:Number,
-  ratings: [{difficulty:Number, overall: Number, workload:Number,comment:String}]
+  ratings: [{difficulty:Number, overall: Number, workload:Number,comment:String,rated_date:Date}]
 })
 
  module.exports =  mongoose.model('rating',ratingSchema);

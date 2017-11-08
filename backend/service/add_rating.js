@@ -52,6 +52,7 @@ module.exports = function(req,res,next){
                         overall: Number(overall_rating),
                         workload: Number(workload_rating),
                         comment: comment,
+                        rated_date:new Date()
                         });
                     this_rating.save();
                     done(null, user_id)
