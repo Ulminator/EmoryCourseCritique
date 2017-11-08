@@ -26,7 +26,8 @@ class ResendEmailContainer extends Component {
         })
         .then(function (response) {
           console.log(response);
-          window.location.replace("http://localhost:3000/success");
+          this.props.history.push('/success')
+          // window.location.replace("http://localhost:3000/success");
         })
         .catch(function (error) {
           console.log(error);
@@ -77,8 +78,10 @@ class ResendEmailContainer extends Component {
   }
 };
 
+
 const mapStateToProps = (state) => {
   return{
+    state
   }
 }
 
@@ -89,5 +92,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ResendEmailContainer);
