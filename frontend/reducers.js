@@ -28,4 +28,6 @@ function rootReducer(state, action) {
     }
 }
 
-export default rootReducer;
+export default {
+  reducer: rootReducer
+};

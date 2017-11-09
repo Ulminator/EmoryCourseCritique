@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import {withRouter} from "react-router-dom";
 import { connect } from 'react-redux';
 
 
@@ -32,7 +33,9 @@ class Inputfield extends React.Component {
         var url = '/search?'+querystring.stringify({
             q: this.state.inputValue
         });
+        //this.props.history.push(url);
       window.location.href= url;
+      console.log(url);
       
       
     }
@@ -72,6 +75,7 @@ class Inputfield extends React.Component {
 }
 const mapStateToProps = (state) => {
   return{
+    state
   }
 }
 
@@ -80,7 +84,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Inputfield);
+)(Inputfield));

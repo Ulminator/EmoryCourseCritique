@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import {withRouter} from "react-router-dom";
 
 class Card extends React.Component {
   constructor(props) {
@@ -23,8 +24,8 @@ class Card extends React.Component {
             course: this.props.cnum,
             prof: pname
         });
-
-           window.location.href = url2;       
+            window.location.href = url2;  
+           //this.props.history.push(url2);     
   }
 
   
@@ -63,4 +64,4 @@ class Card extends React.Component {
   }
 }
 
-export default Card;
+export default withRouter(Card);
