@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 class SignUpPageContainer extends Component {
   constructor(props) {
@@ -123,78 +124,74 @@ class SignUpPageContainer extends Component {
       <div>
 
       <div className = "header">
-          <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
+          <Link to='/' className = "header-title" style={{color: '#FFD700'}}> <span className = "header-title-emory">Emory</span> Course Critique </Link>
       </div>
 
-      <div className = "register-body">
-        <div className = "register-body-main-component">
-          <div className = "register-body-title">Sign Up</div>
-
-          <div className = "first-last-name">
-          <div className = "name-col">
-          <input
-           type="text"
-           value={this.state.firstname}
-           placeholder="First name"
-           className="user-input"
-           onChange={(event) => this.updateFirstname(event)}
-          />
-          </div>
-
-          <div className = "name-col">
-          <input
-           type="text"
-           value={this.state.lastname}
-           placeholder="Last name"
-           className="user-input"
-           onChange={(event) => this.updateLastname(event)}
-          />
-          </div>
-          </div>
+      <lbody >
 
 
-          <div className = "inputs-sizes">
-          <input
-           type="text"
-           value={this.state.email}
-           placeholder="Email Address"
-           className="user-input"
-           onChange={(event) => this.updateEmail(event)}
-          />
-          </div>
+        <div id="login-page" className="login-form2">
+          <div className="col s12 z-depth-4 card-panel">
+            <form className="login-form">
+              <div className="row">
+                <div className="input-field col s12 center">
 
-          <div className = "inputs-sizes">
-          <input
-           type="password"
-           value={this.state.password}
-           placeholder="Password"
-           className="user-input"
-           onChange={(event) => this.updatePassword(event)}
-          />
-          </div>
+                  
+                </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s6">
+                  <i className="material-icons prefix">person</i>
+                  <input id="firstname" type="text" value={this.state.firstname}
+           onChange={(event) => this.updateFirstname(event)}/>
+                  <label htmlFor="firstname" className="center-align">Firstname</label>
+                </div>
+                <div className="input-field col s6">
+                  <input id="lastname" type="text" value={this.state.lastname}
+           onChange={(event) => this.updateLastname(event)}/>
+                  <label htmlFor="lastname">Lastname</label>
+                </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <i className="material-icons prefix">email</i>
+                  <input id="username" type="text" value={this.state.email}
+           onChange={(event) => this.updateEmail(event)}/>
+                  <label htmlFor="username" className="center-align">Email</label>
+                </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <i className="material-icons prefix">lock</i>
+                  <input id="password" type="password" value={this.state.password}
+           onChange={(event) => this.updatePassword(event)}/>
+                  <label htmlFor="password" className="center-align">Password</label>
+                </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <i className="material-icons prefix">lock</i>
+                  <input id="rpassword" type="password" value={this.state.repeated}
+           onChange={(event) => this.updateRepeated(event)}/>
+                  <label htmlFor="rpassword" className="center-align">Repeat Password</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <a onClick={() => this.signup()} className="btn waves-effect waves-light col s12">Sign Up</a>
+                </div>
+              </div>
+              <div className="input-field col s12">
+                <p className="margin center medium-small sign-up">Already have an account? <Link to='/login'>Login</Link></p>
+              </div>
 
-          <div className = "inputs-sizes">
-          <input
-           type="password"
-           value={this.state.repeated}
-           placeholder="Repeat Password"
-           className="user-input"
-           onChange={(event) => this.updateRepeated(event)}
-          />
-          </div>
-
-          <div className="submit-button-row">
-          <button
-          type="button"
-          className="submit-button"
-          onClick={() => this.signup()}>
-          Submit
-          </button>
-          </div>
-
-
+            </form>
           </div>
         </div>
+
+  
+
+      </lbody>
       </div>
     )
   }

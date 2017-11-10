@@ -70,8 +70,8 @@ class LoginPageContainer extends React.Component {
   render() {
     return(
       <div >
-      <div className = "header">
-          <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
+      <div className = "header">    
+          <Link to='/' className = "header-title" style={{color: '#FFD700'}}> <span className = "header-title-emory">Emory</span> Course Critique </Link>
       </div>
       
       <lbody >
@@ -91,7 +91,7 @@ class LoginPageContainer extends React.Component {
                   <i className="material-icons prefix">person</i>
                   <input id="username" type="text" value={this.state.email}
                           onChange={(event) => this.updateEmail(event)}/>
-                  <label htmlFor="username" className="center-align">Username</label>
+                  <label htmlFor="username" className="center-align">Email</label>
                 </div>
               </div>
               <div className="row margin">
@@ -116,7 +116,7 @@ class LoginPageContainer extends React.Component {
               </div>
               <div className="row">
                 <div className="input-field col s6 m6 l6">
-                  <p className="margin medium-small"><li><Link to='/signup'>Register</Link></li></p>
+                  <p className="margin medium-small"><Link to='/signup'>Register</Link></p>
                 </div>
                 <div className="input-field col s6 m6 l6">
                     <p className="margin right-align medium-small"><a onClick={() => this.redirectResend()}>Forgot password ?</a></p>
