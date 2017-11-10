@@ -5,7 +5,7 @@
 
 }
 
-
+html, lbody { height: 100%; }
 /*home start */
 html, body { height: 100%; }
 
@@ -65,6 +65,15 @@ html, body { height: 100%; }
 /* home end */
 
 
+lbody {
+  /*display: table-cell;
+    vertical-align: middle;*/
+    display: block;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #283469 !important;
+    background: linear-gradient(0deg, #f1f1f1 60%, #283469 40%);
+}
 
 
 

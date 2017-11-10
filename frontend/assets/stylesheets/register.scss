@@ -18,15 +18,17 @@
   justify-content: flex-start;
   align-items: center;
   font-size: 37px;
-  color: #00477F;
+  color: #FFD700;
+  background-color: #283469;
 }
 
 .header-title-emory{
   font-weight:600;
+  color: white;
 }
 
 .header-title {
-  margin-left: 15px;
+  margin: auto;
 }
 
 .register-body-title{
@@ -168,6 +170,12 @@
     flex-direction: column;
     justify-content: space-between;
     width: 400px;
+}
+
+.login-form2{
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 1px 5% 5% 5%;
 }
 
 fieldset, label { margin: 0; padding: 0; }

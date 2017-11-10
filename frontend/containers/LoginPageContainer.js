@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 import { LoginAction } from '../actions.js'
 
@@ -33,6 +34,7 @@ class LoginPageContainer extends React.Component {
   login() {
         // Send a POST request
         console.log(this.state.email)
+        console.log(this.state.password)
         //this refers to the window object when referenced inside a fucntion
         var self = this;
 
@@ -67,55 +69,70 @@ class LoginPageContainer extends React.Component {
   }
   render() {
     return(
-      <div>
+      <div >
       <div className = "header">
           <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
       </div>
+      
+      <lbody >
 
-      <div className = "register-body">
-        <div className = "login-body-main-component">
-          <div className = "register-body-title">Login</div>
-              <div>
 
-                <div className="inputs-sizes">
-                  <input
-                   type="text"
-                   value={this.state.email}
-                   placeholder="Email Address"
-                   className="user-input"
-                   onChange={(event) => this.updateEmail(event)}
-                  />
+        <div id="login-page" className="login-form2">
+          <div className="col s12 z-depth-4 card-panel">
+            <form className="login-form">
+              <div className="row">
+                <div className="input-field col s12 center">
+
+                  
                 </div>
-
-                <div className="inputs-sizes-password">
-                  <input
-                   type="password"
-                   value={this.state.password}
-                   placeholder="Password"
-                   className="user-input"
-                   onChange={(event) => this.updatePassword(event)}
-                  />
-                  <button
-                  type="button"
-                  onClick={() => this.redirectResend()}
-                  className="forgot-password-button">
-                  Forgot your password?
-                  </button>
-                </div>
-
-                <div className="submit-button-row">
-                  <button
-                  className="submit-button"
-                  type="button" onClick={() => this.login()}>
-                  Login!
-                  </button>
-                </div>
-
               </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <i className="material-icons prefix">person</i>
+                  <input id="username" type="text" value={this.state.email}
+                          onChange={(event) => this.updateEmail(event)}/>
+                  <label htmlFor="username" className="center-align">Username</label>
+                </div>
               </div>
-            </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <i className="material-icons prefix">lock</i>
+                  <input id="password" type="password" value={this.state.password}
+                         
+                         onChange={(event) => this.updatePassword(event)}/>
+                  <label htmlFor="password">Password</label>
+                </div>
+              </div>
+              <div className="row">          
+                <div className="input-field col s12 m12 l12  login-text">
+                    <input type="checkbox" id="remember-me" />
+                    <label htmlFor="remember-me">Remember me</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <a onClick={() => this.login()} className="btn waves-effect waves-light col s12">Login</a>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6 m6 l6">
+                  <p className="margin medium-small"><li><Link to='/signup'>Register</Link></li></p>
+                </div>
+                <div className="input-field col s6 m6 l6">
+                    <p className="margin right-align medium-small"><a onClick={() => this.redirectResend()}>Forgot password ?</a></p>
+                </div>          
+              </div>
 
+            </form>
+          </div>
         </div>
+
+  
+
+      </lbody>
+      </div>
+
+      
     )
   }
 };
