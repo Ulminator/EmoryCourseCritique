@@ -64,6 +64,10 @@ class ReviewBody extends React.Component {
   render() {
     
     var cards = [];
+    var overalldist =[0,0,0,0,0];
+    var difficultydist =[0,0,0,0,0];
+    var workloaddist =[0,0,0,0,0];
+
 
     console.log(this.state.total_overall/this.state.count);
 
@@ -71,8 +75,14 @@ class ReviewBody extends React.Component {
     
       var thiscourse='reviews';
       for (var i = 0; i < this.state.ratings.length; i++) {
-        cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} key={i}/>);
+        overalldist[this.state.ratings[i].overall-1]+=1;
+        difficultydist[this.state.ratings[i].difficulty-1]+=1;
+        workloaddist[this.state.ratings[i].workload-1]+=1;
+        cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} rdate={this.state.ratings[i].rated_date} key={i}/>);
       }
+      console.log(overalldist);
+      console.log(difficultydist);
+      console.log(workloaddist);
     
     
     return (
