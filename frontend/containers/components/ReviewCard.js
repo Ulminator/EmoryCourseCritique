@@ -30,7 +30,7 @@ class ReviewCard extends React.Component {
             }}>
           Overall:<span
             style={{
-              color: "#66bb6a"
+              color: "#d18e01"
             }}
           >
             {this.props.overall} 

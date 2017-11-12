@@ -45,7 +45,7 @@ class Inputfield extends React.Component {
 
   render() {
     return (
-      <div className="input-field">
+      <div className="input-field" style={{height: 54, lineHeight:"54px"}}>
         <input
           id="search"
           type="search"
@@ -63,12 +63,12 @@ class Inputfield extends React.Component {
           htmlFor="search" 
         >
           <i
-            className="material-icons inputIconOverride"
+            className="material-icons inputIconOverride" style={{height: 54, lineHeight: "54px"}}
           >
             search
           </i>
         </label>
-        <i className="material-icons">close</i> 
+        <i className="material-icons" style={{height: 54, lineHeight: "54px"}}>close</i> 
       </div>
     );
   }

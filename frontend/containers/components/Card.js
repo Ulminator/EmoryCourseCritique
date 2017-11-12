@@ -38,7 +38,7 @@ class Card extends React.Component {
         <h4>
           {this.props.cnum}:<span
             style={{
-              color: "#66bb6a"
+              color: "#d18e01"
             }}
           >
             {this.props.cname}

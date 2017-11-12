@@ -86,38 +86,14 @@ class ReviewBody extends React.Component {
     
     
     return (
-      <div >
+      <rbody >
         <SideNav avg_overall={(this.state.total_overall/this.state.count).toFixed(2)} />
+        
         <div
           style={{
             margin: "0 auto",
             marginLeft: 15,
-            paddingTop: 15
-          }}
-        >
-          <nav
-            className
-            style={{
-              background: "white",
-              width: "98%"
-            }}
-          >
-            <div className="nav-wrapper">
-              <form>
-                <Inputfield/>
-              </form>
-            </div>
-          </nav>
-        </div>
-        <div
-          style={{
-            height: 30
-          }}
-        />
-        <div
-          style={{
-            margin: "0 auto",
-            marginLeft: 15
+            paddingTop:56
           }}
         >
           <h5
@@ -125,6 +101,7 @@ class ReviewBody extends React.Component {
               fontWeight: 300
             }}
           >
+            <br/>
             Showing Reviews for {this.state.reviewCourse}
           </h5>
         </div>
@@ -145,7 +122,7 @@ class ReviewBody extends React.Component {
                 <h4>
                   Course:<span
                     style={{
-                      color: "#66bb6a"
+                      color: "#d18e01"
                     }}
                   >
                     {this.state.reviewCourse}
@@ -179,7 +156,7 @@ class ReviewBody extends React.Component {
           />
         </div>
         <Footer />
-      </div>
+      </rbody>
     );
   }
 }

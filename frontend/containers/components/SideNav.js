@@ -5,20 +5,20 @@ import Tags from "./Tags";
 class SideNav extends React.Component {
   render() {
     return (
-      <ul id="slide-out" className="side-nav fixed">
+      <ul id="slide-out" className="side-nav fixed" style={{top:56.3, height:"100%"}}>
         <li>
           <div className="user-view">
-            <div className="background">
-              <img className src="imgs/darkgoldbackground.png" />
+            <div className="background" style={{backgroundColor: "white"}}>
+              
             </div>
             <a href="#!user">
               <img className="circle" src="imgs/placeholder.png" />
             </a>
             <a href="#!name">
-              <span className="white-text name">Rusty Fox</span>
+              <span className="black-text name">Rusty Fox</span>
             </a>
             <a href="#!email">
-              <span className="white-text email">rustiestfox@emory.edu</span>
+              <span className="black-text email">rustiestfox@emory.edu</span>
             </a>
           </div>
         </li>

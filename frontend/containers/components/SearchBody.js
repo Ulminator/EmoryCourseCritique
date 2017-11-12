@@ -63,38 +63,14 @@ class SearchBody extends React.Component {
       }
     
     return (
-      <div >
+      <rbody >
         <SideNav />
+        
         <div
           style={{
             margin: "0 auto",
             marginLeft: 15,
-            paddingTop: 15
-          }}
-        >
-          <nav
-            className
-            style={{
-              background: "white",
-              width: "98%"
-            }}
-          >
-            <div className="nav-wrapper">
-              <form>
-                <Inputfield/>
-              </form>
-            </div>
-          </nav>
-        </div>
-        <div
-          style={{
-            height: 30
-          }}
-        />
-        <div
-          style={{
-            margin: "0 auto",
-            marginLeft: 15
+            paddingTop:56
           }}
         >
           <h5
@@ -102,6 +78,7 @@ class SearchBody extends React.Component {
               fontWeight: 300
             }}
           >
+            <br/>
             Showing Results for {input}
           </h5>
         </div>
@@ -129,7 +106,7 @@ class SearchBody extends React.Component {
           />
         </div>
         <Footer />
-      </div>
+      </rbody>
     );
   }
 }

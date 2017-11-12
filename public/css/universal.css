@@ -1,7 +1,16 @@
  
 .navOverride{
   background-color:transparent;
-  width: 90%;
+  width: 100%;
+  height: 56px;
+
+}
+
+.navOverride2{
+  background-color:#002978;
+  width: 100%;
+  height: 56px;
+  position:fixed;
 
 }
 
@@ -72,7 +81,7 @@ lbody {
     min-height: 100vh;
     flex-direction: column;
     background-color: #283469 !important;
-    background: linear-gradient(0deg, #f1f1f1 60%, #283469 40%);
+    background: linear-gradient(0deg, #f1f1f1 60%, #002978 40%);
 }
 
 
