@@ -25,7 +25,7 @@ class ReviewCard extends React.Component {
 
     return (
       <div className="card-panel white black-text" >
-        <h4 style={{
+        <h5 style={{
               lineHeight: 0.7
             }}>
           Overall:<span
@@ -35,7 +35,7 @@ class ReviewCard extends React.Component {
           >
             {this.props.overall} 
           </span> 
-        </h4>
+        </h5>
         <span
           style={{
             fontWeight: 300,

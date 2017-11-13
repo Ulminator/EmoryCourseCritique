@@ -115,7 +115,7 @@ class ReviewBody extends React.Component {
             width: "95%"
           }}
         >
-          <div className="row">
+          <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col s12">
 
               <div className="card-panel white black-text" >
@@ -149,11 +149,7 @@ class ReviewBody extends React.Component {
               
             </div>
           </div>
-          <div
-            style={{
-              height: 580
-            }}
-          />
+          
         </div>
         <Footer />
       </rbody>

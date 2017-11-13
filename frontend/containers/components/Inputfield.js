@@ -44,6 +44,17 @@ class Inputfield extends React.Component {
   
 
   render() {
+    console.log(this.props.search);
+    if(this.props.search)
+    {
+      var icon="material-icons inputIconOverride2";
+      var textcolor="white";
+    }
+    else
+    {
+      var icon="material-icons inputIconOverride";
+      var textcolor="#444";
+    }
     return (
       <div className="input-field" style={{height: 54, lineHeight:"54px"}}>
         <input
@@ -57,13 +68,14 @@ class Inputfield extends React.Component {
           value={this.state.inputValue.bind} 
           onChange={this.updateInputValue}
           onKeyPress={this._handleKeyPress}
+          style={{color:textcolor}}
         />
         <label
           className="label-icon inputOverride"
           htmlFor="search" 
         >
           <i
-            className="material-icons inputIconOverride" style={{height: 54, lineHeight: "54px"}}
+            className={icon} style={{height: 54, lineHeight: "54px"}}
           >
             search
           </i>

@@ -4,8 +4,9 @@ import Inputfield from "./Inputfield";
 
 class SearchNavBar extends React.Component {
   render() {
+    var b=true;
     return (
-      <nav className= "navOverride2 z-depth-0">
+      <nav className= "navOverride2 z-depth-2">
         <div className="nav-wrapper">
           <div className="row">
             <div className="col s3" >
@@ -20,7 +21,7 @@ class SearchNavBar extends React.Component {
             </div>
             <div className="col s6" >
               <form>
-                <Inputfield/>
+                <Inputfield search={b}/>
               </form>
             </div>
             <div className="col s3">

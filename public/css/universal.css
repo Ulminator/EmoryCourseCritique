@@ -14,6 +14,14 @@
 
 }
 
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+    border-bottom: none !important;
+}
+
+.input-field input[type=search]:focus {
+  background-color:transparent !important;
+}
+
 html, lbody { height: 100%; }
 /*home start */
 html, body { height: 100%; }
@@ -68,6 +76,12 @@ html, body { height: 100%; }
   position: absolute;
   bottom: 12px;
   color: black !important;
+}
+
+.inputIconOverride2{
+  position: absolute;
+  bottom: 12px;
+  color: white !important;
 }
 
 

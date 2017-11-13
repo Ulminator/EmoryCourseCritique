@@ -7,6 +7,7 @@ class Title extends React.Component {
   
 
   render() {
+    var b=false;
     return (
       <div className="col l8 offset-l2">
         <h1
@@ -43,7 +44,7 @@ class Title extends React.Component {
             >
               <div className="nav-wrapper">
                 <form>
-                  <Inputfield />
+                  <Inputfield search={b}/>
                 </form>
               </div>
             </nav>
