@@ -5,7 +5,7 @@ import Tags from "./Tags";
 class SideNav extends React.Component {
   render() {
     return (
-      <ul id="slide-out" className="side-nav fixed" style={{top:56.3, height:"100%"}}>
+      <ul id="slide-out" className="side-nav fixed" style={{paddingTop:56, height:"100%", zIndex:0}}>
         <li>
           <div className="user-view">
             <div className="background" style={{backgroundColor: "white"}}>
