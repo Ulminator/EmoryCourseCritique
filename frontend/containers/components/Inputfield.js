@@ -63,7 +63,6 @@ class Inputfield extends React.Component {
           className="autocomplete"
           placeholder="Search for a class"
           required
-          autoFocus="autoFocus"
           autoComplete ="off"
           value={this.state.inputValue.bind} 
           onChange={this.updateInputValue}
@@ -80,7 +79,7 @@ class Inputfield extends React.Component {
             search
           </i>
         </label>
-        <i className="material-icons" style={{height: 54, lineHeight: "54px"}}>close</i> 
+        
       </div>
     );
   }

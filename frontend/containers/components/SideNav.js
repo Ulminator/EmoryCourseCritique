@@ -39,11 +39,10 @@ class SideNav extends React.Component {
         </li>
         <li
           style={{
-            paddingTop: 5,
-            paddingBottom: 5
+            paddingBottom: 2
           }}
         >
-          <h2 className="center">{this.props.avg_overall}</h2>
+          <h3 className="center">{this.props.avg_overall}</h3>
         </li>
         <li className="divider" />
         <li>
@@ -53,7 +52,6 @@ class SideNav extends React.Component {
         <li
           style={{
             paddingLeft: 10,
-            marginBottom: 25
           }}
         >
           <div className="chip">

@@ -24,7 +24,7 @@ class ReviewCard extends React.Component {
     }
 
     return (
-      <div className="card-panel white black-text" >
+      <div className="card-panel nohover white black-text" >
         <h5 style={{
               lineHeight: 0.7
             }}>

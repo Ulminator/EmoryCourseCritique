@@ -6,7 +6,7 @@ class SearchNavBar extends React.Component {
   render() {
     var b=true;
     return (
-      <nav className= "navOverride2 z-depth-2">
+      <nav className= "navOverride2 z-depth-1">
         <div className="nav-wrapper">
           <div className="row">
             <div className="col s3" >

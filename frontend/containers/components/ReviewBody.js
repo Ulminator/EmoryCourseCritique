@@ -118,7 +118,7 @@ class ReviewBody extends React.Component {
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col s12">
 
-              <div className="card-panel white black-text" >
+              <div className="card-panel nohover white black-text" >
                 <h4>
                   Course:<span
                     style={{
