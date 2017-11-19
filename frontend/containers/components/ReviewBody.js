@@ -5,6 +5,7 @@ import Card from "./Card";
 import ReviewCard from "./ReviewCard";
 import Footer from "./Footer";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class ReviewBody extends React.Component {
@@ -67,6 +68,15 @@ class ReviewBody extends React.Component {
     var overalldist =[0,0,0,0,0];
     var difficultydist =[0,0,0,0,0];
     var workloaddist =[0,0,0,0,0];
+    var pname = this.state.reviewProfessor;
+    pname=pname.replace(", ","_");
+
+    var querystring = require('querystring');
+        
+        var rateurl = '/rate?'+querystring.stringify({
+            course: this.state.reviewCourse,
+            prof: pname
+        });
 
 
     console.log(this.state.total_overall/this.state.count);
@@ -118,7 +128,7 @@ class ReviewBody extends React.Component {
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col s12">
 
-              <div className="card-panel nohover white black-text" >
+              <div className="card-panel nohover2 white black-text" >
                 <h4>
                   Course:<span
                     style={{
@@ -127,7 +137,17 @@ class ReviewBody extends React.Component {
                   >
                     {this.state.reviewCourse}
                   </span>
+                  <span
+                    style={{
+                      fontSize: 20,
+                      color: "#002a78",
+                      float: "right"
+                    }}
+                  >
+                    <Link to={rateurl}><i className="material-icons suffix">add_circle</i>Add Rating</Link>
+                  </span>
                 </h4>
+                
                 <span
                   style={{
                     fontWeight: 400

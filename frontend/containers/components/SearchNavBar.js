@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import Inputfield from "./Inputfield";
 
 class SearchNavBar extends React.Component {
@@ -9,17 +9,24 @@ class SearchNavBar extends React.Component {
       <nav className= "navOverride2 z-depth-1">
         <div className="nav-wrapper">
           <div className="row">
-            <div className="col s3" >
-              <h5>
-                <span
-                >
-                  <Link to='/' style={{
-                    color: "white"
-                  }}>EmoryCourseCritique</Link>
-                </span>
-              </h5>
+            <div className="col s4" >
+              <div className="row">
+                <div className="col s2">
+                  <Link to='/'><img src="imgs/emory-shield-white.png" style={{height:40,paddingTop:10}}/></Link>
+                </div>
+                <div className="col s10">
+                  <h5>
+                    <span
+                    >
+                      <Link to='/' style={{
+                        color: "white"
+                      }}>EmoryCourseCritique</Link>
+                    </span>
+                  </h5>
+                </div>
+              </div>
             </div>
-            <div className="col s6" >
+            <div className="col s5" >
               <form>
                 <Inputfield search={b}/>
               </form>

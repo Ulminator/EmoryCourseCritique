@@ -15,11 +15,15 @@
 }
 
 .card-panel:hover {
-  background-color:#f3f1ed !important;
+  background-color:#f5f5f5 !important;
 }
 
 .nohover {  
-    pointer-events: none;
+    pointer-events:none;
+}
+
+.nohover2:hover {  
+    background-color:white !important;
 }
 
 input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
