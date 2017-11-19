@@ -16,16 +16,22 @@ class RatePageContainer extends Component {
       }
     }
 
-    //course name & professor name
-    updateCourse(event){
-      this.setState({courseId: event.target.value});
-      console.log(this.state.courseId)
-    }
+    componentWillMount() {
+    console.log('mount');
+    console.log(location.search);
+    
+    var querystring = require('query-string');
+    var parsed = querystring.parse(location.search);
+    console.log(parsed);
+    console.log(parsed.course);
+    console.log(parsed.prof);
+    var pname = parsed.prof.replace("_",", ");
+    this.state.courseId= parsed.course;
+    this.state.profID= pname;
+    console.log(this.state.courseId);
+    console.log(this.state.profID);
 
-    updateProfessor(event){
-      this.setState({profID: event.target.value});
-      console.log(this.state.profID)
-    }
+  }
 
     updateComment(event){
       this.setState({comment: event.target.value});
@@ -99,25 +105,7 @@ render() {
           <div className = "register-body-title">Rate the course</div>
               <div>
 
-                <div className="inputs-sizes">
-                  <input
-                   type="text"
-                   value={this.state.courseId}
-                   placeholder="Course your reviewing"
-                   className="user-input"
-                   onChange= {(event) => this.updateCourse(event)}
-                  />
-                </div>
-
-                <div className="inputs-sizes">
-                  <input
-                   type="text"
-                   value={this.state.profID}
-                   placeholder="Professor of course"
-                   className="user-input"
-                   onChange={(event) => this.updateProfessor(event)}
-                  />
-                </div>
+                
 
                 <div className="inputs-sizes-rate">
                 <div className = "reate-body-title">Easiness</div>

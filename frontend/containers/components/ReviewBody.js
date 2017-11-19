@@ -37,8 +37,20 @@ class ReviewBody extends React.Component {
     axios.get(url)
         .then(function (response) {
           console.log(response);
-          
-            
+          console.log(response.data);
+          if(response.data==="")
+          {
+            var querystring = require('query-string');
+            var parsed = querystring.parse(location.search);
+            console.log(parsed);
+            console.log(parsed.course);
+            console.log(parsed.prof);
+            var pname = parsed.prof.replace("_",", ");
+            self.state.reviewCourse= parsed.course;
+            self.state.reviewProfessor= pname;
+          }
+          else
+          {
             self.setState({
               ratings:response.data.ratings,
               reviewCourse: response.data.class_id,
@@ -49,11 +61,13 @@ class ReviewBody extends React.Component {
               total_overall: response.data.total_overall
             }) 
           //history.pushState(null, '', url2);
+          }
           
         })
         .catch(function (error) {
           console.log(error);
         });
+
     
 
   }
@@ -63,6 +77,15 @@ class ReviewBody extends React.Component {
 
 
   render() {
+    
+    var querystring = require('query-string');
+            var parsed = querystring.parse(location.search);
+            console.log(parsed);
+            console.log(parsed.course);
+            console.log(parsed.prof);
+            var pname = parsed.prof.replace("_",", ");
+            this.state.reviewCourse= parsed.course;
+            this.state.reviewProfessor= pname;
     
     var cards = [];
     var overalldist =[0,0,0,0,0];
