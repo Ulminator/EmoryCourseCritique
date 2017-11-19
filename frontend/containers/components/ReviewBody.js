@@ -140,11 +140,12 @@ class ReviewBody extends React.Component {
                   <span
                     style={{
                       fontSize: 20,
-                      color: "#002a78",
                       float: "right"
                     }}
                   >
-                    <Link to={rateurl}><i className="material-icons suffix">add_circle</i>Add Rating</Link>
+                    <Link to={rateurl} style={{
+                        color: "#002a78"
+                      }}><i className="material-icons suffix">add_circle</i>Add Rating</Link>
                   </span>
                 </h4>
                 
