@@ -10,25 +10,41 @@ class NavBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        link : ""
+        link : "",
+        link2 : ""
     }
   }
 
-  logout() {
+ logout() {
     this.props.loginState();
+    // axios({
+    //   method: 'get',
+    //   url: 'http://localhost:3000/users/currentUser',
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
     axios({
       method: 'get',
       url: 'http://localhost:3000/account/logout',
     })
+    // axios({
+    //   method: 'get',
+    //   url: 'http://localhost:3000/users/currentUser',
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
   }
 
-  render() {
+ render() {
     var condition
     if(this.props.state.loginStatus){
       this.state.link = <li onClick={() => this.logout()}>Logout</li>
     }
     else{
       this.state.link = <li><Link to='/login'>Login</Link></li>
+      this.state.link2 = <li><Link to='/signup'>Signup</Link></li>
     }
     console.log(condition);
     return (
@@ -36,7 +52,7 @@ class NavBar extends React.Component {
           <div className="nav-wrapper">
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               {this.state.link}
-              <li><Link to='/signup'>Signup</Link></li>
+              {this.state.link2}
               <li><a href="collapsible.html"></a></li>
             </ul>
           </div>
