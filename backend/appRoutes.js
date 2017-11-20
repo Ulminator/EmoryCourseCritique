@@ -48,7 +48,7 @@ module.exports = function(app,passport,nev,transport){
 
   }) //middleware to ensure login
 
-  app.get('/account/logout',(req,res)=>{
+  app.post('/account/logout',(req,res)=>{
     req.logout();
     res.redirect('/');
   })
