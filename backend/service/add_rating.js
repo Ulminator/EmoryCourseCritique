@@ -25,12 +25,9 @@ module.exports = function(req,res,next){
           return next(err)
         }
         if(user){
-          console.log(user);
-          console.log(1111);
           return res.json({message:"This user has already rated this course"})
         }
         else{
-          console.log(222);
           done(null,user_id)
         }
       })
@@ -73,6 +70,7 @@ module.exports = function(req,res,next){
                 difficulty: Number(difficulty_rating),
                 overall: Number(overall_rating),
                 workload: Number(workload_rating),
+                rated_date:new Date(),
                 comment: comment
                 });
             new_rating.save(function(err){
@@ -86,7 +84,6 @@ module.exports = function(req,res,next){
                     // Professor findOne error
                 } else {
                     this_professor.ratings.push(new_rating._id);
-                    console.log(this_professor);
                     this_professor.save();
                 }
             });
@@ -97,7 +94,6 @@ module.exports = function(req,res,next){
                     // Professor findOne error
                 } else {
                     this_course.ratings.push(new_rating._id);
-                    console.log(this_course);
                     this_course.save();
                 }
             });
