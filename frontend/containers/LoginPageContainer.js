@@ -64,16 +64,16 @@ class LoginPageContainer extends React.Component {
           }
         })
         .catch(function (error) {
-          console.log(error.response.data.message);
+          alert(error.response.data.message);
         });
   }
   render() {
     return(
       <div >
-      <div className = "header">    
+      <div className = "header">
           <Link to='/' className = "header-title" style={{color: '#FFD700'}}> <span className = "header-title-emory">Emory</span> Course Critique </Link>
       </div>
-      
+
       <lbody >
 
 
@@ -83,7 +83,7 @@ class LoginPageContainer extends React.Component {
               <div className="row">
                 <div className="input-field col s12 center">
 
-                  
+
                 </div>
               </div>
               <div className="row margin">
@@ -98,12 +98,12 @@ class LoginPageContainer extends React.Component {
                 <div className="input-field col s12">
                   <i className="material-icons prefix">lock</i>
                   <input id="password" type="password" value={this.state.password}
-                         
                          onChange={(event) => this.updatePassword(event)}/>
                   <label htmlFor="password">Password</label>
                 </div>
               </div>
-              <div className="row">          
+
+              <div className="row">
                 <div className="input-field col s12 m12 l12  login-text">
                     <input type="checkbox" id="remember-me" />
                     <label htmlFor="remember-me">Remember me</label>
@@ -120,19 +120,19 @@ class LoginPageContainer extends React.Component {
                 </div>
                 <div className="input-field col s6 m6 l6">
                     <p className="margin right-align medium-small"><a onClick={() => this.redirectResend()}>Forgot password ?</a></p>
-                </div>          
+                </div>
               </div>
 
             </form>
           </div>
         </div>
 
-  
+
 
       </lbody>
       </div>
 
-      
+
     )
   }
 };
