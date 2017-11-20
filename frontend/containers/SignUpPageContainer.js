@@ -130,8 +130,8 @@ class SignUpPageContainer extends Component {
       <lbody >
 
 
-        <div id="login-page" className="login-form2">
-          <div className="col s12 z-depth-4 card-panel">
+        <div id="login-page" className="row">
+          <div className="col l6 push-l3 m6 push-m3 s10 push-s1 z-depth-4 card-panel" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
             <form className="login-form">
               <div className="row">
                 <div className="input-field col s12 center">
@@ -161,28 +161,26 @@ class SignUpPageContainer extends Component {
                 </div>
               </div>
               <div className="row margin">
-                <div className="input-field col s12">
+                <div className="input-field col s6">
                   <i className="material-icons prefix">lock</i>
                   <input id="password" type="password" value={this.state.password}
            onChange={(event) => this.updatePassword(event)}/>
                   <label htmlFor="password" className="center-align">Password</label>
                 </div>
-              </div>
-              <div className="row margin">
-                <div className="input-field col s12">
+                <div className="input-field col s6">
                   <i className="material-icons prefix">lock</i>
                   <input id="rpassword" type="password" value={this.state.repeated}
            onChange={(event) => this.updateRepeated(event)}/>
                   <label htmlFor="rpassword" className="center-align">Repeat Password</label>
                 </div>
               </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <a onClick={() => this.signup()} className="btn waves-effect waves-light col s12">Sign Up</a>
+              <div className="row margin">
+                <div className="center">
+                  <a onClick={() => this.signup()} className="btn-large waves-effect waves-light">Sign Up</a>
                 </div>
               </div>
-              <div className="input-field col s12">
-                <p className="margin center medium-small sign-up">Already have an account? <Link to='/login'>Login</Link></p>
+              <div className="input-field">
+                <p className="margin center medium-small sign-up" style={{margin: '30px'}}>Already have an account? <Link to='/login'>Login</Link></p>
               </div>
 
             </form>
