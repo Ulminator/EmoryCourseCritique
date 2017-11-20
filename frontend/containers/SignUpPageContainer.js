@@ -131,7 +131,7 @@ class SignUpPageContainer extends Component {
 
 
         <div id="login-page" className="row">
-          <div className="col l6 push-l3 m6 push-m3 s10 push-s1 z-depth-4 card-panel" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
+          <div className="col l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
             <form className="login-form">
               <div className="row">
                 <div className="input-field col s12 center">
