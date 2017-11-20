@@ -51,7 +51,11 @@
     "redux-devtools": "^3.4.0",
     "redux-devtools-dock-monitor": "^1.1.2",
     "redux-devtools-log-monitor": "^1.3.0",
+<<<<<<< HEAD
     "redux-persist": "^5.4.0",
+=======
+    "redux-persist": "^4.10.2",
+>>>>>>> 927752309b03a84414d38f409dbe1cfa95f3e190
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
     "webpack": "^2.3.3",

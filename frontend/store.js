@@ -1,27 +1,17 @@
 import { createStore, compose } from 'redux';
 import rootReducer from './reducers.js';
-import { persistStore, persistCombineReducers } from 'redux-persist'
-import storage from 'redux-persist/es/storage' // default: localStorage if web
-// import rootReducer from '../reducers.js';
+// import { persistStore, persistCombineReducers } from 'redux-persist'
+
+import { autoRehydrate, persistStore } from 'redux-persist'
+// import storage from 'redux-persist/es/storage' // default: localStorage if web
 
 import DevTools from './containers/DevTools';
 
-const config = {
-  key: 'root',
-  storage,
-}
+let store = compose(
+  DevTools.instrument(),
+  autoRehydrate()
+)(createStore)(rootReducer)
 
-const reducer = persistCombineReducers(config, rootReducer)
+persistStore(store);
 
-export function configureStore(initialState) {
-    const store= createStore(
-        reducer,
-        initialState,
-        compose(
-            DevTools.instrument()
-        )
-    );
-    const persistor = persistStore(store);
-
-  return { persistor, store };
-}
+export default store;
