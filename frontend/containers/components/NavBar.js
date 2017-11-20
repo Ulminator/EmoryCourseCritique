@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { LogoutAction } from '../../actions.js'
 
+import axios from 'axios';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -15,6 +16,10 @@ class NavBar extends React.Component {
 
   logout() {
     this.props.loginState();
+    axios({
+      method: 'get',
+      url: 'http://localhost:3000/account/logout',
+    })
   }
 
   render() {
