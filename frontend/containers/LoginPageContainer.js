@@ -77,12 +77,11 @@ class LoginPageContainer extends React.Component {
       <lbody >
 
 
-        <div id="login-page" className="login-form2">
-          <div className="col s12 z-depth-4 card-panel">
+        <div id="login-page" className="row">
+          <div className="col xl4 push-xl4 l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
             <form className="login-form">
               <div className="row">
                 <div className="input-field col s12 center">
-
 
                 </div>
               </div>
@@ -110,8 +109,8 @@ class LoginPageContainer extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="input-field col s12">
-                  <a onClick={() => this.login()} className="btn waves-effect waves-light col s12">Login</a>
+                <div className="center">
+                  <a onClick={() => this.login()} className="btn-large waves-effect waves-light">Login</a>
                 </div>
               </div>
               <div className="row">
