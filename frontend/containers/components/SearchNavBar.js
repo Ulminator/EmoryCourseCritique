@@ -1,10 +1,53 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import Inputfield from "./Inputfield";
+import { connect } from 'react-redux';
+
+import { LogoutAction } from '../../actions.js';
+
+import axios from 'axios';
 
 class SearchNavBar extends React.Component {
+  
+  constructor(props) {
+    super(props)
+
+  }
+
+  logout() {
+    this.props.loginState();
+    // axios({
+    //   method: 'get',
+    //   url: 'http://localhost:3000/users/currentUser',
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/account/logout',
+    })
+    // axios({
+    //   method: 'get',
+    //   url: 'http://localhost:3000/users/currentUser',
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+  }
+
   render() {
+
     var b=true;
+    var link;
+    var link2;
+    if(this.props.state.loginStatus){
+      link = <li onClick={() => this.logout()} style={{height:56, lineHeight:"56px"}}>Logout</li>
+    }
+    else{
+      link = <li><Link to='/login' style={{height:56, lineHeight:"56px"}}>Login</Link></li>
+      link2 = <li><Link to='/signup' style={{height:56, lineHeight:"56px"}}>Signup</Link></li>
+    }
     return (
       <nav className= "navOverride2 z-depth-1">
         <div className="nav-wrapper">
@@ -33,8 +76,8 @@ class SearchNavBar extends React.Component {
             </div>
             <div className="col s3">
               <ul id="nav-mobile" className="right hide-on-med-and-down" style={{height: 56}}>
-                <li><Link to='/login' style={{height:56, lineHeight:"56px"}}>Login</Link></li>
-                <li><Link to='/signup' style={{height:56, lineHeight:"56px"}}>Signup</Link></li>
+                {link}
+                {link2}
               </ul>
             </div>
           </div>
@@ -45,4 +88,19 @@ class SearchNavBar extends React.Component {
   }
 }
 
-export default SearchNavBar;
+const mapStateToProps = (state) => {
+  return{
+    state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginState: () => dispatch(LogoutAction())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SearchNavBar);
