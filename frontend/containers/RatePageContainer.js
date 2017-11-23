@@ -2,6 +2,7 @@ import ReactStars from 'react-stars'
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 class RatePageContainer extends Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class RatePageContainer extends Component {
           // Send a POST request
           axios({
             method: 'post',
-            url: 'http://localhost:3000/course/add_rating',
+            url: '/course/add_rating',
             data: {
               class_id: this.state.courseId,
               prof_id: this.state.profID,
@@ -72,6 +73,8 @@ class RatePageContainer extends Component {
 
 render() {
 
+  var titleurl='/rating'+location.search;
+
   const overallRating = (newRating) => {
     this.state.overall = (newRating)
     console.log("overall rating is:" + this.state.overall)
@@ -97,68 +100,100 @@ render() {
       <div>
 
       <div className = "header">
-          <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
+          <Link to={titleurl} className = "header-title" style={{color: '#FFD700'}}> <span className = "header-title-emory">Emory</span> Course Critique </Link>
       </div>
 
-      <div className = "register-body">
-        <div className = "rate-body-main-component">
-          <div className = "register-body-title">Rate the course</div>
-              <div>
-
-                
-
-                <div className="inputs-sizes-rate">
-                <div className = "reate-body-title">Easiness</div>
-                <ReactStars
-                  count={5}
-                  value={this.state.difficulty}
-                  onChange={difficultyRating}
-                  size={24}
-                  color2={'#ffd700'} />
-              </div>
-
-              <div className="inputs-sizes-rate">
-              <div className = "reate-body-title">Workload</div>
-                  <ReactStars
-                    count={5}
-                    value={this.state.workload}
-                    onChange={workloadRating}
-                    size={24}
-                    color2={'#ffd700'} />
-            </div>
-
-            <div className="inputs-sizes-rate">
-            <div className = "reate-body-title">Overall</div>
-                <ReactStars
-                  count={5}
-                  value={this.state.overall}
-                  onChange={overallRating}
-                  size={24}
-                  color2={'#ffd700'} />
-            </div>
+      <lbody >
 
 
-            <div className="inputs-sizes">
-              <input
-               type="text"
-               value={this.state.comment}
-               placeholder="comments on the course"
-               className="user-input"
-               onChange= {(event) => this.updateComment(event)}
-              />
-            </div>
-
-                <div className="submit-button-row">
-                  <button
-                  className="submit-button"
-                  type="button" onClick={() => this.submitReview()}>
-                  submit review!
-                  </button>
+        <div id="login-page" className="row">
+          <div className="col xl4 push-xl4 l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
+            <form className="login-form">
+              <div className="row">
+                <div className="input-field col s12 center">
+                  {this.state.courseId}
+                  <br/>
+                  {this.state.profID}
                 </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <div className="inputs-sizes-rate">
+                    <div className = "reate-body-title">Easiness</div>
+                    <ReactStars
+                      count={5}
+                      value={this.state.difficulty}
+                      onChange={difficultyRating}
+                      size={24}
+                      half={false}
+                      color2={'#ffd700'} />
+                  </div>
+                </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <div className="inputs-sizes-rate">
+                    <div className = "reate-body-title">Workload</div>
+                    <ReactStars
+                      count={5}
+                      value={this.state.workload}
+                      onChange={workloadRating}
+                      size={24}
+                      half={false}
+                      color2={'#ffd700'} />
+                  </div>
+                </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <div className="inputs-sizes-rate">
+                    <div className = "reate-body-title">Overall</div>
+                    <ReactStars
+                      count={5}
+                      value={this.state.overall}
+                      onChange={overallRating}
+                      size={24}
+                      half={false}
+                      color2={'#ffd700'} />
+                  </div>
+                </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <div className="inputs-sizes">
+                    <input
+                     type="text"
+                     value={this.state.comment}
+                     placeholder="comments on the course"
+                     className="user-input"
+                     onChange= {(event) => this.updateComment(event)}
+                     style={{border: 'solid 1px', borderColor: "#d1d1d5", height: 'auto', paddingBottom: 40, marginBottom: 0 }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <div className="submit-button-row">
+                    <button
+                    className="submit-button"
+                    type="button" onClick={() => this.submitReview()}>
+                    submit review!
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
 
-              </div>
-              </div>
-            </div>
+            </form>
+          </div>
+        </div>
+
+
+
+      </lbody>
+
+      
 
       </div>
       )

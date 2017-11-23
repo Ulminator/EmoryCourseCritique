@@ -76,7 +76,7 @@ class Card extends React.Component {
             style={{
               fontWeight: 300,
               float: "right",
-              fontSize: '2.5rem',
+              fontSize: '2.5rem'
 
             }}
           >

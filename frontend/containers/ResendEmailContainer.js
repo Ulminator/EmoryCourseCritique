@@ -19,7 +19,7 @@ class ResendEmailContainer extends Component {
         console.log(this.state.email)
         axios({
           method: 'post',
-          url: 'http://localhost:3000/account/forgot',
+          url: '/account/forgot',
           data: {
             email: this.state.email
           }
@@ -27,7 +27,7 @@ class ResendEmailContainer extends Component {
         .then(function (response) {
           console.log(response);
           this.props.history.push('/success')
-          // window.location.replace("http://localhost:3000/success");
+          // window.location.replace("/success");
         })
         .catch(function (error) {
           console.log(error);

@@ -38,11 +38,6 @@ class Footer extends React.Component {
                     Feedback
                   </a>
                 </li>
-                <li>
-                  <a className="grey-text text-lighten-3" href="#!">
-                    Logout
-                  </a>
-                </li>
               </ul>
             </div>
           </div>

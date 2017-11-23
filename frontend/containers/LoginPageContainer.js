@@ -29,7 +29,7 @@ class LoginPageContainer extends React.Component {
   }
   redirectResend(){
     this.props.history.push('/resend')
-    // window.location.replace("http://localhost:3000/resend");                  /*Fixed the resend url*/
+    // window.location.replace("/resend");                  /*Fixed the resend url*/
   }
   login() {
         // Send a POST request
@@ -40,7 +40,7 @@ class LoginPageContainer extends React.Component {
 
         axios({
           method: 'post',
-          url: 'http://localhost:3000/account/login',
+          url: '/account/login',
           data: {
             email: this.state.email,
             password: this.state.password
@@ -54,14 +54,14 @@ class LoginPageContainer extends React.Component {
           if(response.data.redirectUrl){
             self.updateLogin();
             self.props.history.push(response.data.redirectUrl)
-            // window.location.replace('http://localhost:3000'+response.data.redirectUrl)
+            // window.location.replace(response.data.redirectUrl)
           }else{
             // console.log("LOGIN SUCCESS")
             // console.log(self.props);
             self.updateLogin();
             // console.log(self.props)
             self.props.history.push('/')
-            // window.location.replace("http://localhost:3000/");
+            // window.location.replace("/");
           }
         })
         .catch(function (error) {

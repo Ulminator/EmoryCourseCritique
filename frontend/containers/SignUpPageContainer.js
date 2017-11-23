@@ -100,7 +100,7 @@ class SignUpPageContainer extends Component {
         } else {
         axios({
           method: 'post',
-          url: 'http://localhost:3000/account/signup',
+          url: '/account/signup',
           data: {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
@@ -112,7 +112,7 @@ class SignUpPageContainer extends Component {
         .then(function (response) {
           console.log(response);
           this.props.history.push('/success')
-          // window.location.replace("http://localhost:3000/success");
+          // window.location.replace("/success");
         })
         .catch(function (error) {
           console.log(error.response.data.message);

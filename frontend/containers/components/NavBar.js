@@ -16,7 +16,7 @@ class NavBar extends React.Component {
     this.props.loginState();
     // axios({
     //   method: 'get',
-    //   url: 'http://localhost:3000/users/currentUser',
+    //   url: '/users/currentUser',
     // })
     // .then(function (response) {
     //   console.log(response);
@@ -27,7 +27,7 @@ class NavBar extends React.Component {
     })
     // axios({
     //   method: 'get',
-    //   url: 'http://localhost:3000/users/currentUser',
+    //   url: '/users/currentUser',
     // })
     // .then(function (response) {
     //   console.log(response);
