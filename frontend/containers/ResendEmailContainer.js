@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class ResendEmailContainer extends Component {
   constructor(props) {
@@ -40,36 +41,55 @@ class ResendEmailContainer extends Component {
 <div>
 
       <div className = "header">
-          <div className = "header-title"> <span className = "header-title-emory">Emory</span> Course Critique </div>
+          <Link to='/' className = "header-title" style={{color: '#FFD700'}}> <span className = "header-title-emory">Emory</span> Course Critique </Link>
       </div>
 
-      <div className = "register-body">
-        <div className = "login-body-main-component">
-          <div className = "register-body-title">Reset your password</div>
-              <div>
+      <lbody >
 
-                <div className="inputs-sizes">
-                  <input
-                   type="text"
-                   value={this.state.email}
-                   placeholder="Email Address"
-                   className="user-input"
-                   onChange={(event) => this.updateEmail(event)}
-                  />
+
+        <div id="login-page" className="row" style={{height:'-webkit-fill-available'}}>
+          <div className="col xl4 push-xl4 l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel" style={{position: 'relative' , top: '20%', padding: '0 48px'}}> 
+            <form className="login-form">
+              <div className="row">
+                <div className="input-field col s12 center">
+
                 </div>
-
-                <div className="submit-button-row">
-                  <button
-                  className="submit-button"
-                  type="button"
-                  onClick={() => this.resend()}>
-                  Resend Email
-                  </button>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <div className="inputs-sizes">
+                    <input
+                     type="text"
+                     value={this.state.email}
+                     placeholder="Email Address"
+                     className="user-input"
+                     onChange={(event) => this.updateEmail(event)}
+                    />
+                  </div>
                 </div>
+              </div>
+              <div className="row margin">
+                <div className="input-field col s12">
+                  <div className="submit-button-row">
+                    <button
+                    className="submit-button"
+                    type="button"
+                    onClick={() => this.resend()}>
+                    Resend Email
+                    </button>
+                  </div>
+                </div>
+              </div>
 
-              </div>
-              </div>
-            </div>
+            </form>
+          </div>
+        </div>
+
+
+
+      </lbody>
+
+      
 
 
 
