@@ -23,7 +23,7 @@ class NavBar extends React.Component {
     // })
     axios({
       method: 'post',
-      url: 'http://localhost:3000/account/logout',
+      url: '/account/logout',
     })
     // axios({
     //   method: 'get',

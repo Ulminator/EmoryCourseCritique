@@ -54,15 +54,15 @@ class RatePageContainer extends Component {
           })
           .then(function (response) {
             console.log(response.status);
-            // if(response.data.message){
-            //   alert(response.data.message)
-            // }
-            // if(response.data.redirectUrl){
-            //   window.location.replace('http://localhost:3000'+response.data.redirectUrl)
-            // }else{
-            //
-            //   window.location.replace("http://localhost:3000/");
-            // }
+               if(response.data.message){
+                 alert(response.data.message);
+               }
+               /*if(response.data.redirectUrl){
+                 window.location.href =response.data.redirectUrl;
+               }else{ */
+
+                 window.location.href ='/rating'+location.search;
+               //}
           })
           .catch(function (error) {
             console.log(error.response.data.message);

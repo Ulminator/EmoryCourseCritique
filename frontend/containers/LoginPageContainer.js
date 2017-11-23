@@ -52,6 +52,7 @@ class LoginPageContainer extends React.Component {
             alert(response.data.message)
           }
           if(response.data.redirectUrl){
+            self.updateLogin();
             self.props.history.push(response.data.redirectUrl)
             // window.location.replace('http://localhost:3000'+response.data.redirectUrl)
           }else{

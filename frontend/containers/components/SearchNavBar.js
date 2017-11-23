@@ -16,24 +16,12 @@ class SearchNavBar extends React.Component {
 
   logout() {
     this.props.loginState();
-    // axios({
-    //   method: 'get',
-    //   url: 'http://localhost:3000/users/currentUser',
-    // })
-    // .then(function (response) {
-    //   console.log(response);
-    // })
+
     axios({
       method: 'post',
-      url: 'http://localhost:3000/account/logout',
+      url: '/account/logout',
     })
-    // axios({
-    //   method: 'get',
-    //   url: 'http://localhost:3000/users/currentUser',
-    // })
-    // .then(function (response) {
-    //   console.log(response);
-    // })
+
   }
 
   render() {

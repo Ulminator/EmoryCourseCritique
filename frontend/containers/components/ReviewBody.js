@@ -22,10 +22,23 @@ class ReviewBody extends React.Component {
       total_workload:Number
 
     }
+    this.onClick = this.onClick.bind(this);
 
   }
 
-  
+  onClick() {
+    
+
+    var querystring = require('querystring');
+    var pname = this.state.reviewProfessor;
+    pname=pname.replace(", ","_");
+        
+        var rateurl = '/rate?'+querystring.stringify({
+            course: this.state.reviewCourse,
+            prof: pname
+        });
+        window.location.href= rateurl;
+  }
 
   componentWillMount() {
     console.log('mount');
@@ -80,9 +93,7 @@ class ReviewBody extends React.Component {
     
     var querystring = require('query-string');
             var parsed = querystring.parse(location.search);
-            console.log(parsed);
-            console.log(parsed.course);
-            console.log(parsed.prof);
+
             var pname = parsed.prof.replace("_",", ");
             this.state.reviewCourse= parsed.course;
             this.state.reviewProfessor= pname;
@@ -91,15 +102,7 @@ class ReviewBody extends React.Component {
     var overalldist =[0,0,0,0,0];
     var difficultydist =[0,0,0,0,0];
     var workloaddist =[0,0,0,0,0];
-    var pname = this.state.reviewProfessor;
-    pname=pname.replace(", ","_");
 
-    var querystring = require('querystring');
-        
-        var rateurl = '/rate?'+querystring.stringify({
-            course: this.state.reviewCourse,
-            prof: pname
-        });
 
 
     console.log(this.state.total_overall/this.state.count);
@@ -166,9 +169,9 @@ class ReviewBody extends React.Component {
                       float: "right"
                     }}
                   >
-                    <Link to={rateurl} style={{
-                        color: "#002a78"
-                      }}><i className="material-icons suffix">add_circle</i>Add Rating</Link>
+                    <a onClick={this.onClick} onMouseOver="" style={{
+                        color: "#002a78", cursor:'pointer'
+                      }}><i className="material-icons suffix">add_circle</i>Add Rating</a>
                   </span>
                 </h4>
                 
