@@ -39,7 +39,7 @@ class SearchNavBar extends React.Component {
     return (
       <nav className= "navOverride2 z-depth-1">
         <div className="nav-wrapper">
-          <div className="row">
+          <div className="row hide-on-small-only">
             <div className="col s4" >
               <div className="row">
                 <div className="col s2">
@@ -63,7 +63,24 @@ class SearchNavBar extends React.Component {
               </form>
             </div>
             <div className="col s3">
-              <ul id="nav-mobile" className="right hide-on-med-and-down" style={{height: 56}}>
+              <ul id="nav-mobile" className="right" style={{height: 56}}>
+                {link}
+                {link2}
+              </ul>
+            </div>
+          </div>
+
+          <div className="row hide-on-med-and-up">
+            <div className="col s3 right-align" style={{marginRight:-10}}>
+                  <Link to='/'><img src="imgs/emory-shield-white.png" style={{height:40,paddingTop:10, paddingLeft:20}}/></Link>
+            </div>
+            <div className="col s6" >
+              <form>
+                <Inputfield search={b}/>
+              </form>
+            </div>
+            <div className="col s3">
+              <ul id="nav-mobile" className="right" style={{height: 56}}>
                 {link}
                 {link2}
               </ul>

@@ -48,7 +48,7 @@ class NavBar extends React.Component {
     return (
       <nav className= "navOverride z-depth-0">
           <div className="nav-wrapper">
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <ul id="nav-mobile" className="right">
               {link}
               {link2}
               <li><a href="collapsible.html"></a></li>

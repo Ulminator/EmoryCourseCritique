@@ -3,9 +3,29 @@ import SortBy from "./SortBy";
 import Tags from "./Tags";
 
 class SideNav extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      left: "0px"
+      
+    }
+    this.toggle = this.toggle.bind(this);
+    
+  }
+
+  toggle() {
+
+    if (this.state.left === "0px") {
+        this.setState({left: "315px"});
+    } else {
+        this.setState({left: "0px"});
+    }
+  }
+
   render() {
     return (
-      <ul id="slide-out" className="side-nav fixed" style={{paddingTop:56, height:"100%", zIndex:0}}>
+    <aside id="left-sidebar-nav">
+      <ul id="slide-out" className="side-nav fixed" style={{paddingTop:56, height:"100%", zIndex:0, left:this.state.left}}>
         <li>
           <div className="user-view">
             <div className="background" style={{backgroundColor: "white"}}>
@@ -72,6 +92,8 @@ class SideNav extends React.Component {
           </div>
         </li>
       </ul>
+      <a href="#" data-activates="slide-out" className="button-collapse btn-floating btn-medium waves-effect waves-light hide-on-med-and-up" onClick={this.toggle} style={{zIndex:100, position:"fixed", backgroundColor:"#002a78"}}><i className="material-icons">menu</i></a>
+    </aside>
     );
   }
 }
