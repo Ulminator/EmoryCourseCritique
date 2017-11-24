@@ -107,7 +107,7 @@ render() {
 
 
         <div id="login-page" className="row">
-          <div className="col xl4 push-xl4 l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
+          <div className="col xl4 push-xl4 l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel nohover2" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
             <form className="login-form">
               <div className="row">
                 <div className="input-field col s12 center">
