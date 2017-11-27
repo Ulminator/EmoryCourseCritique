@@ -39,7 +39,8 @@ class Title extends React.Component {
               className
               style={{
                 background: "white",
-                height:56
+                height:56,
+                borderRadius:30
               }}
             >
               <div className="nav-wrapper">

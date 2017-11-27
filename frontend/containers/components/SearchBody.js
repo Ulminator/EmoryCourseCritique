@@ -63,35 +63,22 @@ class SearchBody extends React.Component {
       }
     
     return (
-      <rbody >
-        <SideNav />
+      <sbody >
+
         
-        <div
-          style={{
-            margin: "0 auto",
-            marginLeft: 15,
-            paddingTop:56
-          }}
-        >
+        
+        <div style={{height: 40}}/>
+
+        <div className="container" style={{width: "95%", maxWidth: 720}}>
           <h5
             style={{
               fontWeight: 300
-            }}
-          >
+            }}>
+
             <br/>
             Showing Results for {input}
           </h5>
-        </div>
-        <div
-          style={{
-            height: 20
-          }}
-        />
-        <div className="container"
-          style={{
-            width: "95%"
-          }}
-        >
+          
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col s12">
 
@@ -101,7 +88,7 @@ class SearchBody extends React.Component {
           </div>
         </div>
         <Footer />
-      </rbody>
+      </sbody>
     );
   }
 }

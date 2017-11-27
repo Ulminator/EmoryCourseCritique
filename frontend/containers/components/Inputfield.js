@@ -1517,12 +1517,12 @@ class Inputfield extends React.Component {
     if(this.props.search)
     {
       var icon="material-icons inputIconOverride2";
-      var textcolor="white";
+      var height="36";
     }
     else
     {
       var icon="material-icons inputIconOverride";
-      var textcolor="#444";
+      var height="inherit"
     }
     return (
       <div className="input-field" style={{height: 54, lineHeight:"54px"}}>
@@ -1536,14 +1536,24 @@ class Inputfield extends React.Component {
           value={this.state.inputValue.bind} 
           onChange={this.updateInputValue}
           onKeyPress={this._handleKeyPress}
-          style={{color:textcolor}}
+          style={{marginTop:10, height:height, backgroundColor:"#f5f8fa", borderRadius:30}}
         />
         <label
-          className="label-icon inputOverride"
+          className="label-icon hide-on-small-only inputOverride"
           htmlFor="search" 
         >
           <i
-            className={icon} style={{height: 54, lineHeight: "54px"}}
+            className={icon} style={{lineHeight: "54px"}}
+          >
+            search
+          </i>
+        </label>
+        <label
+          className="label-icon hide-on-med-and-up inputOverride"
+          htmlFor="search" 
+        >
+          <i
+            className={icon} style={{lineHeight: "54px", bottom:20, paddingLeft: 10}}
           >
             search
           </i>
