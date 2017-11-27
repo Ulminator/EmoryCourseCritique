@@ -71,7 +71,7 @@ class SearchNavBar extends React.Component {
           </div>
 
           <div className="row hide-on-large-only">
-            <div className="col s2 right-align" style={{marginRight:0}}>
+            <div className="col s2 right-align" style={{marginLeft: 5, marginRight:-5}}>
                   <Link to='/'><img src="imgs/emory-shield-white.png" style={{height:40,paddingTop:10, paddingLeft:20}}/></Link>
             </div>
             <div className="col s7" >

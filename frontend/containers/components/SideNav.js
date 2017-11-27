@@ -92,7 +92,7 @@ class SideNav extends React.Component {
           </div>
         </li>
       </ul>
-      <a href="#" data-activates="slide-out" className="button-collapse btn-floating btn-medium waves-effect waves-light hide-on-med-and-up" onClick={this.toggle} style={{zIndex:100, position:"fixed", backgroundColor:"#002a78"}}><i className="material-icons">menu</i></a>
+      <a href="#" data-activates="slide-out" className="button-collapse btn-floating btn-medium waves-effect waves-light hide-on-med-and-up" onClick={this.toggle} style={{zIndex:100, position:"fixed", backgroundColor:"transparent", boxShadow:"none"}}><i className="material-icons">menu</i></a>
     </aside>
     );
   }
