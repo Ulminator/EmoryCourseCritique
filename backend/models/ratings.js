@@ -8,7 +8,8 @@ var ratingSchema=new Schema({
   total_difficulty:Number,
   total_overall:Number,
   total_workload:Number,
-  ratings: [{difficulty:Number, overall: Number, workload:Number,comment:String,rated_date:Date}]
+  ratings: [{type:Schema.Types.ObjectId, ref: 'critique'}]
 })
-
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
+ratingSchema.plugin(deepPopulate /* more on options below */);
  module.exports =  mongoose.model('rating',ratingSchema);

@@ -9,7 +9,9 @@ var userSchema= new Schema({
   comments:[String],
   rated_classes:[{professor:String, course: String}],
   resetPasswordToken:String,
-  resetPasswordExpires:Date
+  resetPasswordExpires:Date,
+  upvoted:[String],
+  downvoted:[String]
 });
 
 userSchema.methods.storeHashedPassword=function(password){

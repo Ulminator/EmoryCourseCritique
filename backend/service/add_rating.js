@@ -1,9 +1,11 @@
-const path = require('path');
+  const path = require('path');
 const async = require('async');
 var Rating=require(path.join(__dirname,'..','/models/ratings.js'));
 var Professor=require(path.join(__dirname,'..','/models/professor.js'));
 var Course=require(path.join(__dirname,'..','/models/course.js'));
 var User=require(path.join(__dirname,'..','/models/Users.js'));
+var critique=require(path.join(__dirname,'..','/models/critique.js'));
+const mongoose = require('mongoose');
 
 module.exports = function(req,res,next){
     var class_id = req.body.class_id;
@@ -34,6 +36,15 @@ module.exports = function(req,res,next){
     }
 
     function updateRating(user_id, done){Rating.findOne({'class_id': class_id, 'prof_id': prof_id}, function(err, this_rating) {
+        var this_critique=new critique({
+          difficulty: Number(difficulty_rating),
+          overall: Number(overall_rating),
+          workload: Number(workload_rating),
+          comment: comment,
+          rated_date:new Date(),
+          upvotes:0,
+          downvotes:0
+          });
         if (this_rating) {
             // Rating already exists
                 if (err) {
@@ -44,20 +55,14 @@ module.exports = function(req,res,next){
                     this_rating.total_workload+=workload_rating;
                     this_rating.total_overall+=overall_rating;
                     this_rating.total_difficulty+=difficulty_rating;
-                    this_rating.ratings.push({
-                        difficulty: Number(difficulty_rating),
-                        overall: Number(overall_rating),
-                        workload: Number(workload_rating),
-                        comment: comment,
-                        rated_date:new Date()
-                        });
+                    this_critique.save();
+                    this_rating.ratings.push(new mongoose.mongo.ObjectId(this_critique._id));
                     this_rating.save();
                     done(null, user_id)
                     // Add rating to professor
                 }
         } else {
             // Rating doesn't exist
-            console.log(class_id);
             var new_rating = new Rating({
                 class_id: class_id,
                 prof_id: prof_id,
@@ -66,13 +71,8 @@ module.exports = function(req,res,next){
                 total_overall:overall_rating,
                 total_difficulty:difficulty_rating
                 });
-            new_rating.ratings.push({
-                difficulty: Number(difficulty_rating),
-                overall: Number(overall_rating),
-                workload: Number(workload_rating),
-                rated_date:new Date(),
-                comment: comment
-                });
+            this_critique.save();
+            new_rating.ratings.push(new mongoose.mongo.ObjectId(this_critique._id));
             new_rating.save(function(err){
             // Add rating to professor
             if(err){
@@ -87,7 +87,6 @@ module.exports = function(req,res,next){
                     this_professor.save();
                 }
             });
-            console.log(class_id);
             Course.findOne({"course_num": class_id}, function(err, this_course) {
                 if (err) {
                   return next(err)

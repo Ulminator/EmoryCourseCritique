@@ -48,7 +48,7 @@ module.exports = function(app,passport,nev,transport){
 
   }) //middleware to ensure login
 
-  app.post('/account/logout',(req,res)=>{
+  app.post  ('/account/logout',(req,res)=>{
     req.logout();
     res.redirect('/');
   })
@@ -74,6 +74,14 @@ module.exports = function(app,passport,nev,transport){
       }
 
     })
+  })
+
+  app.post('/rating/upvote',function(req,res,next){
+    require('./service/handle_votes.js')(req,res,next,true)
+  })
+
+  app.post('/rating/downvote',function(req,res,next){
+    require('./service/handle_votes.js')(req,res,next,false)
   })
 
     // Get a course list from the search on the main page
