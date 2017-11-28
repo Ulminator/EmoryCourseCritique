@@ -34,7 +34,6 @@ module.exports = function(app,passport,nev,transport){
           return res.redirect('/')
         }else{
           var url=req.session.returnTo;
-          console.log(url);
           delete req.session.returnTo;
           return res.json({"redirectUrl":url})
         }

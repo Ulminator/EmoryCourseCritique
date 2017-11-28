@@ -11,5 +11,5 @@ var ratingSchema=new Schema({
   ratings: [{type:Schema.Types.ObjectId, ref: 'critique'}]
 })
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
-ratingSchema.plugin(deepPopulate /* more on options below */);
+ratingSchema.plugin(deepPopulate);
  module.exports =  mongoose.model('rating',ratingSchema);
