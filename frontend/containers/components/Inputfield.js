@@ -1517,7 +1517,7 @@ class Inputfield extends React.Component {
     if(this.props.search)
     {
       var icon="material-icons inputIconOverride2";
-      var height="36";
+      var height="36px";
     }
     else
     {
@@ -1525,7 +1525,7 @@ class Inputfield extends React.Component {
       var height="inherit"
     }
     return (
-      <div className="input-field" style={{height: 54, lineHeight:"54px"}}>
+      <div className="input-field" style={{height: "54px", lineHeight:"40px"}}>
         <input
           id="search"
           type="search"

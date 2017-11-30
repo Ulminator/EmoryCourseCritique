@@ -15,6 +15,7 @@ class RatePageContainer extends Component {
         overall: 0.0,
         workload: 0.0
       }
+      this._handleKeyPress = this._handleKeyPress.bind(this);
     }
 
     componentWillMount() {
@@ -37,6 +38,16 @@ class RatePageContainer extends Component {
     updateComment(event){
       this.setState({comment: event.target.value});
       console.log(this.state.comment)
+    }
+
+    _handleKeyPress(e) {
+      if (e.key === 'Enter') {
+        
+        e.preventDefault();
+        this.submitReview();
+        
+        
+      }
     }
 
     submitReview() {
@@ -167,6 +178,7 @@ render() {
                      placeholder="comments on the course"
                      className="user-input"
                      onChange= {(event) => this.updateComment(event)}
+                     onKeyPress={this._handleKeyPress}
                      style={{border: 'solid 1px', borderColor: "#d1d1d5", height: 'auto', paddingBottom: 40, marginBottom: 0 }}
                     />
                   </div>
