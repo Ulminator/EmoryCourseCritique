@@ -146,7 +146,7 @@ class ReviewCard extends React.Component {
 
     return (
       <div className="card-panel nohover2 white black-text row" style={{position: "relative"}} >
-        <div className="col s12 m3">
+        <div className="col s6 m3">
         <h4 style={{
             }}>
           Rating:
@@ -194,14 +194,25 @@ class ReviewCard extends React.Component {
         </span>
        
         </div>
+        <div className="col s6 hide-on-med-and-up" style={{position: "absolute", top: "24px", right: "24px"}}>
+        <div className="right">
+          <p style={{fontSize: "0.8rem", fontWeight: "300"}}>{'\u00A0'}Was this helpful?</p>
+          <a className="noSelect" onClick={this.uClick} onMouseOver="" style={{
+              color: "#002a78", cursor:'pointer',  position: "relative", left: "12px"
+            }}><i className="material-icons prefix green-text text-darken-1">thumb_up</i>{this.state.upvotes}</a>
+            <a className="noSelect" onClick={this.dClick} onMouseOver="" style={{
+              color: "#002a78", cursor:'pointer', position: "relative", left: "24px"
+            }}><i className="material-icons prefix red-text text-lighten-2">thumb_down</i>{this.state.downvotes}</a>
+          </div>
+        </div>
         <div className="col s12 m7">
          <p style={{fontSize: "1.1rem", fontWeight: "300"}}>Comments:</p>
           <blockquote style={{fontSize: "1.2rem"}}>{this.props.comment}</blockquote>
 
         </div>
         <div className="col s1"></div>
-        <div style={{position: "absolute", bottom: "24px", right: "24px"}}>
-          <p style={{fontSize: "0.9rem", fontWeight: "300"}}>Was this helpful?</p>
+        <div className="hide-on-small-only" style={{position: "absolute", bottom: "24px", right: "24px"}}>
+          <p style={{fontSize: "0.8rem", fontWeight: "300"}}>{'\u00A0'}Was this helpful?</p>
           <a className="noSelect" onClick={this.uClick} onMouseOver="" style={{
               color: "#002a78", cursor:'pointer',  position: "relative", left: "12px"
             }}><i className="material-icons prefix green-text text-darken-1">thumb_up</i>{this.state.upvotes}</a>

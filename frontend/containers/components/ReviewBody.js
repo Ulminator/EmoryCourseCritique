@@ -300,11 +300,13 @@ class ReviewBody extends React.Component {
 
                   
               {cards}
-              
+
             </div>
           </div>
           
         </div>
+          <div style={{height: "64px"}}></div>
+
         <Footer />
       </rbody>
     );
