@@ -85,9 +85,7 @@ class ReviewBody extends React.Component {
     
 
   }
-  componentWillUnmount() {
-    console.log('unmount');
-  }
+
 
 
   render() {
@@ -210,6 +208,7 @@ class ReviewBody extends React.Component {
             <div className="col s12">
 
               <div className="card-panel nohover2 white black-text row" >
+               
                <div className="col s12 m4">
                <h5>Overall Rating:</h5>
                 <h4 className={ratingColor} style={{
@@ -220,7 +219,77 @@ class ReviewBody extends React.Component {
                   {rating}
                 
                 </h4>
-              
+                <div style={{width:"200px"}}>
+                 <table>
+                   <tbody>
+                     <tr>
+                       <td className="histogram-row">
+                        <a>5 Star</a>
+                       </td>
+                       <td className="histogram-row" style={{width:"80%"}}>
+                        <div className="a-meter 5star">
+                          <div className="a-meter-bar" style={{width:(100*overalldist[4]/this.state.count).toFixed(2)+"%"}}></div>
+                        </div>
+                       </td>
+                       <td className="histogram-row">
+                        <a>{(100*overalldist[4]/this.state.count).toFixed(0)+"%"}</a>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td className="histogram-row">
+                        <a>4 Star</a>
+                       </td>
+                       <td className="histogram-row">
+                        <div className="a-meter 4star">
+                          <div className="a-meter-bar" style={{width:(100*overalldist[3]/this.state.count).toFixed(2)+"%"}}></div>
+                        </div>
+                       </td>
+                       <td className="histogram-row">
+                        <a>{(100*overalldist[3]/this.state.count).toFixed(0)+"%"}</a>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td className="histogram-row">
+                        <a>3 Star</a>
+                       </td>
+                       <td className="histogram-row">
+                        <div className="a-meter 3star">
+                          <div className="a-meter-bar" style={{width:(100*overalldist[2]/this.state.count).toFixed(2)+"%"}}></div>
+                        </div>
+                       </td>
+                       <td className="histogram-row">
+                        <a>{(100*overalldist[2]/this.state.count).toFixed(0)+"%"}</a>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td className="histogram-row">
+                        <a>2 Star</a>
+                       </td>
+                       <td className="histogram-row">
+                        <div className="a-meter 2star">
+                          <div className="a-meter-bar" style={{width:(100*overalldist[1]/this.state.count).toFixed(2)+"%"}}></div>
+                        </div>
+                       </td>
+                       <td className="histogram-row">
+                        <a>{(100*overalldist[1]/this.state.count).toFixed(0)+"%"}</a>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td className="histogram-row">
+                        <a>1 Star</a>
+                       </td>
+                       <td className="histogram-row">
+                        <div className="a-meter 1star">
+                          <div className="a-meter-bar" style={{width:(100*overalldist[0]/this.state.count).toFixed(2)+"%"}}></div>
+                        </div>
+                       </td>
+                       <td className="histogram-row">
+                        <a>{(100*overalldist[0]/this.state.count).toFixed(0)+"%"}</a>
+                       </td>
+                     </tr>
+                   </tbody>
+                 </table>
+               </div>
                 
                 <span
                   style={{
@@ -259,7 +328,7 @@ class ReviewBody extends React.Component {
 
                     <a className=' dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">Sorted By Date</a>
                
-                    <ul id='dropdown1' className='dropdownOverride dropdown-content'>
+                    <ul id='dropdown1' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
                       <li><a href="#!">Date</a></li>
                       <li><a href="#!">Upvotes</a></li>
                       <li className="divider"></li>
