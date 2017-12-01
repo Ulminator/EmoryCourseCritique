@@ -32,7 +32,7 @@ class Card extends React.Component {
 
   render() {
     var rating = 0;
-    var ratingColor = "grey-text text-darken-2";
+    var ratingColor = "grey-text";
     if(this.props.rating === "null"){
         rating = "N/A";
     }else if(this.props.rating > 4){ //its pretty good rating
@@ -41,7 +41,7 @@ class Card extends React.Component {
 
     }else if(this.props.rating > 3){ //meh rating
       rating = this.props.rating;
-      ratingColor = "lime-text";
+      ratingColor = "light-green-text";
     }else if(this.props.rating > 2){ //garbo rating
       rating = this.props.rating;
       ratingColor = "orange-text";
@@ -57,7 +57,7 @@ class Card extends React.Component {
             <h5>
               {this.props.professor}<span
                 style={{
-                  color: "#d18e01"
+                  color: "#d18e01",
                 }}
               >
                 {'\u00A0'}{}
@@ -65,7 +65,8 @@ class Card extends React.Component {
             </h5>
             <span
               style={{
-                fontWeight: 400
+                fontWeight: 300,
+                fontSize: '1.3rem'
               }}
             >
               {this.props.cnum}: {this.props.cname}
@@ -76,7 +77,7 @@ class Card extends React.Component {
             style={{
               fontWeight: 300,
               float: "right",
-              fontSize: '2.5rem'
+              fontSize: '3.5rem'
 
             }}
           >

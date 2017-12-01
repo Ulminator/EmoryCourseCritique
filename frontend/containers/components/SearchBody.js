@@ -67,21 +67,21 @@ class SearchBody extends React.Component {
 
         
         
-        <div style={{height: 40}}/>
+      <div style={{height: "60px"}}></div>
 
         <div className="container" style={{width: "95%", maxWidth: 720}}>
-          <h5
+          <h5 className="center grey-text text-darken-2"
             style={{
               fontWeight: 300
             }}>
 
             <br/>
-            Showing Results for {input}
+            Showing Results for <span className="black-text" style={{fontWeight: "400"}}>{input}</span>
           </h5>
           
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col s12">
-
+              <div style={{height: "20px"}}></div>
               {cards}
               
             </div>

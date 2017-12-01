@@ -118,7 +118,7 @@ render() {
 
 
         <div id="login-page" className="row">
-          <div className="col xl4 push-xl4 l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel nohover2" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
+          <div className="col l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel nohover2" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
             <form className="login-form">
               <div className="row">
                 <div className="input-field col s12 center">
@@ -169,26 +169,24 @@ render() {
                   </div>
                 </div>
               </div>
-              <div className="row margin">
-                <div className="input-field col s12">
-                  <div className="inputs-sizes">
-                    <input
-                     type="text"
-                     value={this.state.comment}
-                     placeholder="comments on the course"
-                     className="user-input"
-                     onChange= {(event) => this.updateComment(event)}
-                     onKeyPress={this._handleKeyPress}
-                     style={{border: 'solid 1px', borderColor: "#d1d1d5", height: 'auto', paddingBottom: 40, marginBottom: 0 }}
-                    />
+              <br/>
+              <div class="row">
+              <form className="col s12">
+                <div className="row">
+                  <div className="input-field col s12">
+                    <i className="material-icons prefix">mode_edit</i>
+                    <textarea id="icon_prefix2" type="text" className="materialize-textarea" value={this.state.comment} onChange= {(event) => this.updateComment(event)} style={{}}></textarea>
+                    <label for="icon_prefix2">Make a comment on this class</label>
                   </div>
                 </div>
-              </div>
+              </form>
+            </div>
+        
               <div className="row margin">
                 <div className="input-field col s12">
                   <div className="submit-button-row">
                     <button
-                    className="submit-button"
+                    className="btn-large waves-effect waves-light"
                     type="button" onClick={() => this.submitReview()}>
                     submit review!
                     </button>

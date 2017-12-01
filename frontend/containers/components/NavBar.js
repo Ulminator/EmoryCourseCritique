@@ -38,7 +38,7 @@ class NavBar extends React.Component {
     var link;
     var link2;
     if(this.props.state.loginStatus){
-      link = <li onClick={() => this.logout()}>Logout</li>
+      link = <li onClick={() => this.logout()} style={{cursor: "pointer"}}>Logout</li>
     }
     else{
       link = <li><Link to='/login'>Login</Link></li>

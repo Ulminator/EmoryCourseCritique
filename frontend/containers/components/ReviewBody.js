@@ -1,5 +1,4 @@
 import React from "react";
-import SideNav from "./SideNav";
 import Inputfield from "./Inputfield";
 import Card from "./Card";
 import ReviewCard from "./ReviewCard";
@@ -24,6 +23,7 @@ class ReviewBody extends React.Component {
     }
     this.onClick = this.onClick.bind(this);
 
+
   }
 
   onClick() {
@@ -41,6 +41,7 @@ class ReviewBody extends React.Component {
   }
 
   componentWillMount() {
+    
     console.log('mount');
     console.log(location.search);
     
@@ -103,11 +104,11 @@ class ReviewBody extends React.Component {
     var difficultydist =[0,0,0,0,0];
     var workloaddist =[0,0,0,0,0];
 
-
+  
 
     console.log(this.state.total_overall/this.state.count);
 
-    console.log(this.props);
+    console.log("rating: " + rating);
     
       var thiscourse='reviews';
       for (var i = 0; i < this.state.ratings.length; i++) {
@@ -119,28 +120,83 @@ class ReviewBody extends React.Component {
       console.log(overalldist);
       console.log(difficultydist);
       console.log(workloaddist);
-    
-    
+
+      //rating review
+      var rating = (this.state.total_overall/this.state.count).toFixed(2);
+      var ratingColor = "grey-text";
+      if(rating === "null" || rating == "NaN"){
+          rating = "N/A";
+      }else if(rating > 4){ //its pretty good rating
+        ratingColor = "green-text";
+
+      }else if(rating > 3){ //meh rating
+        ratingColor = "light-green-text";
+      }else if(rating > 2){ //garbo rating
+        ratingColor = "orange-text";
+      }
+      else{ //disgusting
+        ratingColor = "red-text text-lighten-1";
+      }
+
+
+      //rating workload review
+      var ratingWorkload = (this.state.total_workload/this.state.count).toFixed(2);
+      var ratingWorkloadColor = "grey-text";
+      if(ratingWorkload === "null" || ratingWorkload == "NaN"){
+          ratingWorkload = "N/A";
+      }else if(ratingWorkload > 4){ //its pretty good ratingWorkload
+        ratingWorkloadColor = "green-text";
+
+      }else if(ratingWorkload > 3){ //meh ratingWorkload
+        ratingWorkloadColor = "light-green-text";
+      }else if(ratingWorkload > 2){ //garbo ratingWorkload
+        ratingWorkloadColor = "orange-text";
+      }
+      else{ //disgusting
+        ratingWorkloadColor = "red-text text-lighten-1";
+      }
+
+       //rating difficulty review
+      var ratingDifficulty = (this.state.total_difficulty/this.state.count).toFixed(2);
+      var ratingDifficultyColor = "grey-text";
+      if(ratingDifficulty === "null" || ratingDifficulty == "NaN"){
+          ratingDifficulty = "N/A";
+      }else if(ratingDifficulty > 4){ //its pretty good ratingDifficulty
+        ratingDifficultyColor = "green-text";
+
+      }else if(ratingDifficulty > 3){ //meh ratingDifficulty
+        ratingDifficultyColor = "light-green-text";
+      }else if(ratingDifficulty > 2){ //garbo ratingDifficulty
+        ratingDifficultyColor = "orange-text";
+      }
+      else{ //disgusting
+        ratingDifficultyColor = "red-text text-lighten-1";
+      }
+
+      console.log("rating workload: "  +  ratingWorkload)
+          console.log("rating difficulty: "  +  ratingDifficulty);
+
     return (
+
       <rbody >
-        <SideNav avg_overall={(this.state.total_overall/this.state.count).toFixed(2)} />
         
-        <div
+        <div className=""
           style={{
             margin: "0 auto",
             marginLeft: 15,
             paddingTop:56
           }}
         >
-          <h5
+          
+        </div>
+         <h5 className="center grey-text text-darken-2"
             style={{
               fontWeight: 300
-            }}
-          >
+            }}>
+
             <br/>
-            Showing Reviews for {this.state.reviewCourse}
+            Showing Results for <span className="black-text" style={{fontWeight: "400"}}>{this.state.reviewProfessor}</span>
           </h5>
-        </div>
         <div
           style={{
             height: 20
@@ -148,40 +204,34 @@ class ReviewBody extends React.Component {
         />
         <div className="container"
           style={{
-            width: "95%"
           }}
         >
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col s12">
 
-              <div className="card-panel nohover2 white black-text" >
-                <h4>
-                  Course:<span
-                    style={{
-                      color: "#d18e01"
+              <div className="card-panel nohover2 white black-text row" >
+               <div className="col s12 m4">
+               <h5>Overall Rating:</h5>
+                <h4 className={ratingColor} style={{
+                      fontSize: "4.5rem",
                     }}
                   >
-                    {this.state.reviewCourse}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 20,
-                      float: "right"
-                    }}
-                  >
-                    <a onClick={this.onClick} onMouseOver="" style={{
-                        color: "#002a78", cursor:'pointer'
-                      }}><i className="material-icons suffix">add_circle</i>Add Rating</a>
-                  </span>
+                    
+                  {rating}
+                
                 </h4>
+              
                 
                 <span
                   style={{
-                    fontWeight: 400
+                    fontWeight: '400',
+                    fontSize: '2.4rem',
+                    color: '#283469'
                   }}
                 >
-                  Professor: {this.state.reviewProfessor}
-                </span>{" "}
+               {this.state.count}
+                </span>{'\u00A0'}<span style={{color: "#424242",fontSize: '1.3rem',}}>  total reviews</span>{" "}
+
                 
                 <br />
                 <span
@@ -191,7 +241,64 @@ class ReviewBody extends React.Component {
                 >
 
                 </span>
+
               </div>
+              <div className="col s12 m4">
+                    <h5 style={{fontSize:"1.3rem"}}>Overall Difficulty:</h5>
+                <h4 className={ratingDifficultyColor}>
+             <span
+                    style={{
+                      fontSize: "2.7rem",
+                    }} 
+                  >
+                  {ratingDifficulty}
+                  </span>
+                </h4>
+                 <div className= "">
+                    <div style={{height: "10px"}}></div>
+
+                    <a className=' dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">Sorted By Date</a>
+               
+                    <ul id='dropdown1' className='dropdownOverride dropdown-content'>
+                      <li><a href="#!">Date</a></li>
+                      <li><a href="#!">Upvotes</a></li>
+                      <li className="divider"></li>
+                      <li><a href="#!">Rating</a></li>
+                      <li><a href="#!">Difficulty</a></li>
+                      <li><a href="#!">Workload</a></li>
+                    </ul>
+
+
+                                        <div style={{height: "10px"}}></div>
+
+                  </div>
+              </div>
+              <div className="col s12 m4">
+                    <h5 style={{fontSize:"1.3rem"}}>Overall Workload:</h5>
+                <h4 className={ratingWorkloadColor}>
+             <span
+                    style={{
+                      fontSize: "2.7rem",
+                    }}
+                  >
+                  {ratingWorkload}
+                  </span>
+                </h4>
+                 <div className= "">
+                    <div style={{height: "10px"}}></div>
+
+                    <a onClick={this.onClick} onMouseOver="" className="waves-effect waves-light btn">Add Review Here</a>
+                                        <div style={{height: "10px"}}></div>
+
+                  </div>
+
+              </div>
+
+               
+              </div>
+          
+
+                  
               {cards}
               
             </div>

@@ -2633,7 +2633,7 @@ a {
 blockquote {
   margin: 20px 0;
   padding-left: 1.5rem;
-  border-left: 5px solid #ee6e73;
+  border-left: 5px solid #002978;
 }
 
 i {
@@ -5201,7 +5201,7 @@ small {
 
 .btn:focus, .btn-large:focus,
 .btn-floating:focus {
-  background-color: #1d7d74;
+  background-color: #d28e00;
 }
 
 .btn, .btn-large {
@@ -5477,6 +5477,12 @@ button.btn-floating {
   display: block;
   line-height: 22px;
   padding: 14px 16px;
+}
+
+.dropdownOverride.dropdown-content li > a, .dropdownOverride.dropdown-content li > span {
+
+  float: right;
+
 }
 
 .dropdown-content li > span > label {

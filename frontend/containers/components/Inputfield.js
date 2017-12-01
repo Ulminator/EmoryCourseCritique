@@ -43,6 +43,7 @@ class Inputfield extends React.Component {
 
   componentDidMount() {
      $(document).ready(function(){
+      
           $('input.autocomplete').autocomplete({
             data: {
 "AAS100": 'imgs/csplaceholder.jpg',
