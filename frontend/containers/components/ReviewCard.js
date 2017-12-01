@@ -92,7 +92,7 @@ class ReviewCard extends React.Component {
     }
 
     //difficulty rating
-    var difficultyRating = this.props.overall;
+    var difficultyRating = this.props.difficulty;
     var difficultyRatingColor = "grey-text";
     if(difficultyRating === "null"){
         difficultyRating = "N/A";
@@ -114,7 +114,7 @@ class ReviewCard extends React.Component {
 
 
     //workload rating
-    var workloadRating = this.props.overall;
+    var workloadRating = this.props.workload;
     var workloadRatingColor = "grey-text";
     if(workloadRating === "null"){
         workloadRating = "N/A";
