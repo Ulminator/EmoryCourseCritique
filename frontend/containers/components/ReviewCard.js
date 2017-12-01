@@ -146,7 +146,7 @@ class ReviewCard extends React.Component {
 
     return (
       <div className="card-panel nohover2 white black-text row" style={{position: "relative"}} >
-        <div className="col s12 m4">
+        <div className="col s12 m3">
         <h4 style={{
             }}>
           Rating:

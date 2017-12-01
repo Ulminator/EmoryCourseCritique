@@ -103,12 +103,7 @@ class LoginPageContainer extends React.Component {
                 </div>
               </div>
 
-              <div className="row">
-                <div className="input-field col s12 m12 l12  login-text">
-                    <input type="checkbox" id="remember-me" />
-                    <label htmlFor="remember-me">Remember me</label>
-                </div>
-              </div>
+            
               <div className="row">
                 <div className="center">
                   <a onClick={() => this.login()} className="btn-large waves-effect waves-light">Login</a>
