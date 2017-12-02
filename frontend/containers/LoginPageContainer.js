@@ -59,9 +59,7 @@ class LoginPageContainer extends React.Component {
             // console.log("LOGIN SUCCESS")
             // console.log(self.props);
             self.updateLogin();
-            // console.log(self.props)
-            self.props.history.push('/')
-            // window.location.replace("/");
+            self.props.history.goBack();
           }
         })
         .catch(function (error) {
@@ -79,7 +77,7 @@ class LoginPageContainer extends React.Component {
 
 
         <div id="login-page" className="row">
-          <div className="col xl4 push-xl4 l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel nohover2" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
+          <div className="col xl4 push-xl4 l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel nohover2" style={{position: 'relative' , top: '50px', padding: '0 48px'}}>
             <form className="login-form">
               <div className="row">
                 <div className="input-field col s12 center">
@@ -103,7 +101,7 @@ class LoginPageContainer extends React.Component {
                 </div>
               </div>
 
-            
+
               <div className="row">
                 <div className="center">
                   <a onClick={() => this.login()} className="btn-large waves-effect waves-light">Login</a>
@@ -114,7 +112,7 @@ class LoginPageContainer extends React.Component {
                   <p className="margin medium-small"><Link to='/signup'>Register</Link></p>
                 </div>
                 <div className="input-field col s6 m6 l6">
-                    <p className="margin right-align medium-small"><a onClick={() => this.redirectResend()}>Forgot password ?</a></p>
+                    <p className="margin right-align medium-small"><a href="#!" onClick={() => this.redirectResend()}>Forgot password ?</a></p>
                 </div>
               </div>
 
