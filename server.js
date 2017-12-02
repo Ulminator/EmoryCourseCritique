@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
-const api = require('./backend/routes');
 const passport = require('passport');
 const mongoose = require('mongoose');
 //const key=require('./config/keys')
@@ -18,7 +17,6 @@ var transport=nodemailer.createTransport({
   }
 })
 
-const winston=require('winston')
 
 mongoose.connect(process.env.MONGODB_URI);
 app.set('views',__dirname+'/frontend');
@@ -47,7 +45,6 @@ app.get('*', (request, response) => {
     response.sendFile(__dirname + '/public/index.html'); // For React/Redux
 });
 
-app.use('/api', api);
 // app.use(function(err,req,res,next){
 //   if(err.status&&err.status>100&err.status<500){
 //     res.status(err.status)

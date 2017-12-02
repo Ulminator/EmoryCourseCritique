@@ -4,8 +4,8 @@ var critique=require(path.join(__dirname,'..','/models/critique.js'));
 
 module.exports = function(req,res,next,upvote){
   let critique_id=req.body.critique_id
-  // let user_id=req.user
-  let user_id="59d82517be205112c4b24c14";
+  let user_id=req.user
+
   if(!user_id){
     res.status(401)
     return res.json({message:"user is not authenticated"})
