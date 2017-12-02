@@ -115,7 +115,7 @@ class SignUpPageContainer extends Component {
           // window.location.replace("/success");
         })
         .catch(function (error) {
-          console.log(error.response.data.message);
+          alert(error.response.data.message);
         });
       }
   }
