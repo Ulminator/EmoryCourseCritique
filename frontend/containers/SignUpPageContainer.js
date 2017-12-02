@@ -89,7 +89,7 @@ class SignUpPageContainer extends Component {
         this.validateFieldName("password")
 
         if (this.state.password !== this.state.repeated) {
-          console.log("password didn't match")
+          alert("password didn't match")
         }
         else if (!this.state.emailValid | !this.state.passwordValid){
           for (var x in this.state.formErrors){
@@ -98,23 +98,25 @@ class SignUpPageContainer extends Component {
             }
           }
         } else {
+        var self=this;
         axios({
           method: 'post',
           url: '/account/signup',
           data: {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            password: this.state.password
+            firstname: self.state.firstname,
+            lastname: self.state.lastname,
+            email: self.state.email,
+            password: self.state.password
           }
         })
 
         .then(function (response) {
           console.log(response);
-          this.props.history.push('/success')
+          self.props.history.push('/success');
           // window.location.replace("/success");
         })
         .catch(function (error) {
+          console.log(error);
           alert(error.response.data.message);
         });
       }
