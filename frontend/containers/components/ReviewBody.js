@@ -62,7 +62,9 @@ class ReviewBody extends React.Component {
     ratings.sort(function(a, b) {
       return new Date(a.rated_date).getTime() - new Date(b.rated_date).getTime();
     });
-    
+    document.getElementById("sortDropdown").innerHTML = "&nbsp&nbsp&nbsp&nbspDate&nbsp&nbsp&nbsp&nbsp";
+               
+
     this.setState({ratings:ratings});
   }
 
@@ -74,6 +76,7 @@ class ReviewBody extends React.Component {
       return ((a.upvotes+1)/(a.downvotes+1)) - ((b.upvotes+1)/(b.downvotes+1));
     });
     console.log(ratings);
+    document.getElementById("sortDropdown").innerHTML = "Helpfulness";
 
     this.setState({ratings:ratings});
   }
@@ -84,8 +87,10 @@ class ReviewBody extends React.Component {
     ratings.sort(function(a, b) {
       return a.overall - b.overall;
     });
+    document.getElementById("sortDropdown").innerHTML = "&nbspRating&nbsp";
 
     this.setState({ratings:ratings});
+
   }
 
   sortDifficulty() {
@@ -94,6 +99,7 @@ class ReviewBody extends React.Component {
     ratings.sort(function(a, b) {
       return a.difficulty - b.difficulty;
     });
+    document.getElementById("sortDropdown").innerHTML = "Difficulty";
 
     this.setState({ratings:ratings});
   }
@@ -104,6 +110,7 @@ class ReviewBody extends React.Component {
     ratings.sort(function(a, b) {
       return a.workload - b.workload;
     });
+    document.getElementById("sortDropdown").innerHTML = "WorkLoad";
 
     this.setState({ratings:ratings});
   }
@@ -171,8 +178,7 @@ class ReviewBody extends React.Component {
     var difficultydist =[0,0,0,0,0];
     var workloaddist =[0,0,0,0,0];
 
-  
-
+   
     console.log(this.state.total_overall/this.state.count);
 
     console.log(this.state.ratings);
@@ -193,6 +199,8 @@ class ReviewBody extends React.Component {
       console.log(overalldist);
       console.log(difficultydist);
       console.log(workloaddist);
+
+      
 
       //rating review
       var rating = (this.state.total_overall/this.state.count).toFixed(2);
@@ -248,7 +256,6 @@ class ReviewBody extends React.Component {
 
       console.log("rating workload: "  +  ratingWorkload)
           console.log("rating difficulty: "  +  ratingDifficulty);
-
     return (
 
       <rbody >
@@ -282,9 +289,10 @@ class ReviewBody extends React.Component {
             <div className="col s12">
 
               <div className="card-panel nohover2 white black-text row" >
-               <h5 style={{fontSize:"1.3rem"}}>{this.state.reviewCourse}-{this.state.reviewProfessor}</h5>
                <div className="col s12 m4">
-               <h5>Overall Rating:</h5>
+               <h5 style={{fontSize:"1.3rem", fontWeight: "300"}}>{this.state.reviewCourse}-{this.state.reviewProfessor}</h5>
+
+               <h5>Overall Quality:</h5>
                 <h4 className={ratingColor} style={{
                       fontSize: "4.5rem",
                     }}
@@ -398,13 +406,16 @@ class ReviewBody extends React.Component {
                   </span>
                 </h4>
                  <div className= "">
+
+                    <div style={{height: "24px"}}></div>
+                    <h5 style={{fontSize:"1.3rem"}}>Sorted By:</h5>
                     <div style={{height: "10px"}}></div>
 
-                    <a className=' dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">Sort By Date</a>
+                    <a id="sortDropdown" className='dropdown-button btn-large' href='#' data-activates='dropdown1' data-beloworigin="true">{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}Date{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}</a>
                
                     <ul id='dropdown1' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
                       <li><a href="#!" onClick={this.sortDate}>Date</a></li>
-                      <li><a href="#!" onClick={this.sortHelpful}>Helpful</a></li>
+                      <li><a href="#!" onClick={this.sortHelpful}>Helpfulness</a></li>
                       <li className="divider"></li>
                       <li><a href="#!" onClick={this.sortOverall}>Rating</a></li>
                       <li><a href="#!" onClick={this.sortDifficulty}>Difficulty</a></li>
@@ -428,9 +439,10 @@ class ReviewBody extends React.Component {
                   </span>
                 </h4>
                  <div className= "">
+                  <div style={{height: "24px"}}></div>
+                    <h5 style={{fontSize:"1.3rem"}}>Took this class?</h5>
                     <div style={{height: "10px"}}></div>
-
-                    <a onClick={this.onClick} onMouseOver="" className="waves-effect waves-light btn">Add Review Here</a>
+                    <a style={{backgroundColor: "#d2b000"}} onClick={this.onClick} onMouseOver="" className="waves-effect waves-light btn-large">Add Review Here</a>
                                         <div style={{height: "10px"}}></div>
 
                   </div>
