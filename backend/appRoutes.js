@@ -41,11 +41,6 @@ module.exports = function(app,passport,nev,transport){
     })(req,res,next)
   })
 
-  app.get('/users/currentUser',
-  (req,res)=>{
-    res.json({user:req.session.passport.user})
-
-  }) //middleware to ensure login
 
   app.post  ('/account/logout',(req,res)=>{
     req.logout();
@@ -64,7 +59,7 @@ module.exports = function(app,passport,nev,transport){
             if(err){
               return next(err)
             }
-            res.redirect('/users/currentUser')
+            res.redirect('/')
           })
 
       }
