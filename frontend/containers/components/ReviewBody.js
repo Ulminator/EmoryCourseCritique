@@ -18,12 +18,25 @@ class ReviewBody extends React.Component {
       count: Number,
       total_difficulty:Number,
       total_overall:Number,
-      total_workload:Number
+      total_workload:Number,
+      filterBy:0
 
     }
     this.onClick = this.onClick.bind(this);
+    this.sortDate = this.sortDate.bind(this);
+    this.sortHelpful = this.sortHelpful.bind(this);
+    this.sortOverall = this.sortOverall.bind(this);
+    this.sortDifficulty = this.sortDifficulty.bind(this);
+    this.sortWorkload = this.sortWorkload.bind(this);
+    this.onUpdate= this.onUpdate.bind(this);
 
+  }
 
+  onUpdate(index,upvotes,downvotes) {
+    var ratings= this.state.ratings;
+    ratings[index].upvotes=upvotes;
+    ratings[index].downvotes=downvotes;
+    this.setState({ratings:ratings});
   }
 
   onClick() {
@@ -39,6 +52,62 @@ class ReviewBody extends React.Component {
         });
         window.location.href= rateurl;
   }
+
+  sortDate() {
+    console.log(this.state.ratings);
+    var ratings= this.state.ratings;
+    console.log(ratings[0].rated_date);
+    console.log(new Date(ratings[0].rated_date).getTime());
+
+    ratings.sort(function(a, b) {
+      return new Date(a.rated_date).getTime() - new Date(b.rated_date).getTime();
+    });
+    
+    this.setState({ratings:ratings});
+  }
+
+  sortHelpful() {
+    var ratings= this.state.ratings;
+    console.log(ratings[0].upvotes);
+    console.log((ratings[1].upvotes+1)/(ratings[1].downvotes+1));
+    ratings.sort(function(a, b) {
+      return ((a.upvotes+1)/(a.downvotes+1)) - ((b.upvotes+1)/(b.downvotes+1));
+    });
+    console.log(ratings);
+
+    this.setState({ratings:ratings});
+  }
+
+  sortOverall() {
+    var ratings= this.state.ratings;
+    
+    ratings.sort(function(a, b) {
+      return a.overall - b.overall;
+    });
+
+    this.setState({ratings:ratings});
+  }
+
+  sortDifficulty() {
+    var ratings= this.state.ratings;
+    
+    ratings.sort(function(a, b) {
+      return a.difficulty - b.difficulty;
+    });
+
+    this.setState({ratings:ratings});
+  }
+
+  sortWorkload() {
+    var ratings= this.state.ratings;
+    
+    ratings.sort(function(a, b) {
+      return a.workload - b.workload;
+    });
+
+    this.setState({ratings:ratings});
+  }
+
 
   componentWillMount() {
     
@@ -106,14 +175,20 @@ class ReviewBody extends React.Component {
 
     console.log(this.state.total_overall/this.state.count);
 
-    console.log("rating: " + rating);
+    console.log(this.state.ratings);
     
       var thiscourse='reviews';
-      for (var i = 0; i < this.state.ratings.length; i++) {
+      for (var i = this.state.ratings.length-1; i > -1; i--) {
         overalldist[this.state.ratings[i].overall-1]+=1;
         difficultydist[this.state.ratings[i].difficulty-1]+=1;
         workloaddist[this.state.ratings[i].workload-1]+=1;
-        cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} rdate={this.state.ratings[i].rated_date} dvotes={this.state.ratings[i].downvotes} uvotes={this.state.ratings[i].upvotes} id={this.state.ratings[i]._id} key={i}/>);
+        if(this.state.filterBy===0)
+          cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} rdate={this.state.ratings[i].rated_date} dvotes={this.state.ratings[i].downvotes} uvotes={this.state.ratings[i].upvotes} id={this.state.ratings[i]._id} onUpdate={this.onUpdate} index={i} key={i}/>);
+        else
+        {
+          if(this.state.ratings[i]===this.state.filterBy)
+            cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} rdate={this.state.ratings[i].rated_date} dvotes={this.state.ratings[i].downvotes} uvotes={this.state.ratings[i].upvotes} id={this.state.ratings[i]._id} onUpdate={this.onUpdate} index={i} key={i}/>);
+        } 
       }
       console.log(overalldist);
       console.log(difficultydist);
@@ -143,15 +218,15 @@ class ReviewBody extends React.Component {
       if(ratingWorkload === "null" || ratingWorkload == "NaN"){
           ratingWorkload = "N/A";
       }else if(ratingWorkload > 4){ //its pretty good ratingWorkload
-        ratingWorkloadColor = "green-text";
+        ratingWorkloadColor = "red-text text-lighten-1";
 
       }else if(ratingWorkload > 3){ //meh ratingWorkload
-        ratingWorkloadColor = "light-green-text";
-      }else if(ratingWorkload > 2){ //garbo ratingWorkload
         ratingWorkloadColor = "orange-text";
+      }else if(ratingWorkload > 2){ //garbo ratingWorkload
+        ratingWorkloadColor = "light-green-text";
       }
       else{ //disgusting
-        ratingWorkloadColor = "red-text text-lighten-1";
+        ratingWorkloadColor = "green-text";
       }
 
        //rating difficulty review
@@ -160,15 +235,15 @@ class ReviewBody extends React.Component {
       if(ratingDifficulty === "null" || ratingDifficulty == "NaN"){
           ratingDifficulty = "N/A";
       }else if(ratingDifficulty > 4){ //its pretty good ratingDifficulty
-        ratingDifficultyColor = "green-text";
+        ratingDifficultyColor = "red-text text-lighten-1";
 
       }else if(ratingDifficulty > 3){ //meh ratingDifficulty
-        ratingDifficultyColor = "light-green-text";
-      }else if(ratingDifficulty > 2){ //garbo ratingDifficulty
         ratingDifficultyColor = "orange-text";
+      }else if(ratingDifficulty > 2){ //garbo ratingDifficulty
+        ratingDifficultyColor = "light-green-text";
       }
       else{ //disgusting
-        ratingDifficultyColor = "red-text text-lighten-1";
+        ratingDifficultyColor = "green-text";
       }
 
       console.log("rating workload: "  +  ratingWorkload)
@@ -325,15 +400,15 @@ class ReviewBody extends React.Component {
                  <div className= "">
                     <div style={{height: "10px"}}></div>
 
-                    <a className=' dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">Sorted By Date</a>
+                    <a className=' dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">Sort By Date</a>
                
                     <ul id='dropdown1' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
-                      <li><a href="#!">Date</a></li>
-                      <li><a href="#!">Upvotes</a></li>
+                      <li><a href="#!" onClick={this.sortDate}>Date</a></li>
+                      <li><a href="#!" onClick={this.sortHelpful}>Helpful</a></li>
                       <li className="divider"></li>
-                      <li><a href="#!">Rating</a></li>
-                      <li><a href="#!">Difficulty</a></li>
-                      <li><a href="#!">Workload</a></li>
+                      <li><a href="#!" onClick={this.sortOverall}>Rating</a></li>
+                      <li><a href="#!" onClick={this.sortDifficulty}>Difficulty</a></li>
+                      <li><a href="#!" onClick={this.sortWorkload}>Workload</a></li>
                     </ul>
 
 

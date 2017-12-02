@@ -6,8 +6,8 @@ class ReviewCard extends React.Component {
     super(props)
     this.state = {
       ratings: [],
-      upvotes: 0,
-      downvotes: 0,
+      //upvotes: 0,
+      //downvotes: 0,
       change: false
     }
     this.uClick = this.uClick.bind(this);
@@ -30,7 +30,10 @@ class ReviewCard extends React.Component {
                
                
     
-      self.setState({upvotes: response.data.upvotes, downvotes: response.data.downvotes});
+      //self.setState({upvotes: response.data.upvotes, downvotes: response.data.downvotes});
+      console.log(self.state.upvotes);
+      //self.props.onUpdate(self.props.index,self.state.upvotes,self.state.downvotes);
+      self.props.onUpdate(self.props.index,response.data.upvotes,response.data.downvotes);
 
           })
           .catch(function (error) {
@@ -55,7 +58,10 @@ class ReviewCard extends React.Component {
                
 
     
-      self.setState({upvotes: response.data.upvotes, downvotes: response.data.downvotes});
+      //self.setState({upvotes: response.data.upvotes, downvotes: response.data.downvotes});
+      console.log(self.state.upvotes);
+      //self.props.onUpdate(self.props.index,self.state.upvotes,self.state.downvotes);
+      self.props.onUpdate(self.props.index,response.data.upvotes,response.data.downvotes);
     
           })
           .catch(function (error) {
@@ -64,11 +70,17 @@ class ReviewCard extends React.Component {
     
     
   }
-
+/*
   componentWillMount() {
     this.setState({upvotes:this.props.uvotes});
     this.setState({downvotes:this.props.dvotes});
   }
+  componentWillReceiveProps(newProps) {
+    console.log(newProps);
+    console.log(this.props.uvotes);
+    this.setState({upvotes:newProps.uvotes});
+    this.setState({downvotes:newProps.dvotes});
+  }*/
 
   render() {
     var rating = this.props.overall;
@@ -98,18 +110,18 @@ class ReviewCard extends React.Component {
         difficultyRating = "N/A";
     }else if(difficultyRating > 4){ //its pretty good difficultyRating
       difficultyRating = difficultyRating;
-      difficultyRatingColor = "green-text text-darken-1";
+      difficultyRatingColor = "red-text text-lighten-1";
 
     }else if(difficultyRating > 3){ //meh difficultyRating
       difficultyRating = difficultyRating;
-      difficultyRatingColor = "light-green-text";
+      difficultyRatingColor = "orange-text";
     }else if(difficultyRating > 2){ //garbo difficultyRating
       difficultyRating = difficultyRating;
-      difficultyRatingColor = "orange-text";
+      difficultyRatingColor = "light-green-text";
     }
     else{ //disgusting
       difficultyRating = difficultyRating;
-      ratingColor = "red-text text-lighten-1";
+      ratingColor = "green-text text-darken-1";
     }
 
 
@@ -120,23 +132,23 @@ class ReviewCard extends React.Component {
         workloadRating = "N/A";
     }else if(workloadRating > 4){ //its pretty good workloadRating
       workloadRating = workloadRating;
-      workloadRatingColor = "green-text text-darken-1";
+      workloadRatingColor = "red-text text-lighten-1";
 
     }else if(workloadRating > 3){ //meh workloadRating
       workloadRating = workloadRating;
-      workloadRatingColor = "light-green-text";
+      workloadRatingColor = "orange-text";
     }else if(workloadRating > 2){ //garbo workloadRating
       workloadRating = workloadRating;
-      workloadRatingColor = "orange-text";
+      workloadRatingColor = "light-green-text";
     }
     else{ //disgusting
       workloadRating = workloadRating;
-      ratingColor = "red-text text-lighten-1";
+      ratingColor = "green-text text-darken-1";
     }
 
 
     //var date= this.props.rdate.toString();
-    console.log(this.props.rdate);
+    console.log(this.props.uvotes);
     if(this.props.rdate)
     {
       var date= new Date(this.props.rdate);
@@ -199,10 +211,10 @@ class ReviewCard extends React.Component {
           <p style={{fontSize: "0.8rem", fontWeight: "300"}}>{'\u00A0'}Was this helpful?</p>
           <a className="noSelect" onClick={this.uClick} onMouseOver="" style={{
               color: "#002a78", cursor:'pointer',  position: "relative", left: "12px"
-            }}><i className="material-icons prefix green-text text-darken-1">thumb_up</i>{this.state.upvotes}</a>
+            }}><i className="material-icons prefix green-text text-darken-1">thumb_up</i>{this.props.uvotes}</a>
             <a className="noSelect" onClick={this.dClick} onMouseOver="" style={{
               color: "#002a78", cursor:'pointer', position: "relative", left: "24px"
-            }}><i className="material-icons prefix red-text text-lighten-2">thumb_down</i>{this.state.downvotes}</a>
+            }}><i className="material-icons prefix red-text text-lighten-2">thumb_down</i>{this.props.dvotes}</a>
           </div>
         </div>
         <div className="col s12 m7">
@@ -215,10 +227,10 @@ class ReviewCard extends React.Component {
           <p style={{fontSize: "0.8rem", fontWeight: "300"}}>{'\u00A0'}Was this helpful?</p>
           <a className="noSelect" onClick={this.uClick} onMouseOver="" style={{
               color: "#002a78", cursor:'pointer',  position: "relative", left: "12px"
-            }}><i className="material-icons prefix green-text text-darken-1">thumb_up</i>{this.state.upvotes}</a>
+            }}><i className="material-icons prefix green-text text-darken-1">thumb_up</i>{this.props.uvotes}</a>
             <a className="noSelect" onClick={this.dClick} onMouseOver="" style={{
               color: "#002a78", cursor:'pointer', position: "relative", left: "24px"
-            }}><i className="material-icons prefix red-text text-lighten-2">thumb_down</i>{this.state.downvotes}</a>
+            }}><i className="material-icons prefix red-text text-lighten-2">thumb_down</i>{this.props.dvotes}</a>
           </div>
 
     
