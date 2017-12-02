@@ -51,6 +51,8 @@ class RatePageContainer extends Component {
     }
 
     submitReview() {
+      if(this.state.difficulty!=0 && this.state.overall!=0 && this.state.workload!=0)
+      {
           // Send a POST request
           axios({
             method: 'post',
@@ -79,8 +81,13 @@ class RatePageContainer extends Component {
           .catch(function (error) {
             console.log(error.response.data.message);
           });
+      }
+      else
+      {
+        alert("Must fill out all ratings");
+      }
 
-        }
+    }
 
 render() {
 
@@ -170,16 +177,16 @@ render() {
                 </div>
               </div>
               <br/>
-              <div class="row">
-              <form className="col s12">
+              <div className="row">
+              <div className="col s12">
                 <div className="row">
                   <div className="input-field col s12">
                     <i className="material-icons prefix">mode_edit</i>
                     <textarea id="icon_prefix2" type="text" className="materialize-textarea" value={this.state.comment} onChange= {(event) => this.updateComment(event)} style={{}}></textarea>
-                    <label for="icon_prefix2">Make a comment on this class</label>
+                    <label htmlFor="icon_prefix2">Make a comment on this class</label>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
         
               <div className="row margin">
