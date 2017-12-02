@@ -18,16 +18,17 @@ class ResendEmailContainer extends Component {
   resend() {
         // Send a POST request
         console.log(this.state.email)
+        var self=this;
         axios({
           method: 'post',
           url: '/account/forgot',
           data: {
-            email: this.state.email
+            email: self.state.email
           }
         })
         .then(function (response) {
           console.log(response);
-          this.props.history.push('/success')
+          self.props.history.push('/success')
           // window.location.replace("/success");
         })
         .catch(function (error) {
