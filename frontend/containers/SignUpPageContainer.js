@@ -12,11 +12,12 @@ class SignUpPageContainer extends Component {
       email: "",
       password: "",
       repeated: "",
-
+      success: false,
       formErrors: {Email: '', Password: ''},
       emailValid: false,
       passwordValid: false
     }
+    this.resend = this.resend.bind(this);
   }
 
   updateFirstname(event){
@@ -112,7 +113,8 @@ class SignUpPageContainer extends Component {
 
         .then(function (response) {
           console.log(response);
-          self.props.history.push('/success');
+          self.setState({success:true});
+          self.props.history.push('/signup?success');
           // window.location.replace("/success");
         })
         .catch(function (error) {
@@ -121,79 +123,135 @@ class SignUpPageContainer extends Component {
         });
       }
   }
+
+  resend() {
+    var self=this;
+        axios({
+          method: 'post',
+          url: '/account/resend-verification',
+          data: {
+            email: self.state.email
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+          alert("sent!");
+          //self.props.history.push('/success')
+          // window.location.replace("/success");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
+
+  componentWillMount() {
+    if(location.search.includes("success"))
+    {
+      this.setState({success:true});
+    }
+  }
+
   render() {
-    return(
-      <div>
+    if(this.state.success)
+    {
+      return(
+        <div>
 
-      <div className = "header">
-          <Link to='/' className = "header-title" style={{color: '#FFD700'}}> <span className = "header-title-emory">Emory</span> Course Critique </Link>
-      </div>
-
-      <lbody >
-
-
-        <div id="login-page" className="row">
-          <div className="col l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel nohover2" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
-            <form className="login-form">
-              <div className="row">
-                <div className="input-field col s12 center">
-
-                  
-                </div>
+          <div className = "register-body-success">
+            <div className = "register-body-main-component-success">
+              <div className="register-body-title-success"><h2>Success!</h2></div>
+                  <div className="inputs-sizes-success">
+                    <h3>An email has been sent to you!</h3>
+                  </div>
+                  <div className="submit-button-row">
+                    <button
+                    type="button"
+                    className = "submit-button"
+                    onClick ={this.resend}>
+                    click here to resend email
+                  </button>
               </div>
-              <div className="row margin">
-                <div className="input-field col s6">
-                  <i className="material-icons prefix">person</i>
-                  <input id="firstname" type="text" value={this.state.firstname}
-           onChange={(event) => this.updateFirstname(event)}/>
-                  <label htmlFor="firstname" className="center-align">Firstname</label>
-                </div>
-                <div className="input-field col s6">
-                  <input id="lastname" type="text" value={this.state.lastname}
-           onChange={(event) => this.updateLastname(event)}/>
-                  <label htmlFor="lastname">Lastname</label>
-                </div>
-              </div>
-              <div className="row margin">
-                <div className="input-field col s12">
-                  <i className="material-icons prefix">email</i>
-                  <input id="username" type="text" value={this.state.email}
-           onChange={(event) => this.updateEmail(event)}/>
-                  <label htmlFor="username" className="center-align">Email</label>
-                </div>
-              </div>
-              <div className="row margin">
-                <div className="input-field col s6">
-                  <i className="material-icons prefix">lock</i>
-                  <input id="password" type="password" value={this.state.password}
-           onChange={(event) => this.updatePassword(event)}/>
-                  <label htmlFor="password" className="center-align">Password</label>
-                </div>
-                <div className="input-field col s6">
-                  <i className="material-icons prefix">lock</i>
-                  <input id="rpassword" type="password" value={this.state.repeated}
-           onChange={(event) => this.updateRepeated(event)}/>
-                  <label htmlFor="rpassword" className="center-align">Repeat Password</label>
-                </div>
-              </div>
-              <div className="row margin">
-                <div className="center">
-                  <a onClick={() => this.signup()} className="btn-large waves-effect waves-light">Sign Up</a>
-                </div>
-              </div>
-              <div className="input-field">
-                <p className="margin center medium-small sign-up" style={{margin: '30px'}}>Already have an account? <Link to='/login'>Login</Link></p>
-              </div>
-
-            </form>
+            </div>
           </div>
+
+        </div>
+      )
+    }
+    else
+    {
+      return(
+        <div>
+
+        <div className = "header">
+            <Link to='/' className = "header-title" style={{color: '#FFD700'}}> <span className = "header-title-emory">Emory</span> Course Critique </Link>
         </div>
 
-  
+        <lbody >
 
-      </lbody>
-      </div>
-    )
+
+          <div id="login-page" className="row">
+            <div className="col l6 push-l3 m10 push-m1 s12 z-depth-4 card-panel nohover2" style={{position: 'relative' , top: '50px', padding: '0 48px'}}> 
+              <form className="login-form">
+                <div className="row">
+                  <div className="input-field col s12 center">
+
+                    
+                  </div>
+                </div>
+                <div className="row margin">
+                  <div className="input-field col s6">
+                    <i className="material-icons prefix">person</i>
+                    <input id="firstname" type="text" value={this.state.firstname}
+             onChange={(event) => this.updateFirstname(event)}/>
+                    <label htmlFor="firstname" className="center-align">Firstname</label>
+                  </div>
+                  <div className="input-field col s6">
+                    <input id="lastname" type="text" value={this.state.lastname}
+             onChange={(event) => this.updateLastname(event)}/>
+                    <label htmlFor="lastname">Lastname</label>
+                  </div>
+                </div>
+                <div className="row margin">
+                  <div className="input-field col s12">
+                    <i className="material-icons prefix">email</i>
+                    <input id="username" type="text" value={this.state.email}
+             onChange={(event) => this.updateEmail(event)}/>
+                    <label htmlFor="username" className="center-align">Email</label>
+                  </div>
+                </div>
+                <div className="row margin">
+                  <div className="input-field col s6">
+                    <i className="material-icons prefix">lock</i>
+                    <input id="password" type="password" value={this.state.password}
+             onChange={(event) => this.updatePassword(event)}/>
+                    <label htmlFor="password" className="center-align">Password</label>
+                  </div>
+                  <div className="input-field col s6">
+                    <i className="material-icons prefix">lock</i>
+                    <input id="rpassword" type="password" value={this.state.repeated}
+             onChange={(event) => this.updateRepeated(event)}/>
+                    <label htmlFor="rpassword" className="center-align">Repeat Password</label>
+                  </div>
+                </div>
+                <div className="row margin">
+                  <div className="center">
+                    <a onClick={() => this.signup()} className="btn-large waves-effect waves-light">Sign Up</a>
+                  </div>
+                </div>
+                <div className="input-field">
+                  <p className="margin center medium-small sign-up" style={{margin: '30px'}}>Already have an account? <Link to='/login'>Login</Link></p>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+    
+
+        </lbody>
+        </div>
+      )
+    }
   }
 };
 
