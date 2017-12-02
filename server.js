@@ -24,11 +24,11 @@ app.set('view engine','ejs')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(require('cookie-parser')());
-app.use(require('express-session')({
-   secret: 'keyboard cat',
-   resave: false,
-   saveUninitialized: false,
-   cookie:{maxAge:30*60*1000}}));
+app.use(require('cookie-session')({
+  name:"session",
+  keys:['key1'],
+  maxAge:2*3600*1000
+   }));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());

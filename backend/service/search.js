@@ -29,8 +29,8 @@ module.exports = function(req, res,next) {
         });
         res.json();
     });
-    */
 
+    */
 
     var this_resp = [];
     Course.find(query.query, query.select, query.cursor).then(function(courses) {
