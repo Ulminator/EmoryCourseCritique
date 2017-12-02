@@ -28,6 +28,12 @@ class ReviewBody extends React.Component {
     this.sortOverall = this.sortOverall.bind(this);
     this.sortDifficulty = this.sortDifficulty.bind(this);
     this.sortWorkload = this.sortWorkload.bind(this);
+    this.filter5 = this.filter5.bind(this);
+    this.filter4 = this.filter4.bind(this);
+    this.filter3 = this.filter3.bind(this);
+    this.filter2 = this.filter2.bind(this);
+    this.filter1 = this.filter1.bind(this);
+    this.filterNone = this.filterNone.bind(this);
     this.onUpdate= this.onUpdate.bind(this);
 
   }
@@ -108,6 +114,30 @@ class ReviewBody extends React.Component {
     this.setState({ratings:ratings});
   }
 
+  filter5() {
+    this.setState({filterBy:5})
+  }
+
+  filter4() {
+    this.setState({filterBy:4})
+  }
+
+  filter3() {
+    this.setState({filterBy:3})
+  }
+
+  filter2() {
+    this.setState({filterBy:2})
+  }
+
+  filter1() {
+    this.setState({filterBy:1})
+  }
+
+  filterNone() {
+    this.setState({filterBy:0})
+  }
+
 
   componentWillMount() {
     
@@ -186,7 +216,7 @@ class ReviewBody extends React.Component {
           cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} rdate={this.state.ratings[i].rated_date} dvotes={this.state.ratings[i].downvotes} uvotes={this.state.ratings[i].upvotes} id={this.state.ratings[i]._id} onUpdate={this.onUpdate} index={i} key={i}/>);
         else
         {
-          if(this.state.ratings[i]===this.state.filterBy)
+          if(this.state.ratings[i].overall===this.state.filterBy)
             cards.push(<ReviewCard overall={this.state.ratings[i].overall} difficulty={this.state.ratings[i].difficulty} workload={this.state.ratings[i].workload} comment={this.state.ratings[i].comment} rdate={this.state.ratings[i].rated_date} dvotes={this.state.ratings[i].downvotes} uvotes={this.state.ratings[i].upvotes} id={this.state.ratings[i]._id} onUpdate={this.onUpdate} index={i} key={i}/>);
         } 
       }
@@ -415,6 +445,25 @@ class ReviewBody extends React.Component {
                                         <div style={{height: "10px"}}></div>
 
                   </div>
+                  <div className= "">
+                    <div style={{height: "10px"}}></div>
+
+                    <a className=' dropdown-button btn' href='#' data-activates='dropdown2' data-beloworigin="true">Filter By Star</a>
+               
+                    <ul id='dropdown2' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
+                      <li><a href="#!" onClick={this.filter5}>5 Star</a></li>
+                      <li><a href="#!" onClick={this.filter4}>4 Star</a></li>
+                      <li><a href="#!" onClick={this.filter3}>3 Star</a></li>
+                      <li><a href="#!" onClick={this.filter2}>2 Star</a></li>
+                      <li><a href="#!" onClick={this.filter1}>1 Star</a></li>
+                      <li><a href="#!" onClick={this.filterNone}>All</a></li>
+                    </ul>
+
+
+                                        <div style={{height: "10px"}}></div>
+
+                  </div>
+
               </div>
               <div className="col s12 m4">
                     <h5 style={{fontSize:"1.3rem"}}>Overall Workload:</h5>
