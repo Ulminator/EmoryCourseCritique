@@ -99,22 +99,23 @@ class SignUpPageContainer extends Component {
             }
           }
         } else {
-        var self=this;
+        //var self=this;
         axios({
           method: 'post',
           url: '/account/signup',
           data: {
-            firstname: self.state.firstname,
-            lastname: self.state.lastname,
-            email: self.state.email,
-            password: self.state.password
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            email: this.state.email,
+            password: this.state.password
           }
         })
 
         .then(function (response) {
+          console.log(this);
           console.log(response);
-          self.setState({success:true});
-          self.props.history.push('/signup?success');
+          this.setState({success:true});
+          this.props.history.push('/signup?success');
           // window.location.replace("/success");
         })
         .catch(function (error) {
@@ -130,7 +131,7 @@ class SignUpPageContainer extends Component {
           method: 'post',
           url: '/account/resend-verification',
           data: {
-            email: self.state.email
+            email: this.state.email
           }
         })
         .then(function (response) {
