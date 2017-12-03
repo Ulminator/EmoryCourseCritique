@@ -145,11 +145,13 @@ render() {
                 </div>
               </div>
               <div className="row margin">
-                <div className="col s12">
+                <div className="col s12 center">
                   <div className="inputs-sizes-rate">
                     <div className = "reate-body-title">Easiness</div>
-                    <div onChange={this.setDifficulty}>
-                      <span style={{position:"absolute"}}>Easy A</span>
+                    
+                    <div className="col s12 center" onChange={this.setDifficulty}>
+                      <span style={{paddingLeft:"8px", float:"left"}}>Easy A</span>
+                      <span style={{float:"right"}}>Pure Misery</span>
                       <input className="width-gap" type="radio" name="group1" id="1" value="1"/>
                       <label className="labelOverride" htmlFor="1">1</label>
 
@@ -164,17 +166,18 @@ render() {
 
                       <input className="width-gap" type="radio" name="group1" id="5" value="5"/>
                       <label className="labelOverride" htmlFor="5">5</label>
-                      <span style={{position:"absolute"}}>Pure Misery</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="row margin">
-                <div className="col s12">
+                <div className="col s12 center">
                   <div className="inputs-sizes-rate">
                     <div className = "reate-body-title">Workload</div>
-                    <div onChange={this.setWorkload}>
-                      <span style={{position:"absolute"}}>Whats work?</span>
+                    
+                    <div className="col s12 center" onChange={this.setWorkload}>
+                      <span style={{paddingLeft:"8px", float:"left"}}>Whats work?</span>
+                      <span style={{float:"right"}}>Drowning in Work</span>
                       <input className="width-gap" type="radio" name="group2" id="11" value="1"/>
                       <label className="labelOverride" htmlFor="11">1</label>
 
@@ -189,22 +192,23 @@ render() {
 
                       <input className="width-gap" type="radio" name="group2" id="15" value="5"/>
                       <label className="labelOverride" htmlFor="15">5</label>
-                      <span style={{position:"absolute"}}>Drowning in Work</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="row margin">
-                <div className="input-field col s12">
+                <div className="input-field col s12 center">
                   <div className="inputs-sizes-rate">
                     <div className = "reate-body-title">Overall Rating</div>
-                    <ReactStars
+                    <div style={{margin:"0 auto", width:"26%"}}>
+                    <ReactStars style={{margin:"0 auto", width:"26%"}}
                       count={5}
                       value={this.state.overall}
                       onChange={overallRating}
                       size={24}
                       half={false}
                       color2={'#ffd700'} />
+                    </div>
                   </div>
                 </div>
               </div>
