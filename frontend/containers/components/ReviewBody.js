@@ -278,12 +278,13 @@ class ReviewBody extends React.Component {
       else{ //disgusting
         ratingWorkloadColor = "green-text";
       }
-
+      var counter = this.state.count;
        //rating difficulty review
       var ratingDifficulty = (this.state.total_difficulty/this.state.count).toFixed(2);
       var ratingDifficultyColor = "grey-text";
       if(ratingDifficulty === "null" || ratingDifficulty == "NaN"){
           ratingDifficulty = "N/A";
+          counter = 0;
       }else if(ratingDifficulty > 4){ //its pretty good ratingDifficulty
         ratingDifficultyColor = "red-text text-lighten-1";
 
@@ -295,6 +296,7 @@ class ReviewBody extends React.Component {
       else{ //disgusting
         ratingDifficultyColor = "green-text";
       }
+     
 
       console.log("rating workload: "  +  ratingWorkload)
           console.log("rating difficulty: "  +  ratingDifficulty);
@@ -316,13 +318,8 @@ class ReviewBody extends React.Component {
               fontWeight: 300
             }}>
 
-            <br/>
           </h5>
-        <div
-          style={{
-            height: 20
-          }}
-        />
+        
         <div className="container"
           style={{
           }}
@@ -414,7 +411,7 @@ class ReviewBody extends React.Component {
                    </tbody>
                  </table>
                </div>
-                
+                <p className="" style={{margin: "0", position: "relative", top:"8px"}}>
                 <span
                   style={{
                     fontWeight: '400',
@@ -422,9 +419,9 @@ class ReviewBody extends React.Component {
                     color: '#283469'
                   }}
                 >
-               {this.state.count}
+               {counter}
                 </span>{'\u00A0'}<span style={{color: "#424242",fontSize: '1.3rem',}}>  total reviews</span>{" "}
-
+                </p>
                 
                 <br />
                 <span

@@ -34,7 +34,7 @@ class Footer extends React.Component {
                   </a>
                 </li>
                 <li>
-                  <a className="grey-text text-lighten-3" href="#!">
+                  <a className="grey-text text-lighten-3" href="mailto:colin.jiang@emory.edu?Subject=Hey%20EmoryCourseCritque">
                     Feedback
                   </a>
                 </li>
