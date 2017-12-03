@@ -9,7 +9,12 @@ var myHasher = function(password, tempUserData, insertTempUser, callback) {
 };
 
 module.exports = function(nev){
-  var verifURL="http://localhost:"+PORT+"/account/verification/${URL}";
+  if(process.env.NODE_ENV==='development'){
+    var verifURL="http://localhost:"+PORT+"/account/verification/${URL}";
+  }
+  else{
+    var verifURL="http://emorycoursecritique.com:"+"/account/verification/${URL}";
+  }
   nev.configure({
     verificationURL:verifURL,
     persistentUserModel:User,
