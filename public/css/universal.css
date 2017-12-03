@@ -95,18 +95,26 @@ html, body { height: 100%; }
 
 .inputIconOverride{
   position: absolute;
-  bottom: 12px;
+  bottom: 8px;
   height:56px !important;
   color: black !important;
 }
 
 .inputIconOverride2{
   position: absolute;
-  bottom: 12px;
+  bottom: 10px;
   color: black !important;
 }
+ 
 
+@media only screen and (max-width : 600px) {
+  .inputIconOverride{
 
+left: 8px;
+top: -12px;
+}
+
+}
 
 /* home end */
 
@@ -186,5 +194,46 @@ rbody {
                                   supported by Chrome and Opera */
 }
 
+/*about page*/
+.logoNavBarWithLogo{
+  position: relative;
+    bottom: 12px;
+    left: 12px;
+}
+
+.aboutPics{
+  width: 135px;
+  display: block;
+  margin: auto;
+
+}
+
+.aboutName{
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
 
 
+.aboutJob{
+  font-size: 1.0rem;
+  font-weight: 300;
+}
+
+.marginCol2{
+  margin-top: 48px;
+}
+@media only screen and (max-width : 600px) {
+
+.nav-wrapper .input-field.navBarInput input[type=search] {
+    
+    width: calc(100% - 2rem);
+    
+}
+.marginCol{
+  margin-top: 36px;
+}
+.marginCol2{
+  margin-top: 0px;
+}
+}

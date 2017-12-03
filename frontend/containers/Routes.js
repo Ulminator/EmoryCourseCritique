@@ -3,6 +3,8 @@ import {Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import MainPageContainer from './MainPageContainer';
 import AboutPageContainer from './AboutPageContainer';
+import FAQPageContainer from './FAQPageContainer';
+
 import SignUpPageContainer from './SignUpPageContainer';
 import LoginPageContainer from './LoginPageContainer';
 import SearchPageContainer from './SearchPageContainer';
@@ -18,6 +20,8 @@ export default class Routes extends Component {
          <Switch>
            <Route path="/" exact={true} component={MainPageContainer}/>
            <Route path="/about" exact={true} component={AboutPageContainer}/>
+           <Route path="/FAQ" exact={true} component={FAQPageContainer}/>
+
            <Route path="/signup" exact={true} component={SignUpPageContainer}/>
            <Route path="/login" exact={true} component={LoginPageContainer}/>
            <Route path="/rate" exact={true} component={RatePageContainer}/>

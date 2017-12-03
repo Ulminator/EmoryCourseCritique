@@ -34,7 +34,7 @@ class SearchNavBar extends React.Component {
     }
     else{
       link = <li><Link to='/login' style={{height:56, lineHeight:"56px"}}>Login</Link></li>
-      link2 = <li><Link to='/signup' style={{height:56, lineHeight:"56px"}}>Signup</Link></li>
+      link2 = <li className="hide-on-small-only"><Link to='/signup' style={{height:56, lineHeight:"56px"}}>Signup</Link></li>
     }
     return (
       <nav className= "navOverride2 z-depth-1">

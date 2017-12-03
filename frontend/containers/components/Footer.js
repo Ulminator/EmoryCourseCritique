@@ -24,12 +24,12 @@ class Footer extends React.Component {
               <h5 className="white-text">Useful Links</h5>
               <ul>
                 <li>
-                  <a className="grey-text text-lighten-3" href="#!">
+                  <a className="grey-text text-lighten-3" href="/about">
                     About us
                   </a>
                 </li>
                 <li>
-                  <a className="grey-text text-lighten-3" href="#!">
+                  <a className="grey-text text-lighten-3" href="/faq">
                     FAQ
                   </a>
                 </li>
