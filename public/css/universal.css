@@ -225,7 +225,7 @@ rbody {
 }
 @media only screen and (max-width : 600px) {
 
-.nav-wrapper .input-field input[type=search] {
+.nav-wrapper .input-field.navBarInput input[type=search] {
     
     width: calc(100% - 2rem);
     
