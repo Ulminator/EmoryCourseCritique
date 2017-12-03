@@ -1,4 +1,4 @@
- 
+
 .navOverride{
   background-color:transparent;
   width: 100%;
@@ -143,6 +143,12 @@ rbody {
         display: block;
       }
     }
+
+.labelOverride {
+  padding-left:8px !important;
+  margin-left:20px;
+  padding-top:20px;
+}
 
 /* distribution bars*/
 .histogram-row {

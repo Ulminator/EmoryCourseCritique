@@ -16,6 +16,8 @@ class RatePageContainer extends Component {
         workload: 0.0
       }
       this._handleKeyPress = this._handleKeyPress.bind(this);
+      this.setWorkload = this.setWorkload.bind(this);
+      this.setDifficulty = this.setDifficulty.bind(this);
     }
 
     componentWillMount() {
@@ -48,6 +50,14 @@ class RatePageContainer extends Component {
         
         
       }
+    }
+
+    setWorkload(event) {
+      this.setState({workload: parseInt(event.target.value)});
+    }
+
+    setDifficulty(event) {
+      this.setState({difficulty: parseInt(event.target.value)});
     }
 
     submitReview() {
@@ -135,37 +145,59 @@ render() {
                 </div>
               </div>
               <div className="row margin">
-                <div className="input-field col s12">
+                <div className="col s12">
                   <div className="inputs-sizes-rate">
                     <div className = "reate-body-title">Easiness</div>
-                    <ReactStars
-                      count={5}
-                      value={this.state.difficulty}
-                      onChange={difficultyRating}
-                      size={24}
-                      half={false}
-                      color2={'#ffd700'} />
+                    <div onChange={this.setDifficulty}>
+                      <span style={{position:"absolute"}}>Easy A</span>
+                      <input className="width-gap" type="radio" name="group1" id="1" value="1"/>
+                      <label className="labelOverride" htmlFor="1">1</label>
+
+                      <input className="width-gap" type="radio" name="group1" id="2" value="2"/>
+                      <label className="labelOverride" htmlFor="2">2</label>
+
+                      <input className="width-gap" type="radio" name="group1" id="3" value="3"/>
+                      <label className="labelOverride" htmlFor="3">3</label>
+
+                      <input className="width-gap" type="radio" name="group1" id="4" value="4"/>
+                      <label className="labelOverride" htmlFor="4">4</label>
+
+                      <input className="width-gap" type="radio" name="group1" id="5" value="5"/>
+                      <label className="labelOverride" htmlFor="5">5</label>
+                      <span style={{position:"absolute"}}>Pure Misery</span>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="row margin">
-                <div className="input-field col s12">
+                <div className="col s12">
                   <div className="inputs-sizes-rate">
                     <div className = "reate-body-title">Workload</div>
-                    <ReactStars
-                      count={5}
-                      value={this.state.workload}
-                      onChange={workloadRating}
-                      size={24}
-                      half={false}
-                      color2={'#ffd700'} />
+                    <div onChange={this.setWorkload}>
+                      <span style={{position:"absolute"}}>Whats work?</span>
+                      <input className="width-gap" type="radio" name="group2" id="11" value="1"/>
+                      <label className="labelOverride" htmlFor="11">1</label>
+
+                      <input className="width-gap" type="radio" name="group2" id="12" value="2"/>
+                      <label className="labelOverride" htmlFor="12">2</label>
+
+                      <input className="width-gap" type="radio" name="group2" id="13" value="3"/>
+                      <label className="labelOverride" htmlFor="13">3</label>
+
+                      <input className="width-gap" type="radio" name="group2" id="14" value="4"/>
+                      <label className="labelOverride" htmlFor="14">4</label>
+
+                      <input className="width-gap" type="radio" name="group2" id="15" value="5"/>
+                      <label className="labelOverride" htmlFor="15">5</label>
+                      <span style={{position:"absolute"}}>Drowning in Work</span>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="row margin">
                 <div className="input-field col s12">
                   <div className="inputs-sizes-rate">
-                    <div className = "reate-body-title">Overall</div>
+                    <div className = "reate-body-title">Overall Rating</div>
                     <ReactStars
                       count={5}
                       value={this.state.overall}

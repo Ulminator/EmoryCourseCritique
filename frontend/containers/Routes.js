@@ -5,7 +5,6 @@ import MainPageContainer from './MainPageContainer';
 import SignUpPageContainer from './SignUpPageContainer';
 import LoginPageContainer from './LoginPageContainer';
 import SearchPageContainer from './SearchPageContainer';
-import RegisterSuccessContainer from './RegisterSuccessContainer';
 import ResendEmailContainer from './ResendEmailContainer';
 import RatePageContainer from './RatePageContainer';
 import ReviewPageContainer from './ReviewPageContainer';
@@ -18,7 +17,6 @@ export default class Routes extends Component {
          <Switch>
            <Route path="/" exact={true} component={MainPageContainer}/>
            <Route path="/signup" exact={true} component={SignUpPageContainer}/>
-           <Route path="/success" exact={true} component={RegisterSuccessContainer}/>
            <Route path="/login" exact={true} component={LoginPageContainer}/>
            <Route path="/rate" exact={true} component={RatePageContainer}/>
            <Route path="/search" exact={true} component={SearchPageContainer}/>
