@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
+import NavBarWithLogo from "./components/NavBarWithLogo";
 
 class AboutPageContainer extends Component {
   constructor(props) {
@@ -9,11 +10,53 @@ class AboutPageContainer extends Component {
   }
   render() {
     return(
+     <div>
+        <div style={{backgroundColor: "#002978", height: "64px"}}>
+          <NavBarWithLogo/>
+        </div>
+        <div className="container">
+          <div style={{height: "45px"}}></div>
+            <h2 className="center" style={{fontWeight: "300"}}>Meet Your Boys</h2>
+          <div style={{height: "45px"}}></div>
+          <div className="row">
+            <div className="col s12 m4 l4 marginCol">
+              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics"/>
+              <p className="center aboutName">Alex Lin<br/> <span className="aboutJob">Scrum Master</span></p>
+            </div>
+             <div className="col s12 m4 l4 marginCol">
+              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
+              <p className="center aboutName">Axel Chauvin<br/> <span className="aboutJob">Database Man</span></p>
 
-      <div style={{}}>
-        Hello
-        <Footer />
-      </div>
+            </div>
+             <div className="col s12 m4 l4 marginCol">
+              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
+              <p className="center aboutName">Colin Jiang<br/> <span className="aboutJob">React Master</span></p>
+
+            </div>
+          </div>
+           <div className="row marginCol2">
+            <div className="col s12 m4 l4 marginCol">
+              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics"/>
+              <p className="center aboutName">Justin Luo<br/> <span className="aboutJob">Designer</span></p>
+         
+            </div>
+             <div className="col s12 m4 l4 marginCol">
+              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
+              <p className="center aboutName">Antonio Chan<br/> <span className="aboutJob">Frontend Man</span></p>
+           
+            </div>
+             <div className="col s12 m4 l4 marginCol">
+              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
+              <p className="center aboutName">Matt Ulmer<br/> <span className="aboutJob">Frontend Man</span></p>
+           
+            </div>
+          </div>
+        </div>
+        <div style={{height: "45px"}}></div>
+        <div>
+           <Footer/>
+        </div>
+    </div>
     )
   }
 };

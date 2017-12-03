@@ -459,7 +459,7 @@ class ReviewBody extends React.Component {
                   <div className= "">
                     <div style={{height: "10px"}}></div>
 
-                    <a className=' dropdown-button btn' href='#' data-activates='dropdown2' data-beloworigin="true">Filter By Star</a>
+                    <a className=' dropdown-button btn-large' href='#' data-activates='dropdown2' data-beloworigin="true">Filter by Stars</a>
                
                     <ul id='dropdown2' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
                       <li><a href="#!" onClick={this.filter5}>5 Star</a></li>

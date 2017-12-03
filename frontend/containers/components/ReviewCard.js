@@ -219,7 +219,7 @@ class ReviewCard extends React.Component {
         </div>
         <div className="col s12 m7">
          <p style={{fontSize: "1.1rem", fontWeight: "300"}}>Comments:</p>
-          <blockquote style={{fontSize: "1.2rem"}}>{this.props.comment}</blockquote>
+          <blockquote style={{fontSize: "1.2rem", overflowWrap: "break-word"}}>{this.props.comment}</blockquote>
 
         </div>
         <div className="col s1"></div>
