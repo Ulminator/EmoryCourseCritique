@@ -20,28 +20,28 @@ class AboutPageContainer extends Component {
           <div style={{height: "45px"}}></div>
           <div className="row">
             <div className="col s12 m4 l4 marginCol">
-              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics"/>
+              <img src="https://image.ibb.co/mdSBnw/colin.jpg" alt="" className="circle responsive-img aboutPics"/>
               <p className="center aboutName">Alex Lin<br/> <span className="aboutJob">Scrum Master</span></p>
             </div>
              <div className="col s12 m4 l4 marginCol">
-              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
+              <img src="https://preview.ibb.co/joj7Sw/axoloto.jpg" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
               <p className="center aboutName">Axel Chauvin<br/> <span className="aboutJob">Database Man</span></p>
 
             </div>
              <div className="col s12 m4 l4 marginCol">
-              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
+              <img src="https://image.ibb.co/mdSBnw/colin.jpg" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
               <p className="center aboutName">Colin Jiang<br/> <span className="aboutJob">React Master</span></p>
 
             </div>
           </div>
            <div className="row marginCol2">
             <div className="col s12 m4 l4 marginCol">
-              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics"/>
+              <img src="https://i.pinimg.com/originals/b4/52/2e/b4522e62359b306c80283c3a057f7c66.jpg" alt="" className="circle responsive-img aboutPics"/>
               <p className="center aboutName">Justin Luo<br/> <span className="aboutJob">Designer</span></p>
          
             </div>
              <div className="col s12 m4 l4 marginCol">
-              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
+              <img src="https://preview.ibb.co/k4D3Zb/poro.jpg" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
               <p className="center aboutName">Antonio Chan<br/> <span className="aboutJob">Frontend Man</span></p>
            
             </div>
