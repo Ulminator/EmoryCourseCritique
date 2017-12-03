@@ -450,7 +450,7 @@ class ReviewBody extends React.Component {
                     <h5 style={{fontSize:"1.3rem"}}>Sorted By:</h5>
                     <div style={{height: "10px"}}></div>
 
-                    <a id="sortDropdown" className='dropdown-button btn-large' href='#' data-activates='dropdown1' data-beloworigin="true">{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}Date{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}</a>
+                    <a id="sortDropdown" className='dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}Date{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}</a>
                
                     <ul id='dropdown1' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
                       <li><a href="#!" onClick={this.sortDate}>Date</a></li>
@@ -465,24 +465,7 @@ class ReviewBody extends React.Component {
                                         <div style={{height: "10px"}}></div>
 
                   </div>
-                  <div className= "">
-                    <div style={{height: "10px"}}></div>
 
-                    <a className=' dropdown-button btn-large' href='#' data-activates='dropdown2' data-beloworigin="true">Filter by Stars</a>
-               
-                    <ul id='dropdown2' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
-                      <li><a href="#!" onClick={this.filter5}>5 Star</a></li>
-                      <li><a href="#!" onClick={this.filter4}>4 Star</a></li>
-                      <li><a href="#!" onClick={this.filter3}>3 Star</a></li>
-                      <li><a href="#!" onClick={this.filter2}>2 Star</a></li>
-                      <li><a href="#!" onClick={this.filter1}>1 Star</a></li>
-                      <li><a href="#!" onClick={this.filterNone}>All</a></li>
-                    </ul>
-
-
-                                        <div style={{height: "10px"}}></div>
-
-                  </div>
 
               </div>
               <div className="col s12 m4">
@@ -498,9 +481,29 @@ class ReviewBody extends React.Component {
                 </h4>
                  <div className= "">
                   <div style={{height: "24px"}}></div>
+                    <h5 style={{fontSize:"1.3rem"}}>Filter By:</h5>
+                    <div style={{height: "10px"}}></div>
+                    
+                    <a className=' dropdown-button btn' href='#' data-activates='dropdown2' data-beloworigin="true">Filter By Star</a>
+               
+                    <ul id='dropdown2' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
+                      <li><a href="#!" onClick={this.filter5}>5 Star</a></li>
+                      <li><a href="#!" onClick={this.filter4}>4 Star</a></li>
+                      <li><a href="#!" onClick={this.filter3}>3 Star</a></li>
+                      <li><a href="#!" onClick={this.filter2}>2 Star</a></li>
+                      <li><a href="#!" onClick={this.filter1}>1 Star</a></li>
+                      <li><a href="#!" onClick={this.filterNone}>All</a></li>
+                    </ul>
+                                        <div style={{height: "10px"}}></div>
+
+                  </div>
+                  <div className= "">
                     <h5 style={{fontSize:"1.3rem"}}>Took this class?</h5>
                     <div style={{height: "10px"}}></div>
+
                     <a style={{backgroundColor: "#d2b000"}} onClick={this.onClick} onMouseOver="" className="waves-effect waves-light btn-large">Add Review Here</a>
+
+
                                         <div style={{height: "10px"}}></div>
 
                   </div>
