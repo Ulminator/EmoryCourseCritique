@@ -60,7 +60,7 @@ class LoginPageContainer extends React.Component {
             // console.log("LOGIN SUCCESS")
             // console.log(self.props);
             self.updateLogin();
-            self.props.history.goBack();
+          window.location.href = "/";
           }
         })
         .catch(function (error) {
