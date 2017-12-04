@@ -16,7 +16,7 @@ class FAQPageContainer extends Component {
         </div>
         <div className="container">
           <div style={{height: "45px"}}></div>
-            <h2 className="center" style={{fontWeight: "300"}}>Frquently Asked Questions</h2>
+            <h2 className="center" style={{fontWeight: "300"}}>Frequently Asked Questions</h2>
           <div style={{height: "45px"}}></div>
           <div className="row">
             <div className="col s12 m10 offset-m1">

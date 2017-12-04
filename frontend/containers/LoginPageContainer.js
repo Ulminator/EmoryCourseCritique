@@ -49,18 +49,18 @@ class LoginPageContainer extends React.Component {
         .then(function (response) {
           console.log(response.status);
           if(response.data.message){
-             Materialize.toast(response.data.mesasge, 4000);
+             Materialize.toast(response.data.message, 4000);
 
           }
-          if(response.data.redirectUrl){
+          if(response.data.redirectUrl===("/rate?"+self.props.history.location.search)){
             self.updateLogin();
             self.props.history.push(response.data.redirectUrl)
             // window.location.replace(response.data.redirectUrl)
           }else{
             // console.log("LOGIN SUCCESS")
-            // console.log(self.props);
+             //console.log(self.props);
             self.updateLogin();
-          window.location.href = "/";
+            self.props.history.goBack();
           }
         })
         .catch(function (error) {
