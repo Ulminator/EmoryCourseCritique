@@ -99,23 +99,23 @@ class SignUpPageContainer extends Component {
             }
           }
         } else {
-        //var self=this;
+        var self=this;
         axios({
           method: 'post',
           url: '/account/signup',
           data: {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            password: this.state.password
+            firstname: self.state.firstname,
+            lastname: self.state.lastname,
+            email: self.state.email,
+            password: self.state.password
           }
         })
 
         .then(function (response) {
           console.log(this);
           console.log(response);
-          this.setState({success:true});
-          this.props.history.push('/signup?success');
+          self.setState({success:true});
+          self.props.history.push('/signup?success');
           // window.location.replace("/success");
         })
         .catch(function (error) {

@@ -28,7 +28,8 @@ class ResendEmailContainer extends Component {
         })
         .then(function (response) {
           console.log(response);
-          self.props.history.push('/success')
+          alert('success');
+          //self.props.history.push('/success')
           // window.location.replace("/success");
         })
         .catch(function (error) {
