@@ -28,7 +28,8 @@ class ResendEmailContainer extends Component {
         })
         .then(function (response) {
           console.log(response);
-          alert('success');
+          Materialize.toast("Successfull login!", 4000);
+
           //self.props.history.push('/success')
           // window.location.replace("/success");
         })

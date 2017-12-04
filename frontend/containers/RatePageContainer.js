@@ -79,7 +79,8 @@ class RatePageContainer extends Component {
           .then(function (response) {
             console.log(response.status);
                if(response.data.message){
-                 alert(response.data.message);
+                  Materialize.toast(response.data.message, 4000);
+
                }
                /*if(response.data.redirectUrl){
                  window.location.href =response.data.redirectUrl;
@@ -94,7 +95,7 @@ class RatePageContainer extends Component {
       }
       else
       {
-        alert("Must fill out all ratings");
+        Materialize.toast("Please fill out all ratings!", 4000);
       }
 
     }

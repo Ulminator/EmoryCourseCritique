@@ -9,13 +9,14 @@ class Title extends React.Component {
   render() {
     var b=false;
     return (
-      <div className="col l8 offset-l2">
+      <div className="col l10 offset-l1">
         <h1
-          className="center"
+          className="center smallFontMobile"
           style={{
             color: "white",
             textTransform: "uppercase",
-            fontWeight: 300
+            fontWeight: 300,
+
           }}
         >
           <span
@@ -28,13 +29,13 @@ class Title extends React.Component {
           </span>{" "}
           COURSE CRITIQUE
         </h1>
-        <div
+        <div className="hide-on-small-only"
           style={{
-            height: 30
+            height: 12
           }}
         />
         <div className="row">
-          <div className="col s12">
+          <div className="col s12 m10 offset-m1 l10 offset-l1 xl8 offset-xl2">
             <nav
               className
               style={{

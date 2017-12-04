@@ -49,7 +49,8 @@ class LoginPageContainer extends React.Component {
         .then(function (response) {
           console.log(response.status);
           if(response.data.message){
-            alert(response.data.message)
+             Materialize.toast(response.data.mesasge, 4000);
+
           }
           if(response.data.redirectUrl){
             self.updateLogin();
@@ -63,7 +64,8 @@ class LoginPageContainer extends React.Component {
           }
         })
         .catch(function (error) {
-          alert(error.response.data.message);
+          Materialize.toast(error.response.data.message, 4000);
+
         });
   }
   render() {
@@ -108,11 +110,14 @@ class LoginPageContainer extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="input-field col s6 m6 l6">
-                  <p className="margin medium-small"><Link to='/signup'>Register</Link></p>
+                <div className="input-field col s6 m6">
+                 <p style={{marginBottom: "0px", fontWeight: "300", fontSize: "1.2rem"}}>Don't have an account?</p>
+                  <p style={{marginTop: "4px"}} className="margin medium-small"><Link to='/signup'>Register Here</Link></p>
                 </div>
-                <div className="input-field col s6 m6 l6">
-                    <p className="margin right-align medium-small"><a href="#!" onClick={() => this.redirectResend()}>Forgot password ?</a></p>
+                <div className="input-field col s6 m6 push-m1">
+                    <p style={{marginBottom: "0px", fontWeight: "300", fontSize: "1.2rem"}}>Forgot password?</p>
+
+                    <p style={{marginTop: "4px"}} className="margin medium-small"><a href="#!" onClick={() => this.redirectResend()}>Reset it here</a></p>
                 </div>
               </div>
 

@@ -65,22 +65,25 @@ class SignUpPageContainer extends Component {
       return("")
     }
     else{
-      return(" must end with @emory.edu.");
+         Materialize.toast('Password must end with @emory.edu', 4000);
     }
   }
 
   checkPwd() {
     var str = this.state.password;
     if (str.length < 6) {
-        return(" is too short. Must be at least 6 characters.");
+        Materialize.toast('Password Must be at least 6 characters', 4000);
+
     } else if (str.length > 50) {
-        return(" is too long.");
+         Materialize.toast('Password is too long', 4000);
     } else if (str.search(/\d/) == -1) {
-        return(" must contain at least one number.");
+         Materialize.toast('Password must contain at least one number', 4000);
     } else if (str.search(/[a-zA-Z]/) == -1) {
-        return(" must contain at least one letter.");
+        Materialize.toast('Password must contain at least one letter', 4000);
+
     } else if (str.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+\.\,\;\:]/) != -1) {
-        return(" contains an invalid character.");
+        Materialize.toast('Password contains an invalid character', 4000);
+
     }
     return("");
   }
@@ -90,12 +93,13 @@ class SignUpPageContainer extends Component {
         this.validateFieldName("password")
 
         if (this.state.password !== this.state.repeated) {
-          alert("password didn't match")
+         Materialize.toast("Passwords don't match", 4000);
         }
         else if (!this.state.emailValid | !this.state.passwordValid){
           for (var x in this.state.formErrors){
             if(this.state.formErrors[x].length!=0){
-              alert(x + this.state.formErrors[x])
+              Materialize.toast(x + this.state.formErrors[x], 4000);
+
             }
           }
         } else {
@@ -120,7 +124,8 @@ class SignUpPageContainer extends Component {
         })
         .catch(function (error) {
           console.log(error);
-          alert(error.response.data.message);
+          Materialize.toast(error.response.data.message, 4000);
+
         });
       }
   }
@@ -136,7 +141,8 @@ class SignUpPageContainer extends Component {
         })
         .then(function (response) {
           console.log(response);
-          alert("sent!");
+          Materialize.toast("An email has been sent to you!", 4000);
+
           //self.props.history.push('/success')
           // window.location.replace("/success");
         })
