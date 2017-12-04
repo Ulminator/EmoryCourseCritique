@@ -122,27 +122,39 @@ class ReviewBody extends React.Component {
   }
 
   filter5() {
-    this.setState({filterBy:5})
+    this.setState({filterBy:5});
+    document.getElementById("filterStar").innerHTML = "Show only 5 Stars";
+
   }
 
   filter4() {
-    this.setState({filterBy:4})
+    this.setState({filterBy:4});
+    document.getElementById("filterStar").innerHTML = "Show only 4 Stars";
+
   }
 
   filter3() {
-    this.setState({filterBy:3})
+    this.setState({filterBy:3});
+    document.getElementById("filterStar").innerHTML = "Show only 3 Stars";
+
   }
 
   filter2() {
-    this.setState({filterBy:2})
+    this.setState({filterBy:2});
+    document.getElementById("filterStar").innerHTML = "Show only 2 Stars";
+
   }
 
   filter1() {
-    this.setState({filterBy:1})
+    this.setState({filterBy:1});
+    document.getElementById("filterStar").innerHTML = "Show only 1 Stars";
+
   }
 
   filterNone() {
-    this.setState({filterBy:0})
+    this.setState({filterBy:0});
+    document.getElementById("filterStar").innerHTML = "Show All Stars";
+
   }
 
 
@@ -484,7 +496,7 @@ class ReviewBody extends React.Component {
                     <h5 style={{fontSize:"1.3rem"}}>Filter By:</h5>
                     <div style={{height: "10px"}}></div>
                     
-                    <a className=' dropdown-button btn' href='#' data-activates='dropdown2' data-beloworigin="true">Filter By Star</a>
+                    <a id="filterStar" className='dropdown-button btn' href='#' data-activates='dropdown2' data-beloworigin="true">Show All Stars</a>
                
                     <ul id='dropdown2' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
                       <li><a href="#!" onClick={this.filter5}>5 Star</a></li>
