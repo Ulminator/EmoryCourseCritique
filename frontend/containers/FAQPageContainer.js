@@ -21,10 +21,15 @@ class FAQPageContainer extends Component {
           <div className="row">
             <div className="col s12 m10 offset-m1">
                 <ul className="collapsible" data-collapsible="accordion">
-                  <li>
-                    <div className="collapsible-header active"><i className="material-icons">whatshot</i>How do I review a course?</div>
-                    <div className="collapsible-body"><span>You need to be an Emory Undergraduate student with an active email ending in @emory.edu. After you first register, you need to activate your account through that email. </span></div>
+                 <li>
+                    <div className="collapsible-header active"><i className="material-icons">question_answer</i>What is this?</div>
+                    <div className="collapsible-body"><span>Emory Course Critique is a site made by a group of Emory Undergrads who want to make it easier for students to choose courses. Search for a course number or course name to get started!</span></div>
                   </li>    
+                  <li>
+                    <div className="collapsible-header"><i className="material-icons">whatshot</i>How do I review a course?</div>
+                    <div className="collapsible-body"><span>You need to be an Emory Undergraduate student with an active email ending in @emory.edu. After you first register, you need to activate your account through that email. </span></div>
+                  </li>
+
                   <li>
                     <div className="collapsible-header"><i className="material-icons">person_outline</i>Is this anonymous?</div>
                     <div className="collapsible-body"><span>Yea.</span></div>

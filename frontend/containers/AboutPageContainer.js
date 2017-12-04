@@ -20,7 +20,7 @@ class AboutPageContainer extends Component {
           <div style={{height: "45px"}}></div>
           <div className="row">
             <div className="col s12 m4 l4 marginCol">
-              <img src="https://image.ibb.co/mdSBnw/colin.jpg" alt="" className="circle responsive-img aboutPics"/>
+              <img src="https://pbs.twimg.com/profile_images/927521433965785089/0nO-z1D4.jpg" alt="" className="circle responsive-img aboutPics"/>
               <p className="center aboutName">Alex Lin<br/> <span className="aboutJob">Scrum Master</span></p>
             </div>
              <div className="col s12 m4 l4 marginCol">
@@ -46,7 +46,7 @@ class AboutPageContainer extends Component {
            
             </div>
              <div className="col s12 m4 l4 marginCol">
-              <img src="http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png" alt="" className="circle responsive-img aboutPics" style={{width: "145px"}}/>
+              <img src="https://image.ibb.co/eUufxw/matt.jpg" alt="" className="circle responsive-img aboutPics" style={{width: "145px", height:"145px"}}/>
               <p className="center aboutName">Matt Ulmer<br/> <span className="aboutJob">Frontend Man</span></p>
            
             </div>

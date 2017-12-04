@@ -139,21 +139,19 @@ render() {
             <form className="login-form">
               <div className="row">
                 <div className="input-field col s12 center">
-                  {this.state.courseId}
-                  <br/>
-                  {this.state.profID}
+                  <h5>{this.state.courseId}</h5>
+                  <h4>{this.state.profID}</h4>
                 </div>
               </div>
               <div className="row margin">
-                <div className="col s12 center">
-                  <div className="inputs-sizes-rate">
-                    <div className = "reate-body-title">Easiness</div>
-                    
-                    <div className="col s12 center" onChange={this.setDifficulty}>
-                      <span style={{paddingLeft:"8px", float:"left"}}>Easy A</span>
-                      <span style={{float:"right"}}>Pure Misery</span>
+                  <div className="">
+                  <div className="divider"></div>
+                <div style={{height: "36px"}}></div>
+                  <p className="center" style={{fontSize: "1.2rem", marginBottom: "20px"}}>Overall Difficulty</p>
+
+                    <div className="center" onChange={this.setDifficulty}>
                       <input className="width-gap" type="radio" name="group1" id="1" value="1"/>
-                      <label className="labelOverride" htmlFor="1">1</label>
+                      <label className="labelOverride" htmlFor="1" style={{marginLeft: "0"}}>1</label>
 
                       <input className="width-gap" type="radio" name="group1" id="2" value="2"/>
                       <label className="labelOverride" htmlFor="2">2</label>
@@ -167,19 +165,21 @@ render() {
                       <input className="width-gap" type="radio" name="group1" id="5" value="5"/>
                       <label className="labelOverride" htmlFor="5">5</label>
                     </div>
-                  </div>
+
                 </div>
+                                <div style={{height: "24px"}}></div>
+
               </div>
               <div className="row margin">
-                <div className="col s12 center">
-                  <div className="inputs-sizes-rate">
-                    <div className = "reate-body-title">Workload</div>
-                    
-                    <div className="col s12 center" onChange={this.setWorkload}>
-                      <span style={{paddingLeft:"8px", float:"left"}}>Whats work?</span>
-                      <span style={{float:"right"}}>Drowning in Work</span>
+
+                <div className="divider"></div>
+                <div style={{height: "36px"}}></div>
+                    <p className="center" style={{fontSize: "1.2rem", marginBottom: "20px"}}>Overall Workload</p>
+                   
+                    <div className="center" onChange={this.setWorkload} style={{}}>
+
                       <input className="width-gap" type="radio" name="group2" id="11" value="1"/>
-                      <label className="labelOverride" htmlFor="11">1</label>
+                      <label className="labelOverride" htmlFor="11" style={{marginLeft: "0"}}>1</label>
 
                       <input className="width-gap" type="radio" name="group2" id="12" value="2"/>
                       <label className="labelOverride" htmlFor="12">2</label>
@@ -192,27 +192,30 @@ render() {
 
                       <input className="width-gap" type="radio" name="group2" id="15" value="5"/>
                       <label className="labelOverride" htmlFor="15">5</label>
-                    </div>
                   </div>
-                </div>
               </div>
               <div className="row margin">
                 <div className="input-field col s12 center">
+                <div className="divider"></div>
+                <div style={{height: "16px"}}></div>
+
                   <div className="inputs-sizes-rate">
-                    <div className = "reate-body-title">Overall Rating</div>
+                    <p className="center" style={{fontSize: "1.2rem"}}>Overall Rating</p>
                     <div style={{margin:"0 auto", width:"26%"}}>
-                    <ReactStars style={{margin:"0 auto", width:"26%"}}
+                    <div style={{position:"relative", left:"16px"}}><ReactStars style={{margin:"0 auto", width:"26%"}}
                       count={5}
                       value={this.state.overall}
                       onChange={overallRating}
                       size={24}
                       half={false}
-                      color2={'#ffd700'} />
+                      color2={'#ffd700'} /></div>
                     </div>
                   </div>
                 </div>
               </div>
               <br/>
+              <div style={{height: "16px"}}></div>
+
               <div className="row">
               <div className="col s12">
                 <div className="row">
