@@ -49,7 +49,8 @@ class LoginPageContainer extends React.Component {
         .then(function (response) {
           console.log(response.status);
           if(response.data.message){
-            alert(response.data.message)
+             Materialize.toast(response.data.mesasge, 4000);
+
           }
           if(response.data.redirectUrl){
             self.updateLogin();
@@ -63,7 +64,8 @@ class LoginPageContainer extends React.Component {
           }
         })
         .catch(function (error) {
-          alert(error.response.data.message);
+          Materialize.toast(error.response.data.message, 4000);
+
         });
   }
   render() {

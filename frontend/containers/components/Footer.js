@@ -16,8 +16,7 @@ class Footer extends React.Component {
               <h5 className="white-text">Welcome!</h5>
               <p className="grey-text text-lighten-4">
                 Emory Course Critique is a site meant to help Emory students
-                choose the best classes and professors. If you have any feedback
-                or questions, feel free to ask us!
+                choose the best classes and professors. All reviews are anonymous.
               </p>
             </div>
             <div className="col l4 offset-l2 s12">
