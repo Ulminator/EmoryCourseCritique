@@ -201,7 +201,7 @@ render() {
 
                   <div className="inputs-sizes-rate">
                     <p className="center" style={{fontSize: "1.2rem"}}>Overall Rating</p>
-                    <div style={{margin:"0 auto", width:"26%"}}>
+                    <div style={{margin:"0 auto", width:"150px"}}>
                     <div style={{position:"relative", left:"16px"}}><ReactStars style={{margin:"0 auto", width:"26%"}}
                       count={5}
                       value={this.state.overall}
