@@ -445,7 +445,7 @@ class ReviewBody extends React.Component {
                 </span>
 
               </div>
-              <div className="col s12 m4">
+              <div className="col s6 m4">
                     <h5 style={{fontSize:"1.3rem"}}>Overall Difficulty:</h5>
                 <h4 className={ratingDifficultyColor}>
              <span
@@ -480,7 +480,7 @@ class ReviewBody extends React.Component {
 
 
               </div>
-              <div className="col s12 m4">
+              <div className="col s6 m4 l4">
                     <h5 style={{fontSize:"1.3rem"}}>Overall Workload:</h5>
                 <h4 className={ratingWorkloadColor}>
              <span
