@@ -41,6 +41,7 @@ class SignUpPageContainer extends Component {
     this.setState({repeated: event.target.value});
   }
 
+
   validateFieldName(fieldName){
     let fieldValidationErrors = this.state.formErrors;
     switch (fieldName) {
@@ -158,6 +159,15 @@ class SignUpPageContainer extends Component {
     }
   }
 
+componentDidMount() {
+   $(document).ready(function(){
+      $(document).on("keydown", function(e){
+         if(e.keyCode == 13 ){
+            document.getElementById('signUpBtn').click();
+         } 
+      });
+   });
+  }
   render() {
     if(this.state.success)
     {
@@ -242,7 +252,7 @@ class SignUpPageContainer extends Component {
                 </div>
                 <div className="row margin">
                   <div className="center">
-                    <a onClick={() => this.signup()} className="btn-large waves-effect waves-light">Sign Up</a>
+                    <a id="signUpBtn" onClick={() => this.signup()} className="btn-large waves-effect waves-light">Sign Up</a>
                   </div>
                 </div>
                 <div className="input-field">

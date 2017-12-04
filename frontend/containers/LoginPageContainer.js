@@ -14,7 +14,21 @@ class LoginPageContainer extends React.Component {
       email: "",
       password: ""
     }
+
   }
+
+componentDidMount() {
+   $(document).ready(function(){
+      $(document).on("keydown", function(e){
+         if(e.keyCode == 13 ){
+            document.getElementById('loginBtn').click();
+         } 
+      });
+   });
+  }
+inputListener(e){
+ 
+}
 
   updateLogin() {
     this.props.loginState();
@@ -67,15 +81,20 @@ class LoginPageContainer extends React.Component {
           Materialize.toast(error.response.data.message, 4000);
 
         });
+
+
+
   }
   render() {
+
+
     return(
-      <div >
+      <div onKeyDown={this.inputListener}>
       <div className = "header">
           <Link to='/' className = "header-title" style={{color: '#FFD700'}}> <span className = "header-title-emory">Emory</span> Course Critique </Link>
       </div>
 
-      <lbody >
+      <lbody>
 
 
         <div id="login-page" className="row">
@@ -106,7 +125,7 @@ class LoginPageContainer extends React.Component {
 
               <div className="row">
                 <div className="center">
-                  <a onClick={() => this.login()} className="btn-large waves-effect waves-light">Login</a>
+                  <a id="loginBtn" onClick={() => this.login()} className="btn-large waves-effect waves-light">Login</a>
                 </div>
               </div>
               <div className="row">
