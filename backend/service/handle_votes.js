@@ -8,7 +8,7 @@ module.exports = function(req,res,next,upvote){
 
   if(!user_id){
     res.status(401)
-    return res.json({message:"user is not authenticated"})
+    return res.json({message:"Must login to vote"})
   }
   critique.findOne({_id:critique_id},function(err,this_critique){
     if(err){

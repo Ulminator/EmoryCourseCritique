@@ -28,7 +28,6 @@ class ReviewCard extends React.Component {
           .then(function (response) {
             console.log(response);
                
-               
     
       //self.setState({upvotes: response.data.upvotes, downvotes: response.data.downvotes});
       console.log(self.state.upvotes);
@@ -37,7 +36,9 @@ class ReviewCard extends React.Component {
 
           })
           .catch(function (error) {
-            console.log(error.response.data.message);
+            //console.log(error.response.data.message);
+            
+            Materialize.toast(error.response.data.message, 4000);
           });
     
     
@@ -55,7 +56,6 @@ class ReviewCard extends React.Component {
           })
           .then(function (response) {
             console.log(response);
-               
 
     
       //self.setState({upvotes: response.data.upvotes, downvotes: response.data.downvotes});
@@ -65,7 +65,9 @@ class ReviewCard extends React.Component {
     
           })
           .catch(function (error) {
-            console.log(error.response.data.message);
+            //console.log(error.response.data.message);
+            
+            Materialize.toast(error.response.data.message, 4000);
           });
     
     

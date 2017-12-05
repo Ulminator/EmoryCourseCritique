@@ -1,5 +1,4 @@
 import React from "react";
-import SideNav from "./SideNav";
 import Inputfield from "./Inputfield";
 import Card from "./Card";
 import ReviewCard from "./ReviewCard";
