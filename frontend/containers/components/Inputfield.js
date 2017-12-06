@@ -1501,7 +1501,7 @@ class Inputfield extends React.Component {
             "WGS497R": null,
             "WGS499R": null,
             },
-            limit: 7, // The max amount of results that can be shown at once. Default: Infinity.
+           // limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
             onAutocomplete: function(val) {
               // Callback function when value is autcompleted.
             var url = '/search?q='+val;
