@@ -1,4 +1,5 @@
 
+
 .navOverride{
   background-color:transparent;
   width: 100%;
@@ -242,4 +243,10 @@ rbody {
 .marginCol2{
   margin-top: 0px;
 }
+}
+.autocomplete-content.dropdown-content{
+max-height: 450px !important;
+
+
+
 }

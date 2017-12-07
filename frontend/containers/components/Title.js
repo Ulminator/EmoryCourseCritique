@@ -9,8 +9,8 @@ class Title extends React.Component {
   render() {
     var b=false;
     return (
-      <div className="col l10 offset-l1">
-        <h1
+      <div className="col xl10 offset-xl1 l12">
+        <h2
           className="center smallFontMobile"
           style={{
             color: "white",
@@ -28,7 +28,7 @@ class Title extends React.Component {
             Emory
           </span>{" "}
           COURSE CRITIQUE
-        </h1>
+        </h2>
         <div className="hide-on-small-only"
           style={{
             height: 12
