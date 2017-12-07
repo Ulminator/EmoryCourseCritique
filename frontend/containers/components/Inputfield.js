@@ -1537,7 +1537,7 @@ class Inputfield extends React.Component {
           value={this.state.inputValue.bind} 
           onChange={this.updateInputValue}
           onKeyPress={this._handleKeyPress}
-          style={{marginTop:10, height:height, backgroundColor:"#f5f8fa", borderRadius:30}}
+          style={{marginTop:10, height:height, backgroundColor:"#eeeeee", borderRadius:30}}
         />
         <label
           className="label-icon hide-on-small-only inputOverride"
