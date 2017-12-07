@@ -161,7 +161,7 @@ class ReviewCard extends React.Component {
     return (
       <div className="card-panel nohover2 white black-text row" style={{position: "relative"}} >
         <div className="col s6 m3">
-        <h4 style={{
+        <h5 style={{
             }}>
           Rating:
             {'\u00A0'}<span className={ratingColor}
@@ -171,7 +171,7 @@ class ReviewCard extends React.Component {
           >
             {rating} 
           </span> 
-        </h4>
+        </h5>
         
         <span
           style={{
@@ -199,8 +199,8 @@ class ReviewCard extends React.Component {
         <br />
         <span
           style={{
-            fontWeight: 400,
-            fontSize: "1.25rem"
+            fontWeight: 300,
+            fontSize: "1.1rem"
           }}
         >
           {dateformat}
@@ -221,7 +221,7 @@ class ReviewCard extends React.Component {
         </div>
         <div className="col s12 m7">
          <p style={{fontSize: "1.1rem", fontWeight: "300"}}>Comments:</p>
-          <blockquote style={{fontSize: "1.2rem", overflowWrap: "break-word"}}>{this.props.comment}</blockquote>
+          <blockquote style={{fontSize: "1.0rem", overflowWrap: "break-word"}}>{this.props.comment}</blockquote>
 
         </div>
         <div className="col s1"></div>
