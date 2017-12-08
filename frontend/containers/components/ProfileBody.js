@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-class CourseBody extends React.Component {
+class ProfileBody extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,8 +22,7 @@ class CourseBody extends React.Component {
       avg_workload:Number
 
     }
-    this.onClick = this.onClick.bind(this);
-    this.sortDate = this.sortDate.bind(this);
+
     this.sortOverall = this.sortOverall.bind(this);
     this.sortDifficulty = this.sortDifficulty.bind(this);
     this.sortWorkload = this.sortWorkload.bind(this);
@@ -31,59 +30,47 @@ class CourseBody extends React.Component {
   }
 
 
-  onClick() {
-    
-
-
-  }
-
-  sortDate() {
-    console.log(this.state.sections);
-    var ratings= this.state.sections;
-    console.log(ratings[0].rated_date);
-    console.log(new Date(ratings[0].rated_date).getTime());
-
-    ratings.sort(function(a, b) {
-      return new Date(a.rated_date).getTime() - new Date(b.rated_date).getTime();
-    });
-    document.getElementById("sortDropdown").innerHTML = "&nbsp&nbsp&nbsp&nbspDate&nbsp&nbsp&nbsp&nbsp";
-               
-
-    this.setState({ratings:ratings});
-  }
+  
 
   sortOverall() {
     var ratings= this.state.sections;
     
     ratings.sort(function(a, b) {
-      return a.overall - b.overall;
+      var a_overall=a.average_overall||0;
+      var b_overall=b.average_overall||0;
+      console.log(b_overall);
+      return a_overall - b_overall;
     });
     document.getElementById("sortDropdown").innerHTML = "&nbspRating&nbsp";
 
-    this.setState({ratings:ratings});
+    this.setState({sections:ratings});
 
   }
 
   sortDifficulty() {
     var ratings= this.state.sections;
-    
+
     ratings.sort(function(a, b) {
-      return a.difficulty - b.difficulty;
+      var a_difficulty=a.average_difficulty||0;
+      var b_difficulty=b.average_difficulty||0;
+      return a_difficulty - b_difficulty;
     });
     document.getElementById("sortDropdown").innerHTML = "Difficulty";
 
-    this.setState({ratings:ratings});
+    this.setState({sections:ratings});
   }
 
   sortWorkload() {
     var ratings= this.state.sections;
     
     ratings.sort(function(a, b) {
-      return a.workload - b.workload;
+      var a_workload=a.average_workload||0;
+      var b_workload=b.average_workload||0;
+      return a_workload - b_workload;
     });
     document.getElementById("sortDropdown").innerHTML = "WorkLoad";
 
-    this.setState({ratings:ratings});
+    this.setState({sections:ratings});
   }
 
 
@@ -106,30 +93,54 @@ class CourseBody extends React.Component {
     console.log(location.search);
     
       var self=this;
-      var url= '/section'+location.search;
-      console.log(url);
-    axios.get(url)
-        .then(function (response) {
-          
-            self.setState({
-              course_num: response.data.course_num,
-              course_name: response.data.course_name,
-              sections: response.data.sections,
-              credits: response.data.credits,
-              ger: response.data.ger,
-              description: response.data.description,
-              avg_difficulty:response.data.course_avg_difficulty,
-              avg_overall:response.data.course_avg_overall,
-              avg_workload:response.data.course_avg_workload
-            }) 
-          //history.pushState(null, '', url2);
-          
-          
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
+      if(location.pathname==="/course")
+      {
+        var url= '/section'+location.search;
+        console.log(url);
+        axios.get(url)
+          .then(function (response) {
+            
+              self.setState({
+                course_num: response.data.course_num,
+                course_name: response.data.course_name,
+                sections: response.data.sections,
+                credits: response.data.credits,
+                ger: response.data.ger,
+                description: response.data.description,
+                avg_difficulty:response.data.course_avg_difficulty,
+                avg_overall:response.data.course_avg_overall,
+                avg_workload:response.data.course_avg_workload
+              }) 
+            //history.pushState(null, '', url2);
+            
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      else if(location.pathname==="/prof")
+      {
+        var url= '/faculty'+location.search;
+        console.log(url);
+        axios.get(url)
+          .then(function (response) {
+            
+              self.setState({
+                course_name: response.data.professor,
+                sections: response.data.courses,
+                avg_difficulty:response.data.prof_avg_difficulty,
+                avg_overall:response.data.prof_avg_overall,
+                avg_workload:response.data.prof_avg_workload
+              }) 
+            //history.pushState(null, '', url2);
+            
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     
 
   }
@@ -140,24 +151,46 @@ class CourseBody extends React.Component {
     
     
     var cards = [];
-
+    var description;
+    var ger;
+    var credits;
+    var sections;
+    var header;
    
 
-    console.log(this.state.sections);
-    
+    if(location.pathname==="/course")
+    {
+      header=this.state.course_num+" - "+this.state.course_name;
+      description="Description:";
+      ger="GER:";
+      credits="Credits:";
+      sections="total section(s)";
       for (var i = this.state.sections.length-1; i > -1; i--) {
         
         cards.push(<Card cnum= {this.state.course_num} cname={this.state.course_name} professor={this.state.sections[i].professor} rating={this.state.sections[i].average_overall} key={i}/>);
         
       }
-
+    }
+    else if(location.pathname==="/prof")
+    {
+      header=this.state.course_name;
+      description="";
+      ger="";
+      credits="";
+      sections="course(s) taught";
+      for (var i = this.state.sections.length-1; i > -1; i--) {
+        
+        cards.push(<Card cnum= {this.state.sections[i].course_num} cname={this.state.sections[i].course_name} professor={this.state.course_name} rating={this.state.sections[i].average_overall} key={i}/>);
+        
+      }
+    }
 
       
 
       //rating review
       var rating = this.state.avg_overall;
       var ratingColor = "grey-text";
-      if(rating === "null" || rating == "NaN"){
+      if(rating === null || rating == "NaN"){
           rating = "N/A";
       }else if(rating > 4){ //its pretty good rating
         ratingColor = "green-text";
@@ -175,7 +208,7 @@ class CourseBody extends React.Component {
       //rating workload review
       var ratingWorkload = this.state.avg_workload;
       var ratingWorkloadColor = "grey-text";
-      if(ratingWorkload === "null" || ratingWorkload == "NaN"){
+      if(ratingWorkload === null || ratingWorkload == "NaN"){
           ratingWorkload = "N/A";
       }else if(ratingWorkload > 4){ //its pretty good ratingWorkload
         ratingWorkloadColor = "red-text text-lighten-1";
@@ -192,7 +225,7 @@ class CourseBody extends React.Component {
        //rating difficulty review
       var ratingDifficulty = this.state.avg_difficulty;
       var ratingDifficultyColor = "grey-text";
-      if(ratingDifficulty === "null" || ratingDifficulty == "NaN"){
+      if(ratingDifficulty === null || ratingDifficulty == "NaN"){
           ratingDifficulty = "N/A";
       }else if(ratingDifficulty > 4){ //its pretty good ratingDifficulty
         ratingDifficultyColor = "red-text text-lighten-1";
@@ -238,7 +271,7 @@ class CourseBody extends React.Component {
 
               <div className="card-panel nohover2 white black-text row" >
                <div className="col s12 m4">
-               <h5 style={{fontSize:"1.3rem", fontWeight: "300"}}>{this.state.course_num}-{this.state.course_name}</h5>
+               <h5 style={{fontSize:"1.3rem", fontWeight: "300"}}>{header}</h5>
 
                <h5>Overall Quality:</h5>
                 <h4 className={ratingColor} style={{
@@ -255,7 +288,7 @@ class CourseBody extends React.Component {
                     fontWeight: 300
                   }}
                 >
-                Description: {this.state.description}
+                {description} {this.state.description}
                 </span>
                 
                 <p className="" style={{margin: "0", position: "relative", top:"8px"}}>
@@ -267,7 +300,7 @@ class CourseBody extends React.Component {
                   }}
                 >
                {counter}
-                </span>{'\u00A0'}<span style={{color: "#424242",fontSize: '1.3rem',}}>  total sections</span>{" "}
+                </span>{'\u00A0'}<span style={{color: "#424242",fontSize: '1.3rem',}}>  {sections}</span>{" "}
                 </p>
                 
                 <br />
@@ -292,7 +325,7 @@ class CourseBody extends React.Component {
                     fontWeight: 300
                   }}
                 >
-                GER: {this.state.ger}
+                {ger} {this.state.ger}
                 </span>
 
                 <br />
@@ -301,7 +334,7 @@ class CourseBody extends React.Component {
                     fontWeight: 300
                   }}
                 >
-                Credits: {this.state.credits}
+                {credits} {this.state.credits}
                 </span> 
 
 
@@ -323,11 +356,9 @@ class CourseBody extends React.Component {
                     <h5 style={{fontSize:"1.3rem"}}>Sorted By:</h5>
                     <div style={{height: "10px"}}></div>
 
-                    <a id="sortDropdown" className='dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}Date{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}</a>
+                    <a id="sortDropdown" className='dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}None{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}</a>
                
                     <ul id='dropdown1' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
-                      <li><a href="#!" onClick={this.sortDate}>Date</a></li>
-                      <li className="divider"></li>
                       <li><a href="#!" onClick={this.sortOverall}>Rating</a></li>
                       <li><a href="#!" onClick={this.sortDifficulty}>Difficulty</a></li>
                       <li><a href="#!" onClick={this.sortWorkload}>Workload</a></li>
@@ -373,4 +404,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CourseBody);
+)(ProfileBody);

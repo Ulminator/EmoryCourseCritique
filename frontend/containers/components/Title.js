@@ -9,7 +9,7 @@ class Title extends React.Component {
   render() {
     var b=false;
     return (
-      <div className="col xl10 offset-xl1 l12">
+      <div className="col xl10 offset-xl1 l12" style={{float:"none"}}>
         <h2
           className="center smallFontMobile"
           style={{

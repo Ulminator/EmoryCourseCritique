@@ -92,7 +92,7 @@ module.exports = function(app,passport,nev,transport){
     });
 
     // Get prof page when clicked in search
-    app.get('/prof', querymen.middleware({
+    app.get('/faculty', querymen.middleware({
         prof: {type: String, paths: ['prof']}
     }), function(req, res) {
         require('./service/get_professor.js')(res, req.querymen.query);

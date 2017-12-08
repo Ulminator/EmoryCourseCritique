@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
-import CourseBody from  "./components/CourseBody";
+import ProfileBody from  "./components/ProfileBody";
 import SearchNavBar from "./components/SearchNavBar";
 
 
-class CoursePageContainer extends Component {
+class ProfilePageContainer extends Component {
   render() {
 
     return(
 
       <div >
         <SearchNavBar/>
-        <CourseBody />
+        <ProfileBody />
 
       </div>
     )
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CoursePageContainer);
+)(ProfilePageContainer);

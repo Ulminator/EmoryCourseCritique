@@ -36,7 +36,17 @@ class ReviewBody extends React.Component {
     this.filterNone = this.filterNone.bind(this);
     this.onUpdate= this.onUpdate.bind(this);
     this.coursePage=this.coursePage.bind(this);
+    this.profPage=this.profPage.bind(this);
 
+  }
+
+  profPage() {
+    var querystring = require('querystring');
+        
+        var courseurl = '/prof?'+querystring.stringify({
+            prof: this.state.reviewProfessor,
+        });
+        window.location.href=courseurl;
   }
 
   coursePage() {
@@ -274,7 +284,7 @@ class ReviewBody extends React.Component {
       //rating review
       var rating = (this.state.total_overall/this.state.count).toFixed(2);
       var ratingColor = "grey-text";
-      if(rating === "null" || rating == "NaN"){
+      if(rating === null || rating == "NaN"){
           rating = "N/A";
       }else if(rating > 4){ //its pretty good rating
         ratingColor = "green-text";
@@ -292,7 +302,7 @@ class ReviewBody extends React.Component {
       //rating workload review
       var ratingWorkload = (this.state.total_workload/this.state.count).toFixed(2);
       var ratingWorkloadColor = "grey-text";
-      if(ratingWorkload === "null" || ratingWorkload == "NaN"){
+      if(ratingWorkload === null || ratingWorkload == "NaN"){
           ratingWorkload = "N/A";
       }else if(ratingWorkload > 4){ //its pretty good ratingWorkload
         ratingWorkloadColor = "red-text text-lighten-1";
@@ -310,7 +320,7 @@ class ReviewBody extends React.Component {
        //rating difficulty review
       var ratingDifficulty = (this.state.total_difficulty/this.state.count).toFixed(2);
       var ratingDifficultyColor = "grey-text";
-      if(ratingDifficulty === "null" || ratingDifficulty == "NaN"){
+      if(ratingDifficulty === null || ratingDifficulty == "NaN"){
           ratingDifficulty = "N/A";
       }else if(ratingDifficulty > 4){ //its pretty good ratingDifficulty
         ratingDifficultyColor = "red-text text-lighten-1";
@@ -358,7 +368,7 @@ class ReviewBody extends React.Component {
                <div className="col s12 m4">
 
                 <h5 onClick={this.coursePage} style={{fontSize:"1.3rem", fontWeight: "300", display:"inline", cursor: "pointer"}}>{this.state.reviewCourse} </h5>
-                <h5 style={{fontSize:"1.3rem", fontWeight: "300", display:"inline"}}>- {this.state.reviewProfessor}</h5>
+                <h5 onClick={this.profPage} style={{fontSize:"1.3rem", fontWeight: "300", display:"inline", cursor: "pointer"}}>- {this.state.reviewProfessor}</h5>
    
 
                <h5>Overall Quality:</h5>

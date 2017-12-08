@@ -32,9 +32,9 @@ module.exports = function(res, query_string) {
                             var course_professor_rating = {
                                 course_num: courseItem.course_num,
                                 course_name: courseItem.course_name,
-                                average_difficulty: 'null',
-                                average_overall: 'null',
-                                average_workload: 'null'
+                                average_difficulty: null,
+                                average_overall: null,
+                                average_workload: null
                             }
                             // add card to response
                             sendcprof(course_professor_rating, false);
