@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import MainPageContainer from './MainPageContainer';
 import AboutPageContainer from './AboutPageContainer';
 import FAQPageContainer from './FAQPageContainer';
-
+import CoursePageContainer from './CoursePageContainer'
 import SignUpPageContainer from './SignUpPageContainer';
 import LoginPageContainer from './LoginPageContainer';
 import SearchPageContainer from './SearchPageContainer';
@@ -21,7 +21,7 @@ export default class Routes extends Component {
            <Route path="/" exact={true} component={MainPageContainer}/>
            <Route path="/about" exact={true} component={AboutPageContainer}/>
            <Route path="/FAQ" exact={true} component={FAQPageContainer}/>
-
+           <Route path="/course" exact={true} component={CoursePageContainer}/>
            <Route path="/signup" exact={true} component={SignUpPageContainer}/>
            <Route path="/login" exact={true} component={LoginPageContainer}/>
            <Route path="/rate" exact={true} component={RatePageContainer}/>

@@ -85,7 +85,7 @@ module.exports = function(app,passport,nev,transport){
     });
 
     // Get course page when clicked in search
-    app.get('/course', querymen.middleware({
+    app.get('/section', querymen.middleware({
         course: {type: String, paths: ['course']}
     }), function(req, res) {
         require('./service/get_course.js')(res, req.querymen.query);

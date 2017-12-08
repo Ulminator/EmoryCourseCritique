@@ -35,7 +35,17 @@ class ReviewBody extends React.Component {
     this.filter1 = this.filter1.bind(this);
     this.filterNone = this.filterNone.bind(this);
     this.onUpdate= this.onUpdate.bind(this);
+    this.coursePage=this.coursePage.bind(this);
 
+  }
+
+  coursePage() {
+    var querystring = require('querystring');
+        
+        var courseurl = '/course?'+querystring.stringify({
+            course: this.state.reviewCourse,
+        });
+        window.location.href=courseurl;
   }
 
   onUpdate(index,upvotes,downvotes) {
@@ -182,7 +192,7 @@ class ReviewBody extends React.Component {
         .then(function (response) {
           console.log(response);
           console.log(response.data);
-          if(response.data==="")
+          if(response.data===null)
           {
             var querystring = require('query-string');
             var parsed = querystring.parse(location.search);
@@ -190,8 +200,14 @@ class ReviewBody extends React.Component {
             console.log(parsed.course);
             console.log(parsed.prof);
             var pname = parsed.prof.replace("_",", ");
-            self.state.reviewCourse= parsed.course;
-            self.state.reviewProfessor= pname;
+            //self.state.reviewCourse= parsed.course;
+            //self.state.reviewProfessor= pname;
+            self.setState({
+              reviewCourse: parsed.course,
+              reviewProfessor: pname,
+              count: 0,
+
+            }) 
           }
           else
           {
@@ -237,7 +253,6 @@ class ReviewBody extends React.Component {
 
     console.log(this.state.ratings);
     
-      var thiscourse='reviews';
       for (var i = this.state.ratings.length-1; i > -1; i--) {
         overalldist[this.state.ratings[i].overall-1]+=1;
         difficultydist[this.state.ratings[i].difficulty-1]+=1;
@@ -290,13 +305,13 @@ class ReviewBody extends React.Component {
       else{ //disgusting
         ratingWorkloadColor = "green-text";
       }
+      console.log(this.state.count);
       var counter = this.state.count;
        //rating difficulty review
       var ratingDifficulty = (this.state.total_difficulty/this.state.count).toFixed(2);
       var ratingDifficultyColor = "grey-text";
       if(ratingDifficulty === "null" || ratingDifficulty == "NaN"){
           ratingDifficulty = "N/A";
-          counter = 0;
       }else if(ratingDifficulty > 4){ //its pretty good ratingDifficulty
         ratingDifficultyColor = "red-text text-lighten-1";
 
@@ -341,7 +356,10 @@ class ReviewBody extends React.Component {
 
               <div className="card-panel nohover2 white black-text row" >
                <div className="col s12 m4">
-               <h5 style={{fontSize:"1.3rem", fontWeight: "300"}}>{this.state.reviewCourse}-{this.state.reviewProfessor}</h5>
+
+                <h5 onClick={this.coursePage} style={{fontSize:"1.3rem", fontWeight: "300", display:"inline", cursor: "pointer"}}>{this.state.reviewCourse} </h5>
+                <h5 style={{fontSize:"1.3rem", fontWeight: "300", display:"inline"}}>- {this.state.reviewProfessor}</h5>
+   
 
                <h5>Overall Quality:</h5>
                 <h4 className={ratingColor} style={{

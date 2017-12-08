@@ -50,7 +50,7 @@ class SearchNavBar extends React.Component {
                       <Link to='/' style={{
                         color: "#d38e02",
                         fontSize: "smaller"
-                      }}>EMORYCOURSECRITIQUE</Link>
+                      }}>EmoryCourseCritique</Link>
                     </span>
                   </h5>
                 </div>
