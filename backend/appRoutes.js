@@ -91,6 +91,13 @@ module.exports = function(app,passport,nev,transport){
         require('./service/get_course.js')(res, req.querymen.query);
     });
 
+    // Get prof page when clicked in search
+    app.get('/prof', querymen.middleware({
+        prof: {type: String, paths: ['prof']}
+    }), function(req, res) {
+        require('./service/get_professor.js')(res, req.querymen.query);
+    });
+
     // Get course page when clicked in search
     app.get('/testtwo', querymen.middleware({
         course: {type: String, paths: ['course']},
