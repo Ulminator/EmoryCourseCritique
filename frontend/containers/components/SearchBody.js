@@ -1,6 +1,6 @@
 import React from "react";
 import Inputfield from "./Inputfield";
-import Card from "./Card";
+import SearchCard from "./SearchCard";
 import ReviewCard from "./ReviewCard";
 import Footer from "./Footer";
 import axios from 'axios';
@@ -58,7 +58,7 @@ class SearchBody extends React.Component {
         var thiscourse=this.state.courses[0].course_num;
       }
       for (var i = 0; i < this.state.courses.length; i++) {
-        cards.push(<Card cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} professor={this.state.courses[i].professor} rating={this.state.courses[i].average_overall} key={i}/>);
+        cards.push(<SearchCard cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} sections={this.state.courses[i].sections} rating={this.state.courses[i].course_avg_overall} key={i}/>);
       }
     
     return (
