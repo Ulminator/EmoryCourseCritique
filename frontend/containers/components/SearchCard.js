@@ -66,7 +66,10 @@ class SearchCard extends React.Component {
     var sections=[];
     for(var i=0;i<this.props.sections.length;i++) 
     {
-      sections.push(<li onClick={this.reviewPage} data-id={this.props.sections[i].professor} key={i}><div style={{display:"inline"}}>{this.props.sections[i].professor}</div><div style={{display:"inline", float:"right"}}>{this.props.sections[i].average_overall}</div></li>);
+      var section_overall=this.props.sections[i].average_overall||"N/A";
+      if(i>0)
+        sections.push(<li className="divider" key={i-0.5}></li>);
+      sections.push(<li onClick={this.reviewPage} data-id={this.props.sections[i].professor} key={i} style={{cursor:"pointer", margin:"18px"}}><div style={{display:"inline"}}>{this.props.sections[i].professor}</div><div style={{display:"inline", float:"right"}}>{section_overall}</div></li>);
     }
     return (
       <div className="card-panel white black-text nohover2" >
@@ -101,7 +104,7 @@ class SearchCard extends React.Component {
             <li>
               <div className="collapsible-header" style={{width:"100%"}}><i className="material-icons">library_books</i>Sections</div>
               <div className="collapsible-body">
-                <ul style={{margin:"-10px"}}>
+                <ul style={{margin:"-28px"}}>
                   {sections}
                 </ul>
               </div>
