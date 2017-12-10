@@ -69,30 +69,36 @@ class SearchCard extends React.Component {
       var section_overall=this.props.sections[i].average_overall||"N/A";
       if(i>0)
         sections.push(<li className="divider" key={i-0.5}></li>);
-      sections.push(<li onClick={this.reviewPage} data-id={this.props.sections[i].professor} key={i} style={{cursor:"pointer", margin:"18px"}}><div style={{display:"inline"}}>{this.props.sections[i].professor}</div><div style={{display:"inline", float:"right"}}>{section_overall}</div></li>);
+      sections.push(<li onClick={this.reviewPage} data-id={this.props.sections[i].professor} key={i} style={{cursor:"pointer", margin:"18px 24px"}}>
+                      <div style={{display:"inline"}}>{this.props.sections[i].professor}</div>
+                      <div style={{display:"inline", float:"right"}}>{section_overall}</div>
+                    </li>);
     }
     return (
       <div className="card-panel white black-text nohover2" >
         <div className="row">
           <div className="col s6" >
             
-            <span onClick={this.onClick} onMouseOver=""
+            <span
               style={{
                 fontWeight: 300,
-                fontSize: '0.9rem',
-                cursor: 'pointer'
+                fontSize: '0.9rem'
+                
               }}
             >
-              {this.props.cnum}: {this.props.cname}
+              {this.props.cnum}: {this.props.cname} {" "}
+              <i className="material-icons" onClick={this.onClick} style={{fontSize:"16px", verticalAlign:"text-bottom", cursor:'pointer', color:"#225894"}}>info_outline</i>
             </span>{" "}
+
           </div>
-          <div className ="col s5">
+          <div className ="col s6">
           <h5 className={ratingColor}
             style={{
               fontWeight: 300,
               float: "right",
-              fontSize: '2.5rem'
-
+              fontSize: '2.5rem',
+              lineHeight: "15px",
+              marginBottom: "30px"
             }}
           >
             {rating}
@@ -102,14 +108,18 @@ class SearchCard extends React.Component {
 
           <ul className="collapsible shadowOverride" data-collapsible="accordion" style={{margin:-25}}>
             <li>
-              <div className="collapsible-header" style={{width:"100%"}}><i className="material-icons">library_books</i>Sections</div>
+              <div className="collapsible-header" style={{width:"100%"}}>
+                <i className="material-icons" style={{color:"#d38e02"}}>library_books</i>Sections
+                <i className="material-icons" style={{width:"100%", textAlign:"right"}}>arrow_drop_down</i>
+              </div>
               <div className="collapsible-body">
-                <ul style={{margin:"-28px"}}>
+                <ul style={{margin:"-28px", fontSize:"0.9rem", fontWeight:"300"}}>
                   {sections}
                 </ul>
               </div>
             </li>
           </ul>
+
 
       </div>
 
