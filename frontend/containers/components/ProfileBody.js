@@ -12,7 +12,7 @@ class ProfileBody extends React.Component {
     this.state = {
 
       course_num: '',
-      course_name: '',
+      name: '',
       sections: [],
       credits: '',
       ger: '',
@@ -102,7 +102,7 @@ class ProfileBody extends React.Component {
             
               self.setState({
                 course_num: response.data.course_num,
-                course_name: response.data.course_name,
+                name: response.data.course_name,
                 sections: response.data.sections,
                 credits: response.data.credits,
                 ger: response.data.ger,
@@ -127,7 +127,7 @@ class ProfileBody extends React.Component {
           .then(function (response) {
             
               self.setState({
-                course_name: response.data.professor,
+                name: response.data.professor,
                 sections: response.data.courses,
                 avg_difficulty:response.data.prof_avg_difficulty,
                 avg_overall:response.data.prof_avg_overall,
@@ -160,27 +160,27 @@ class ProfileBody extends React.Component {
 
     if(location.pathname==="/course")
     {
-      header=this.state.course_num+" - "+this.state.course_name;
+      header=this.state.course_num+" - "+this.state.name;
       description="Description:";
       ger="GER:";
       credits="Credits:";
       sections="total section(s)";
       for (var i = this.state.sections.length-1; i > -1; i--) {
         
-        cards.push(<Card cnum= {this.state.course_num} cname={this.state.course_name} professor={this.state.sections[i].professor} rating={this.state.sections[i].average_overall} key={i}/>);
+        cards.push(<Card cnum= {this.state.course_num} professor={this.state.sections[i].professor} title2={this.state.course_num+": "+this.state.name} title1={this.state.sections[i].professor} rating={this.state.sections[i].average_overall} key={i}/>);
         
       }
     }
     else if(location.pathname==="/prof")
     {
-      header=this.state.course_name;
+      header=this.state.name;
       description="";
       ger="";
       credits="";
       sections="course(s) taught";
       for (var i = this.state.sections.length-1; i > -1; i--) {
         
-        cards.push(<Card cnum= {this.state.sections[i].course_num} cname={this.state.sections[i].course_name} professor={this.state.course_name} rating={this.state.sections[i].average_overall} key={i}/>);
+        cards.push(<Card cnum= {this.state.sections[i].course_num} professor={this.state.name} title2={this.state.name} title1={this.state.sections[i].course_num+": "+this.state.sections[i].course_name} rating={this.state.sections[i].average_overall} key={i}/>);
         
       }
     }

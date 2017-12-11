@@ -51,11 +51,11 @@ class Card extends React.Component {
       ratingColor = "red-text text-lighten-1";
     }
     return (
-      <div className="card-panel white black-text" onClick={this.onClick} onMouseOver="" style={{cursor: 'pointer'}}>
+      <div className="card-panel white black-text row" onClick={this.onClick} onMouseOver="" style={{cursor: 'pointer'}}>
         <div className="row">
           <div className="col s6">
             <h6>
-              {this.props.professor}<span
+              {this.props.title1}<span
                 style={{
                   color: "#d18e01",
                 }}
@@ -69,7 +69,7 @@ class Card extends React.Component {
                 fontSize: '0.9rem'
               }}
             >
-              {this.props.cnum}: {this.props.cname}
+              {this.props.title2}
             </span>{" "}
           </div>
           <div className ="col s5">
