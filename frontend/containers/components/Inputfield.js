@@ -1697,7 +1697,7 @@ class Inputfield extends React.Component {
 "WGS312 - User's Guide to Freud": null,
 "WGS347 - Gender and Global Health": null
             },
-           // limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            limit: 60, // The max amount of results that can be shown at once. Default: Infinity.
             onAutocomplete: function(val) {
               // Callback function when value is autcompleted.
             var url = '/search?q='+val;
@@ -1733,7 +1733,7 @@ class Inputfield extends React.Component {
           value={this.state.inputValue.bind} 
           onChange={this.updateInputValue}
           onKeyPress={this._handleKeyPress}
-          style={{marginTop:10, height:height, backgroundColor:"#eeeeee", borderRadius:30}}
+          style={{marginTop:10, height:height, backgroundColor:"#eeeeee", borderRadius:5, border:".5px solid gainsboro"}}
         />
         <label
           className="label-icon hide-on-small-only inputOverride"

@@ -204,6 +204,14 @@ rbody {
                                   supported by Chrome and Opera */
 }
 
+@media only screen and (max-width : 600px) {
+
+.align-toggle{
+  text-align:left;
+}
+}
+
+
 /*about page*/
 .logoNavBarWithLogo{
   position: relative;

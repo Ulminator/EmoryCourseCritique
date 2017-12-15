@@ -156,6 +156,7 @@ class ProfileBody extends React.Component {
     var credits;
     var sections;
     var header;
+    var picture;
    
 
     if(location.pathname==="/course")
@@ -178,6 +179,7 @@ class ProfileBody extends React.Component {
       ger="";
       credits="";
       sections="course(s) taught";
+      picture=<i className="material-icons" style={{color:"#d38e02", fontSize:"60px"}}>account_circle</i>;
       for (var i = this.state.sections.length-1; i > -1; i--) {
         
         cards.push(<Card cnum= {this.state.sections[i].course_num} professor={this.state.name} title2={this.state.name} title1={this.state.sections[i].course_num+": "+this.state.sections[i].course_name} rating={this.state.sections[i].average_overall} key={i}/>);
@@ -263,25 +265,18 @@ class ProfileBody extends React.Component {
           </h5>
         
         <div className="container"
-          style={{
+          style={{maxWidth:"800px"
           }}
         >
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col s12">
 
               <div className="card-panel nohover2 white black-text row" >
-               <div className="col s12 m4">
+               <div className="col s12 m8">
                <h5 style={{fontSize:"1.3rem", fontWeight: "300"}}>{header}</h5>
 
-               <h5>Overall Quality:</h5>
-                <h4 className={ratingColor} style={{
-                      fontSize: "4.5rem",
-                    }}
-                  >
-                    
-                  {rating}
-                
-                </h4>
+                {picture}
+                <div className="hide-on-small-only">
                 <br />
                 <span
                   style={{
@@ -290,35 +285,7 @@ class ProfileBody extends React.Component {
                 >
                 {description} {this.state.description}
                 </span>
-                
-                <p className="" style={{margin: "0", position: "relative", top:"8px"}}>
-                <span
-                  style={{
-                    fontWeight: '400',
-                    fontSize: '2.4rem',
-                    color: '#283469'
-                  }}
-                >
-               {counter}
-                </span>{'\u00A0'}<span style={{color: "#424242",fontSize: '1.3rem',}}>  {sections}</span>{" "}
-                </p>
-                
-                <br />
-                
 
-              </div>
-              <div className="col s6 m4">
-                    <h5 style={{fontSize:"1.3rem"}}>Overall Difficulty:</h5>
-                <h4 className={ratingDifficultyColor}>
-             <span
-                    style={{
-                      fontSize: "2.7rem",
-                    }} 
-                  >
-                  {ratingDifficulty}
-                  </span>
-                </h4>
-                
                 <br />
                 <span
                   style={{
@@ -336,25 +303,23 @@ class ProfileBody extends React.Component {
                 >
                 {credits} {this.state.credits}
                 </span> 
-
-
-              </div>
-              <div className="col s6 m4 l4">
-                    <h5 style={{fontSize:"1.3rem"}}>Overall Workload:</h5>
-                <h4 className={ratingWorkloadColor}>
-             <span
-                    style={{
-                      fontSize: "2.7rem",
-                    }}
-                  >
-                  {ratingWorkload}
-                  </span>
-                </h4>
-                 <div className= "">
+                
+                <p className="" style={{margin: "0", position: "relative", top:"8px"}}>
+                <span
+                  style={{
+                    fontWeight: '400',
+                    fontSize: '2.4rem',
+                    color: '#283469'
+                  }}
+                >
+               {counter}
+                </span>{'\u00A0'}<span style={{color: "#424242",fontSize: '1.3rem',}}>  {sections}</span>{" "}
+                </p>
+                <div className= "">
 
                     <div style={{height: "24px"}}></div>
                     <h5 style={{fontSize:"1.3rem"}}>Sorted By:</h5>
-                    <div style={{height: "10px"}}></div>
+  
 
                     <a id="sortDropdown" className='dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}None{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}</a>
                
@@ -368,9 +333,118 @@ class ProfileBody extends React.Component {
                                         <div style={{height: "10px"}}></div>
 
                   </div>
-                  
+                <br />
+                </div>
+                
 
               </div>
+              
+             
+
+
+
+              
+
+              <div className="col s12 align-toggle m4 right-align row" style={{padding:"0px"}}>
+               
+                 <div className="col s4 m12">
+                  <h5 style={{fontSize:"1.3rem"}}>Overall Quality:</h5>
+                    <h4 className={ratingColor} style={{
+                          fontSize: "2.7rem",
+                        }}
+                      >
+                        
+                      {rating}
+                    
+                    </h4>
+                 </div>
+                 <div className="col s4 m12">
+                  <h5 style={{fontSize:"1.3rem"}}>Overall Difficulty:</h5>
+                    <h4 className={ratingDifficultyColor}>
+                 <span
+                        style={{
+                          fontSize: "2.7rem",
+                        }} 
+                      >
+                      {ratingDifficulty}
+                      </span>
+                    </h4>
+                 </div>
+                 <div className="col s4 m12">
+                        <h5 style={{fontSize:"1.3rem"}}>Overall Workload:</h5>
+                    <h4 className={ratingWorkloadColor}>
+                 <span
+                        style={{
+                          fontSize: "2.7rem",
+                        }}
+                      >
+                      {ratingWorkload}
+                      </span>
+                    </h4>
+                 </div>
+               
+
+              </div>
+
+              <div className="col s12 hide-on-med-and-up">
+               
+                <span
+                  style={{
+                    fontWeight: 300
+                  }}
+                >
+                {description} {this.state.description}
+                </span>
+
+                <br />
+                <span
+                  style={{
+                    fontWeight: 300
+                  }}
+                >
+                {ger} {this.state.ger}
+                </span>
+
+                <br />
+                <span
+                  style={{
+                    fontWeight: 300
+                  }}
+                >
+                {credits} {this.state.credits}
+                </span> 
+                
+                <p className="" style={{margin: "0", position: "relative", top:"8px"}}>
+                <span
+                  style={{
+                    fontWeight: '400',
+                    fontSize: '2.4rem',
+                    color: '#283469'
+                  }}
+                >
+               {counter}
+                </span>{'\u00A0'}<span style={{color: "#424242",fontSize: '1.3rem',}}>  {sections}</span>{" "}
+                </p>
+                <div className= "">
+
+                    <div style={{height: "24px"}}></div>
+                    <h5 style={{fontSize:"1.3rem"}}>Sorted By:</h5>
+  
+
+                    <a id="sortDropdown" className='dropdown-button btn' href='#' data-activates='dropdown1' data-beloworigin="true">{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}None{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}</a>
+               
+                    <ul id='dropdown1' className='dropdownOverride dropdown-content' style={{zIndex:50}}>
+                      <li><a href="#!" onClick={this.sortOverall}>Rating</a></li>
+                      <li><a href="#!" onClick={this.sortDifficulty}>Difficulty</a></li>
+                      <li><a href="#!" onClick={this.sortWorkload}>Workload</a></li>
+                    </ul>
+
+
+                                        <div style={{height: "10px"}}></div>
+
+                  </div>
+                <br />
+                </div>
 
                
               </div>

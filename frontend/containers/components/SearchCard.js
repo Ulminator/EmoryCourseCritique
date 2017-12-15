@@ -67,11 +67,25 @@ class SearchCard extends React.Component {
     for(var i=0;i<this.props.sections.length;i++) 
     {
       var section_overall=this.props.sections[i].average_overall||"N/A";
+
+      var ratingColor = "grey-text";
+      if(section_overall > 4){ //its pretty good rating
+        ratingColor = "green-text";
+
+      }else if(section_overall > 3){ //meh rating
+        ratingColor = "light-green-text";
+      }else if(section_overall > 2){ //garbo rating
+        ratingColor = "orange-text";
+      }
+      else if(section_overall>0){ //disgusting
+        ratingColor = "red-text text-lighten-1";
+      }
+
       if(i>0)
         sections.push(<li className="divider" key={i-0.5}></li>);
       sections.push(<li onClick={this.reviewPage} data-id={this.props.sections[i].professor} key={i} style={{cursor:"pointer", margin:"18px 24px"}}>
                       <div style={{display:"inline"}}>{this.props.sections[i].professor}</div>
-                      <div style={{display:"inline", float:"right"}}>{section_overall}</div>
+                      <div className={ratingColor} style={{display:"inline", float:"right"}}>{section_overall}</div>
                     </li>);
     }
     return (
