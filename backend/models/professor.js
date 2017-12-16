@@ -8,4 +8,6 @@ var professorSchema=new Schema({
   ratings:[{type: Schema.Types.ObjectId,ref:'rating'}]
 })
 
+professorSchema.plugin(require('mongoose-keywords'), {paths: ['name']});
+
 module.exports = mongoose.model('professor',professorSchema);
