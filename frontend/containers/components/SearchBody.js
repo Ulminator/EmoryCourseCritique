@@ -95,7 +95,7 @@ class SearchBody extends React.Component {
                 <li><a href="#professors">Professors</a></li>
               </ul>
             </div>
-            <div className="col hide-on-small-only m1" style={{width:"10px"}}/>
+            <div className="col hide-on-small-only m1" style={{width:"0px", marginRight:"-5px"}}/>
             <div className="col s12 m8" >
               <h5 className="center grey-text text-darken-2"
                 style={{
@@ -107,7 +107,7 @@ class SearchBody extends React.Component {
               </h5>
               <div style={{height: "20px"}}></div>
               <div id="courses" className="section scrollspy">
-              {cards}
+                {cards}
               </div>
               <h5 className="center grey-text text-darken-2"
                 style={{
