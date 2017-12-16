@@ -58,6 +58,7 @@ module.exports = function(req, res,next) {
         }
     var course_resp=[];
     var prof_resp=[];
+    var sendCount=0;
     Course.find(query.query, query.select, query.cursor).then(function(courses) {
 
         var count=courses.length;
@@ -156,6 +157,7 @@ module.exports = function(req, res,next) {
             {
                 console.log("COUNT IS 0");
                 console.log(course_resp);
+                sendCount++;
                 sendJson(course_resp, false);
             }
         }
@@ -163,11 +165,14 @@ module.exports = function(req, res,next) {
     
 
     Professor.find(query.query, query.select, query.cursor).then(function(professors) {
+        
+        console.log("PROFESSORS");
         console.log(professors);
-        var count=professors.length;
-        if(count===0)
+        var pcount=professors.length;
+        if(pcount===0)
         {
             console.log("NO PROFS");
+            sendCount++;
             sendJson(null,true);
         }
         
@@ -252,9 +257,10 @@ module.exports = function(req, res,next) {
                             sections: sections
                         }
             prof_resp.push(course);
-            count--;
-            if(count==0)
+            pcount--;
+            if(pcount==0)
             {
+                sendCount++;
                 sendJson(prof_resp,true)
             }
         }
@@ -264,15 +270,21 @@ module.exports = function(req, res,next) {
 
     function sendJson(data, send){
         
-        if(send)
+        if(sendCount>1)
         {
-            all.profs=data;
+            if(send)
+                all.profs=data;
+            else
+                all.courses=data;
             console.log(all);
             return res.end(JSON.stringify(all));
         }
         else
         {
-            all.courses=data;
+            if(send)
+                all.profs=data;
+            else
+                all.courses=data;
             console.log(data);
             console.log("COURSES:");
             console.log(all);
