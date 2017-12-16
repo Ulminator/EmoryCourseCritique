@@ -86,15 +86,7 @@ class SearchBody extends React.Component {
       <div style={{height: "60px"}}></div>
 
         <div className="container" style={{width: "95%", maxWidth: 1120}}>
-          <h5 className="center grey-text text-darken-2"
-            style={{
-              fontWeight: 300,
-              marginLeft: "10px"
-            }}>
-
-            <br/>
-            Course Results for <span className="black-text" style={{fontWeight: "400"}}>{input}</span>
-          </h5>
+          
           
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col hide-on-small-only m2">
@@ -103,7 +95,16 @@ class SearchBody extends React.Component {
                 <li><a href="#professors">Professors</a></li>
               </ul>
             </div>
-            <div className="col s12 m8" style={{marginLeft:"10px"}}>
+            <div className="col hide-on-small-only m1" style={{width:"10px"}}/>
+            <div className="col s12 m8" >
+              <h5 className="center grey-text text-darken-2"
+                style={{
+                  fontWeight: 300
+                }}>
+
+                <br/>
+                Course Results for <span className="black-text" style={{fontWeight: "400"}}>{input}</span>
+              </h5>
               <div style={{height: "20px"}}></div>
               <div id="courses" className="section scrollspy">
               {cards}
