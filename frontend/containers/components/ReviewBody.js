@@ -41,10 +41,12 @@ class ReviewBody extends React.Component {
   }
 
   profPage() {
+    var pname = this.state.reviewProfessor;
+        pname=pname.replace(", ","_");
     var querystring = require('querystring');
         
         var courseurl = '/prof?'+querystring.stringify({
-            prof: this.state.reviewProfessor,
+            prof: pname,
         });
         window.location.href=courseurl;
   }

@@ -17,18 +17,7 @@ class LoginPageContainer extends React.Component {
 
   }
 
-componentDidMount() {
-   $(document).ready(function(){
-      $(document).on("keydown", function(e){
-         if(e.keyCode == 13 ){
-            document.getElementById('loginBtn').click();
-         } 
-      });
-   });
-  }
-inputListener(e){
- 
-}
+
 
   updateLogin() {
     this.props.loginState();
@@ -66,7 +55,7 @@ inputListener(e){
              Materialize.toast(response.data.message, 4000);
 
           }
-          if(response.data.redirectUrl===("/rate?"+self.props.history.location.search)){
+          if(response.data.redirectUrl&&!self.props.history.location.key){
             self.updateLogin();
             self.props.history.push(response.data.redirectUrl)
             // window.location.replace(response.data.redirectUrl)

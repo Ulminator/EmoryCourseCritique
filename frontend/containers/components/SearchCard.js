@@ -13,17 +13,27 @@ class SearchCard extends React.Component {
   }
 
   onClick() {
-    /*console.log(this.props.professor);
-    var pname = this.props.professor;
-    pname=pname.replace(", ","_");
-    console.log(pname);*/
-    var querystring = require('querystring');
-        
-        var url2 = '/course?'+querystring.stringify({
-            course: this.props.cnum,
-        });
-            window.location.href = url2;  
-           //this.props.history.push(url2);     
+    if(this.props.isProf)
+    {
+        var pname = this.props.cnum;
+        pname=pname.replace(", ","_");
+        var querystring = require('querystring');
+          
+          var url2 = '/prof?'+querystring.stringify({
+              prof: pname,
+          });
+              window.location.href = url2; 
+    }
+    else
+    {
+      var querystring = require('querystring');
+          
+          var url2 = '/course?'+querystring.stringify({
+              course: this.props.cnum,
+          });
+              window.location.href = url2;  
+             //this.props.history.push(url2); 
+    }    
   }
 
   reviewPage(event) {
@@ -62,7 +72,7 @@ class SearchCard extends React.Component {
   });
     var rating = 0;
     var ratingColor = "grey-text";
-    if(this.props.rating === null || this.props.rating == "NaN"){
+    if(this.props.rating === null || this.props.rating == "NaN" || this.props.rating==0){
         rating = "N/A";
     }else if(this.props.rating > 4){ //its pretty good rating
       rating = this.props.rating;

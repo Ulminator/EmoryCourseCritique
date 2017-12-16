@@ -55,7 +55,7 @@ module.exports = function(res, query_string) {
                                         average_workload: (rating.total_workload / rating.rating_count).toFixed(2)
                                     }
                                     // add card to response
-                                    sendcprof(course_professor_rating, true);
+                                    sendcprof(course_professor_rating, rating.rating_count!=0);
                                 }
 
                             });
