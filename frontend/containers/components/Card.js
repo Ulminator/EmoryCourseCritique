@@ -33,7 +33,7 @@ class Card extends React.Component {
   render() {
     var rating = 0;
     var ratingColor = "grey-text";
-    if(!this.props.rating){
+    if(this.props.rating === null || this.props.rating == "NaN" || this.props.rating==0){
         rating = "N/A";
     }else if(this.props.rating > 4){ //its pretty good rating
       rating = this.props.rating;

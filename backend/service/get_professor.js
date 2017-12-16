@@ -68,9 +68,9 @@ module.exports = function(res, query_string) {
         function sendcprof(send, add) {
             if(add)
             {
-                total_overall+=send.average_overall;
-                total_workload+=send.average_workload;
-                total_difficulty+=send.average_difficulty;
+                total_overall+=Number(send.average_overall);
+                total_workload+=Number(send.average_workload);
+                total_difficulty+=Number(send.average_difficulty);
             }
             else
             {

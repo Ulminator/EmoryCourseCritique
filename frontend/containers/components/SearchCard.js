@@ -92,26 +92,28 @@ class SearchCard extends React.Component {
     var sections=[];
     for(var i=0;i<this.props.sections.length;i++) 
     {
-      var section_overall=this.props.sections[i].average_overall||"N/A";
+      var section_overall=this.props.sections[i].average_overall;
 
-      var ratingColor = "grey-text";
-      if(section_overall > 4){ //its pretty good rating
-        ratingColor = "green-text";
+      var ratingColor2 = "grey-text";
+      if(section_overall === null || section_overall == "NaN" || section_overall==0){
+        section_overall = "N/A";
+      }else if(section_overall > 4){ //its pretty good rating
+        ratingColor2 = "green-text";
 
       }else if(section_overall > 3){ //meh rating
-        ratingColor = "light-green-text";
+        ratingColor2 = "light-green-text";
       }else if(section_overall > 2){ //garbo rating
-        ratingColor = "orange-text";
+        ratingColor2 = "orange-text";
       }
       else if(section_overall>0){ //disgusting
-        ratingColor = "red-text text-lighten-1";
+        ratingColor2 = "red-text text-lighten-1";
       }
 
       if(i>0)
         sections.push(<li className="divider" key={i-0.5}></li>);
       sections.push(<li onClick={this.reviewPage} data-id={this.props.sections[i].section_name} key={i} style={{cursor:"pointer", margin:"18px 24px"}}>
                       <div style={{display:"inline"}}>{this.props.sections[i].section_name}</div>
-                      <div className={ratingColor} style={{display:"inline", float:"right"}}>{section_overall}</div>
+                      <div className={ratingColor2} style={{display:"inline", float:"right"}}>{section_overall}</div>
                     </li>);
     }
     return (

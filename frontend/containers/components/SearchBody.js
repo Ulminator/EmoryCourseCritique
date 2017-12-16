@@ -64,9 +64,7 @@ class SearchBody extends React.Component {
     console.log(this.props);
     
       console.log(this.state.courses);
-      if(this.state.courses[0]){
-        var thiscourse=this.state.courses[0].course_num;
-      }
+      
       if(this.state.courses)
       {
         for (var i = 0; i < this.state.courses.length; i++) {

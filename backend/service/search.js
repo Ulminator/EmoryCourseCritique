@@ -62,6 +62,12 @@ module.exports = function(req, res,next) {
     Course.find(query.query, query.select, query.cursor).then(function(courses) {
 
         var count=courses.length;
+        if(count===0)
+        {
+            sendCount++;
+            console.log("NO COURSES");
+            sendJson(null,false);
+        }
 
         // Iterate thrugh courses
         courses.forEach(function(courseItem) {
@@ -114,9 +120,10 @@ module.exports = function(req, res,next) {
             function sendcsection(send,add) {
                 if(add)
                 {
-                    total_overall+=send.average_overall;
-                    total_workload+=send.average_workload;
-                    total_difficulty+=send.average_difficulty;
+                    total_overall+=Number(send.average_overall);
+                    total_workload+=Number(send.average_workload);
+                    total_difficulty+=Number(send.average_difficulty);
+                    console.log(total_overall);
                 }
                 else
                 {
@@ -222,9 +229,9 @@ module.exports = function(req, res,next) {
             function sendpsection(send,add) {
                 if(add)
                 {
-                    total_overall+=send.average_overall;
-                    total_workload+=send.average_workload;
-                    total_difficulty+=send.average_difficulty;
+                    total_overall+=Number(send.average_overall);
+                    total_workload+=Number(send.average_workload);
+                    total_difficulty+=Number(send.average_difficulty);
                 }
                 else
                 {
@@ -289,7 +296,7 @@ module.exports = function(req, res,next) {
             console.log("COURSES:");
             console.log(all);
         }
-    }
+    } 
     
     //WARNING MESSING WITH DB make id's unique 
     /*
@@ -320,9 +327,10 @@ module.exports = function(req, res,next) {
 
         
 
-    }); 
+    }); */
 
-    /* WARNING MESSING WITH DB old search query
+    //WARNING MESSING WITH DB old search query
+    /*
     var this_resp = [];
     Course.find().then(function(courses) {
 
@@ -375,8 +383,34 @@ module.exports = function(req, res,next) {
                                           return next(err)
                                             // Professor findOne error
                                         } else {
-                                            this_professor.ratings.push(newRating._id);
-                                            this_professor.save();
+                                            if(this_professor.ratings)
+                                            {
+                                                /*var found = this_professor.ratings.some(function (el) {
+                                                    return el === rating._id;
+                                                });
+                                                //if(!(this_professor.ratings.includes(rating._id)))
+                                                //{
+                                                this_professor.ratings.push(newRating._id);
+                                                this_professor.save();
+                                                //}
+                                            }
+                                            else
+                                            {
+                                                var newArray= [];
+                                                newArray.push(newRating._id);
+                                                //var saveID=this_professor._id;
+                                                /*var new_prof = new Professor({
+                                                    name: this_professor.name,
+                                                    ratings: newArray,
+                                                });
+                                                this_professor.set({ratings:newArray});
+                                                this_professor.save();
+                                                //Professor.remove({_id: course.id}, function(err) {
+
+                                                //});
+                                                //Professor.update({name:this_professor.name},)
+                                                //new_prof.save();
+                                            }
                                         }
                                     });
                                     Course.findOne({'course_num': courseItem.course_num}, function(err, this_course) {
@@ -408,7 +442,7 @@ module.exports = function(req, res,next) {
                                     average_overall: (rating.total_overall / rating.rating_count).toFixed(2),
                                     average_workload: (rating.total_workload / rating.rating_count).toFixed(2)
                                 }
-                                Professor.findOne({'name':profName}, function(err, this_professor) {
+                                /*Professor.findOne({'name':profName}, function(err, this_professor) {
                                         if (err) {
                                           return next(err)
                                             // Professor findOne error
@@ -512,7 +546,7 @@ module.exports = function(req, res,next) {
             }
         }
 
-    }); 
+    }); */
     
-    */
+    
 }; 
