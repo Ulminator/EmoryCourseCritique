@@ -27,16 +27,32 @@ class SearchCard extends React.Component {
   }
 
   reviewPage(event) {
-    var pname = event.currentTarget.dataset.id;
-    pname=pname.replace(", ","_");
-    console.log(pname);
-    var querystring = require('querystring');
-        
-        var url2 = '/rating?'+querystring.stringify({
-            course: this.props.cnum,
-            prof:pname
-        });
-            window.location.href = url2; 
+    if(this.props.isProf)
+    {
+      var pname = this.props.cnum;
+      pname=pname.replace(", ","_");
+      console.log(pname);
+      var querystring = require('querystring');
+          
+          var url2 = '/rating?'+querystring.stringify({
+              course: event.currentTarget.dataset.id,
+              prof:pname
+          });
+              window.location.href = url2; 
+    }
+    else
+    {
+      var pname = event.currentTarget.dataset.id;
+      pname=pname.replace(", ","_");
+      console.log(pname);
+      var querystring = require('querystring');
+          
+          var url2 = '/rating?'+querystring.stringify({
+              course: this.props.cnum,
+              prof:pname
+          });
+              window.location.href = url2; 
+    }
   }
   
 
@@ -83,8 +99,8 @@ class SearchCard extends React.Component {
 
       if(i>0)
         sections.push(<li className="divider" key={i-0.5}></li>);
-      sections.push(<li onClick={this.reviewPage} data-id={this.props.sections[i].professor} key={i} style={{cursor:"pointer", margin:"18px 24px"}}>
-                      <div style={{display:"inline"}}>{this.props.sections[i].professor}</div>
+      sections.push(<li onClick={this.reviewPage} data-id={this.props.sections[i].section_name} key={i} style={{cursor:"pointer", margin:"18px 24px"}}>
+                      <div style={{display:"inline"}}>{this.props.sections[i].section_name}</div>
                       <div className={ratingColor} style={{display:"inline", float:"right"}}>{section_overall}</div>
                     </li>);
     }

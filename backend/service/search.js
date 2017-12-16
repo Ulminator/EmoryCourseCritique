@@ -61,7 +61,7 @@ module.exports = function(req, res,next) {
     Course.find(query.query, query.select, query.cursor).then(function(courses) {
 
         var count=courses.length;
-        
+
         // Iterate thrugh courses
         courses.forEach(function(courseItem) {
             var numSections = courseItem.ratings.length;
@@ -70,6 +70,11 @@ module.exports = function(req, res,next) {
             var total_difficulty=0;
             var total_workload=0;
             var this_sections=[];
+            if(courseItem.ratings.length===0)
+            {
+                numSections++;
+                sendcsection(null,false);
+            }
             // Iterate through each professor in each course
             courseItem.ratings.forEach(function(ratingID) {
 
@@ -81,28 +86,22 @@ module.exports = function(req, res,next) {
                             }
                             if (!rating) {
                                 // error finding a rating
-                                console.log(rating);
                                 
-                                var course_professor_rating = {
-                                    professor: null,
-                                    average_difficulty: null,
-                                    average_overall: null,
-                                    average_workload: null
-                                }
+                                
+                                console.log(ratingID);
                                 // add card to response
-                                sendcsection(course_professor_rating,false);
+                                sendcsection(ratingID,false);
 
 
                             } else {
-                                console.log(rating);
                                 var course_professor_rating = {
-                                    professor: rating.prof_id,
+                                    section_name: rating.prof_id,
                                     average_difficulty: (rating.total_difficulty / rating.rating_count).toFixed(2),
                                     average_overall: (rating.total_overall / rating.rating_count).toFixed(2),
                                     average_workload: (rating.total_workload / rating.rating_count).toFixed(2)
                                 }
                                 // add card to response
-                                sendcsection(course_professor_rating,true);
+                                sendcsection(course_professor_rating,rating.rating_count!=0);
                             }
 
                         });
@@ -122,15 +121,17 @@ module.exports = function(req, res,next) {
                 {
                     numRating--;
                 }
-            if(add)
+            if(send)
                 this_sections.push(send);
+            
+
             numSections--;
 
             if(numSections==0)
             {
-               console.log(numRating);
-               console.log(total_overall);
-               console.log((total_overall/numRating).toFixed(2));
+               //console.log(numRating);
+               //console.log(total_overall);
+               //console.log((total_overall/numRating).toFixed(2));
                courseJson(courseItem.course_num, courseItem.course_name,(total_overall/numRating).toFixed(2), (total_workload/numRating).toFixed(2), (total_difficulty/numRating).toFixed(2), this_sections);
             }
                         
@@ -140,7 +141,7 @@ module.exports = function(req, res,next) {
 
         // Pass data to sendJson
         function courseJson(course_num, course_name, overall,workload,difficulty,sections) {
-            console.log(overall);
+            //console.log(overall);
             var course={
                             course_num: course_num,
                             course_name: course_name,
@@ -153,6 +154,7 @@ module.exports = function(req, res,next) {
             count--;
             if(count==0)
             {
+                console.log("COUNT IS 0");
                 console.log(course_resp);
                 sendJson(course_resp, false);
             }
@@ -189,28 +191,21 @@ module.exports = function(req, res,next) {
                             }
                             if (!rating) {
                                 // error finding a rating
-                                console.log(rating);
                                 
-                                var course_professor_rating = {
-                                    course_num: null,
-                                    average_difficulty: null,
-                                    average_overall: null,
-                                    average_workload: null
-                                }
                                 // add card to response
-                                sendpsection(course_professor_rating,false);
+                                sendpsection(null,false);
 
 
                             } else {
                                 console.log(rating);
                                 var course_professor_rating = {
-                                    course_num: rating.class_id,
+                                    section_name: rating.class_id,
                                     average_difficulty: (rating.total_difficulty / rating.rating_count).toFixed(2),
                                     average_overall: (rating.total_overall / rating.rating_count).toFixed(2),
                                     average_workload: (rating.total_workload / rating.rating_count).toFixed(2)
                                 }
                                 // add card to response
-                                sendpsection(course_professor_rating,true);
+                                sendpsection(course_professor_rating,rating.rating_count!=0);
                             }
 
                         });
@@ -230,7 +225,7 @@ module.exports = function(req, res,next) {
                 {
                     numRating--;
                 }
-            if(add)
+            if(send)
                 this_sections.push(send);
             numSections--;
 

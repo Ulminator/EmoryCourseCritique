@@ -30,11 +30,11 @@ class SearchNavBar extends React.Component {
     var link;
     var link2;
     if(this.props.state.loginStatus){
-      link = <li onClick={() => this.logout()} style={{fontWeight:300,height:56, lineHeight:"56px", paddingRight: "12px", cursor: "pointer", color: "#d38e02"}}>LOGOUT</li>
+      link = <li onClick={() => this.logout()} style={{fontWeight:300,height:56, lineHeight:"60px", paddingRight: "12px", cursor: "pointer", color: "#d38e02"}}>LOGOUT</li>
     }
     else{
-      link = <li><Link to='/login' style={{fontWeight:300,height:56, lineHeight:"56px", color: "#d38e02"}}>LOGIN</Link></li>
-      link2 = <li className="hide-on-med-and-down"><Link to='/signup' style={{fontWeight:300,height:56, lineHeight:"56px", color: "#d38e02"}}>SIGNUP</Link></li>
+      link = <li><Link to='/login' style={{fontWeight:300,height:56, lineHeight:"60px", color: "#d38e02"}}>LOGIN</Link></li>
+      link2 = <li className="hide-on-med-and-down"><Link to='/signup' style={{fontWeight:300,height:56, lineHeight:"60px", color: "#d38e02"}}>SIGNUP</Link></li>
     }
     return (
       <nav className= "navOverride2 z-depth-1">

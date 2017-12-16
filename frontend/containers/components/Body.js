@@ -11,9 +11,9 @@ class Body extends React.Component {
 
         <div className="container">
           <div className="row">
-            <div className="hide-on-small-only"
+            <div 
               style={{
-                height: "24px"
+                height: "36px"
               }}
             />
             <Title />

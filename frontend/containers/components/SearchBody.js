@@ -67,11 +67,17 @@ class SearchBody extends React.Component {
       if(this.state.courses[0]){
         var thiscourse=this.state.courses[0].course_num;
       }
-      for (var i = 0; i < this.state.courses.length; i++) {
-        cards.push(<SearchCard cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} sections={this.state.courses[i].sections} rating={this.state.courses[i].course_avg_overall} key={i}/>);
+      if(this.state.courses)
+      {
+        for (var i = 0; i < this.state.courses.length; i++) {
+          cards.push(<SearchCard cnum= {this.state.courses[i].course_num} cname={this.state.courses[i].course_name} sections={this.state.courses[i].sections} rating={this.state.courses[i].course_avg_overall} key={i}/>);
+        }
       }
-      for (var i = 0; i < this.state.profs.length; i++) {
-        profcards.push(<SearchCard cnum= {this.state.profs[i].professor} sections={this.state.profs[i].sections} rating={this.state.profs[i].course_avg_overall} key={i}/>);
+      if(this.state.profs)
+      {
+        for (var i = 0; i < this.state.profs.length; i++) {
+          profcards.push(<SearchCard cnum= {this.state.profs[i].professor} sections={this.state.profs[i].sections} rating={this.state.profs[i].course_avg_overall} isProf={true} key={i}/>);
+        }
       }
     
     return (
@@ -84,7 +90,8 @@ class SearchBody extends React.Component {
         <div className="container" style={{width: "95%", maxWidth: 1120}}>
           <h5 className="center grey-text text-darken-2"
             style={{
-              fontWeight: 300
+              fontWeight: 300,
+              marginLeft: "10px"
             }}>
 
             <br/>
@@ -98,7 +105,7 @@ class SearchBody extends React.Component {
                 <li><a href="#professors">Professors</a></li>
               </ul>
             </div>
-            <div className="col s12 m8">
+            <div className="col s12 m8" style={{marginLeft:"10px"}}>
               <div style={{height: "20px"}}></div>
               <div id="courses" className="section scrollspy">
               {cards}
