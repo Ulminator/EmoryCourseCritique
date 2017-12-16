@@ -45,7 +45,7 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
 .input-field input[type=search]:focus {
   color:black !important;
   background-color:white !important;
-  border: 1px solid !important;
+  border: .5px solid !important;
   box-shadow: none !important;
 }
 

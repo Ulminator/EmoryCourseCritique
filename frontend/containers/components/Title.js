@@ -39,7 +39,7 @@ class Title extends React.Component {
             <nav
               className
               style={{
-                background: "white",
+                background: "transparent",
                 height:56,
                 borderRadius:30
               }}
