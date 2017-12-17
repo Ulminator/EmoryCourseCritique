@@ -41,11 +41,14 @@ module.exports = function(req, res,next) {
         course.save();
       });
     });*/
-    /*
-    Professor.find().then(function(courses) {
+    
+    //WARNING: MESSING WITH DB
+    /*Professor.find().then(function(courses) {
       courses.forEach(function(course) {
 
-        course.keywords.push(course.name);
+        prof_name=course.name.replace(',','');
+        course.keywords.push(prof_name);
+        course.keywords.shift();
         console.log(course.keywords);
         course.save();
       });
