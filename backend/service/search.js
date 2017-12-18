@@ -62,7 +62,7 @@ module.exports = function(req, res,next) {
     var course_resp=[];
     var prof_resp=[];
     var sendCount=0;
-    Course.find(query.query, query.select, query.cursor).then(function(courses) {
+    Course.find(query.query, query.select, query.cursor).lean().then(function(courses) {
 
         var count=courses.length;
         if(count===0)
@@ -99,8 +99,7 @@ module.exports = function(req, res,next) {
                                 
                                 
                                 console.log(ratingID);
-                                // add card to response
-                                sendcsection(ratingID,false);
+
 
 
                             } else {
@@ -114,7 +113,7 @@ module.exports = function(req, res,next) {
                                 sendcsection(course_professor_rating,rating.rating_count!=0);
                             }
 
-                        });
+                        }).lean();
 
 
 
@@ -132,7 +131,6 @@ module.exports = function(req, res,next) {
                 {
                     numRating--;
                 }
-            if(send)
                 this_sections.push(send);
             
 
@@ -174,7 +172,7 @@ module.exports = function(req, res,next) {
 
     
 
-    Professor.find(query.query, query.select, query.cursor).then(function(professors) {
+    Professor.find(query.query, query.select, query.cursor).lean().then(function(professors) {
         
         console.log("PROFESSORS");
         console.log(professors);
@@ -207,8 +205,7 @@ module.exports = function(req, res,next) {
                             if (!rating) {
                                 // error finding a rating
                                 
-                                // add card to response
-                                sendpsection(null,false);
+                                console.log(ratingID);
 
 
                             } else {
@@ -223,7 +220,7 @@ module.exports = function(req, res,next) {
                                 sendpsection(course_professor_rating,rating.rating_count!=0);
                             }
 
-                        });
+                        }).lean();
 
 
 
@@ -240,7 +237,6 @@ module.exports = function(req, res,next) {
                 {
                     numRating--;
                 }
-            if(send)
                 this_sections.push(send);
             numSections--;
 

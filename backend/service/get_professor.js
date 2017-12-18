@@ -52,7 +52,7 @@ module.exports = function(res, query_string) {
                             sendcprof(course_professor_rating, rating.rating_count!=0);
                         }
 
-                    });
+                    }).lean();
                 })
                 
             } 
@@ -90,7 +90,7 @@ module.exports = function(res, query_string) {
             }
         }
 
-    });
+    }).lean();
 
     
 };

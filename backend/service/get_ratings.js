@@ -9,7 +9,7 @@ module.exports = function(res, query_string){
     console.log(query_string['prof']);
     prof_id= query_string['prof'].replace("_",", ");
 
-    Rating.findOne({class_id:query_string['course'],prof_id:prof_id}).deepPopulate('ratings').exec(function(err,rating){
+    Rating.findOne({class_id:query_string['course'],prof_id:prof_id}).deepPopulate('ratings').lean().exec(function(err,rating){
       console.log(rating);
       res.json(rating)
     })

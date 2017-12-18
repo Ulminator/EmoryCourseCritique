@@ -23,11 +23,11 @@ module.exports = function(res, query_string) {
                 this_course.professors.forEach(function(profName) {
 
                 // Find matching professor
-                    Professor.findOne({'name': profName}, function(err, professor) {
+                    Professor.find({'name': profName}, function(err, professor) {
                         if (err) {
                             return next(err)
                             // error finding a professor
-                        } else if (this_course) {
+                        } else if (professor) {
                             // Find matching rating
                             Rating.findOne({'class_id': this_course.course_num, 'prof_id': profName}, function(err, rating) {
                                 if(err){
@@ -58,10 +58,10 @@ module.exports = function(res, query_string) {
                                     sendcprof(course_professor_rating, rating.rating_count!=0);
                                 }
 
-                            });
+                            }).lean();
 
                         }
-                    });
+                    }).limit(1).lean();
 
                 });
                 // Pass data to sendJson
@@ -101,5 +101,5 @@ module.exports = function(res, query_string) {
                 //res.redirect('/404');
             }
         }
-    });
+    }).lean();
 };
