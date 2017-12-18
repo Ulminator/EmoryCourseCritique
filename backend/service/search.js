@@ -90,11 +90,11 @@ module.exports = function(req, res,next) {
 
                 // Find matching professor
                 
-                        Rating.findOne({'_id': ratingID}, function(err, rating) {
+                        Rating.find({'_id': ratingID}, function(err, rating) {
                             if(err){
                               return next(err)
                             }
-                            if (!rating) {
+                            if (!rating[0]) {
                                 // error finding a rating
                                 
                                 sendcsection(null,false);
@@ -103,6 +103,7 @@ module.exports = function(req, res,next) {
 
 
                             } else {
+                                var rating=rating[0];
                                 var course_professor_rating = {
                                     section_name: rating.prof_id,
                                     average_difficulty: (rating.total_difficulty / rating.rating_count).toFixed(2),
@@ -113,7 +114,7 @@ module.exports = function(req, res,next) {
                                 sendcsection(course_professor_rating,rating.rating_count!=0);
                             }
 
-                        }).lean();
+                        }).lean().limit(1);
 
 
 
@@ -199,18 +200,18 @@ module.exports = function(req, res,next) {
 
                 // Find matching professor
                 
-                        Rating.findOne({'_id': ratingID}, function(err, rating) {
+                        Rating.find({'_id': ratingID}, function(err, rating) {
                             if(err){
                               return next(err)
                             }
-                            if (!rating) {
+                            if (!rating[0]) {
                                 // error finding a rating
                                 
                                 console.log(ratingID);
 
 
                             } else {
-                                console.log(rating);
+                                var rating=rating[0];
                                 var course_professor_rating = {
                                     section_name: rating.class_id,
                                     average_difficulty: (rating.total_difficulty / rating.rating_count).toFixed(2),
@@ -221,7 +222,7 @@ module.exports = function(req, res,next) {
                                 sendpsection(course_professor_rating,rating.rating_count!=0);
                             }
 
-                        }).lean();
+                        }).lean().limit(1);
 
 
 

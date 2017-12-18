@@ -23,24 +23,19 @@ module.exports = function(res, query_string) {
 
                 courses.forEach(function(courseItem) {
                     // Find matching rating
-                    Rating.findOne({'class_id': courseItem.course_num, 'prof_id': prof_id}, function(err, rating) {
+                    Rating.find({'class_id': courseItem.course_num, 'prof_id': prof_id}, function(err, rating) {
                         if(err){
                           return next(err)
                         }
-                        if (!rating) {
+                        if (!rating[0]) {
                             // error finding a rating
-                            var course_professor_rating = {
-                                course_num: courseItem.course_num,
-                                course_name: courseItem.course_name,
-                                average_difficulty: null,
-                                average_overall: null,
-                                average_workload: null
-                            }
+                            
                             // add card to response
-                            sendcprof(course_professor_rating, false);
+                            sendcprof(null, false);
 
 
                         } else {
+                            var rating =rating[0];
                             var course_professor_rating = {
                                 course_num: courseItem.course_num,
                                 course_name: courseItem.course_name,
@@ -52,7 +47,7 @@ module.exports = function(res, query_string) {
                             sendcprof(course_professor_rating, rating.rating_count!=0);
                         }
 
-                    }).lean();
+                    }).lean().limit(1);
                 })
                 
             } 
@@ -76,7 +71,8 @@ module.exports = function(res, query_string) {
             {
                 numSections--;
             }
-            this_resp.push(send);
+            if(send)
+                this_resp.push(send);
             count--;
             if(count==0)
             {

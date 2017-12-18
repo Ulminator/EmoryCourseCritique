@@ -4,14 +4,14 @@ var Rating = require(path.join(__dirname,'..','/models/ratings.js'));
 var Professor = require(path.join(__dirname,'..','/models/professor.js'));
 
 module.exports = function(res, query_string) {
-    Course.findOne({'course_num': query_string['course']}, function(err, this_course) {
+    Course.find({'course_num': query_string['course']}, function(err, this_course) {
         if (err) {
             // findOne error
             res.json({error: err});
         } else {
-            if (this_course) {
+            if (this_course[0]) {
                 // Course found
-                console.log(this_course);
+                var this_course=this_course[0];
 
                 var count=this_course.professors.length;
                 var numSections=count;
@@ -29,25 +29,20 @@ module.exports = function(res, query_string) {
                             // error finding a professor
                         } else if (professor) {
                             // Find matching rating
-                            Rating.findOne({'class_id': this_course.course_num, 'prof_id': profName}, function(err, rating) {
+                            Rating.find({'class_id': this_course.course_num, 'prof_id': profName}, function(err, rating) {
                                 if(err){
                                   return next(err)
                                 }
-                                if (!rating) {
+                                if (!rating[0]) {
                                     // error finding a rating
                                     console.log(profName);
-                                    var course_professor_rating = {
-                                        professor: profName,
-                                        average_difficulty: null,
-                                        average_overall: null,
-                                        average_workload: null
-                                    }
+                                    
                                     // add card to response
-                                    sendcprof(course_professor_rating, false);
+                                    sendcprof(null, false);
 
 
                                 } else {
-                                    console.log(profName);
+                                    var rating=rating[0];
                                     var course_professor_rating = {
                                         professor: profName,
                                         average_difficulty: (rating.total_difficulty / rating.rating_count).toFixed(2),
@@ -58,7 +53,7 @@ module.exports = function(res, query_string) {
                                     sendcprof(course_professor_rating, rating.rating_count!=0);
                                 }
 
-                            }).lean();
+                            }).lean().limit(1);
 
                         }
                     }).limit(1).lean();
@@ -76,7 +71,8 @@ module.exports = function(res, query_string) {
                     {
                         numSections--;
                     }
-                    this_resp.push(send);
+                    if(send)
+                        this_resp.push(send);
                     count--;
                     if(count==0)
                     {
@@ -101,5 +97,5 @@ module.exports = function(res, query_string) {
                 //res.redirect('/404');
             }
         }
-    }).lean();
+    }).lean().limit(1);
 };
