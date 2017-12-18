@@ -97,7 +97,7 @@ module.exports = function(req, res,next) {
                             if (!rating) {
                                 // error finding a rating
                                 
-                                
+                                sendcsection(null,false);
                                 console.log(ratingID);
 
 
@@ -131,6 +131,7 @@ module.exports = function(req, res,next) {
                 {
                     numRating--;
                 }
+            if(send)
                 this_sections.push(send);
             
 
