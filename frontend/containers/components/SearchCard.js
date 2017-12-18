@@ -65,11 +65,14 @@ class SearchCard extends React.Component {
     }
   }
   
-
-  render() {
+  componentWillMount() {
     $(document).ready(function(){
     $('.collapsible').collapsible();
   });
+  }
+
+  render() {
+    
     var rating = 0;
     var ratingColor = "grey-text";
     if(this.props.rating === null || this.props.rating == "NaN" || this.props.rating==0){

@@ -49,9 +49,9 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
   box-shadow: none !important;
 }
 
-html, lbody { height: 100%; }
+html, lbody { height: 100%; touch-action: manipulation; }
 /*home start */
-html, body { height: 100%; }
+html, body { height: 100%; touch-action: manipulation; }
 
  body {
     display: block;
