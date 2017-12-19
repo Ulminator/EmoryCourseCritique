@@ -88,7 +88,7 @@ html, body { height: 100%; touch-action: manipulation; }
 
 .body-container {
 	  height: 100%;
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5 )), url('https://www.sph.emory.edu/departments/epi/images/emory%20hospital-aerial%20shot.jpg');
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5 )), url('../imgs/emory_20hospital-aerial_20shot.jpg');
     background-repeat:no-repeat;
     background-position:center top;
     background-size: cover;

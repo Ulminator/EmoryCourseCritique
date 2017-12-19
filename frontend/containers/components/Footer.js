@@ -1,5 +1,4 @@
 import React from "react";
-import Footercopyright from "./Footercopyright";
 
 class Footer extends React.Component {
   render() {
@@ -41,7 +40,14 @@ class Footer extends React.Component {
             </div>
           </div>
         </div>
-        <Footercopyright />
+        <div className="footer-copyright">
+          <div className="container">
+            © 2017 CAMAJA
+            <a className="grey-text text-lighten-4 right">
+              Atlanta, GA
+            </a>
+          </div>
+        </div>
       </footer>
     );
   }
