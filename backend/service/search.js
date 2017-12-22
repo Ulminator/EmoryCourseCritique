@@ -1,5 +1,6 @@
 const path = require('path');
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 var Course = require(path.join(__dirname,'..','/models/course.js'));
 var Rating = require(path.join(__dirname,'..','/models/ratings.js'));
 var Professor = require(path.join(__dirname,'..','/models/professor.js'));
@@ -53,8 +54,106 @@ module.exports = function(req, res,next) {
         course.save();
       });
     });*/
+
+    //new and improved query
+    var all={
+            courses:[],
+            profs:[]
+        };
+    console.log(query);
+    Course.aggregate([
+        {"$match":query.query},
+        {"$lookup": {
+            "from": "ratings",
+            "localField": "ratings",
+            "foreignField": "_id",
+            "as": "ratings"
+        }},
+        {"$project": {
+            "course_num": 1,
+            "course_name": 1,
+            "sections": {"$map": {
+                input:"$ratings",
+                as:"rating",
+                in: {
+                    "section_name": "$$rating.prof_id",
+                    "average_overall": {"$cond": [ {"$eq": [ "$$rating.rating_count", 0 ] }, "N/A", {"$divide": ["$$rating.total_overall", "$$rating.rating_count"]} ]}
+                }
+            }},
+            //"course_avg_overall": {"$avg": "$ratings.average_overall"},
+
+            "weight": {
+                "$add": [
+                { "$cond": {
+                  "if": { "$eq": [0,{"$indexOfCP": [ "$course_num", query.query.keywords.source.toUpperCase() ]}] }, 
+                  "then": 1,
+                  "else": 0
+                }}
+              ] 
+          }
+        }},
+
+
+        {"$addFields": {
+            "course_avg_overall": {"$avg": "$sections.average_overall"}//{"$divide": ["$total_overall", "$rating_count"]}
+        }},
+
+        { "$sort": { "weight": -1 } },
+        {"$limit": 40}
+
+        ]).exec((err, courses) => {
+            if (err) throw err;
+            console.log(courses);
+            all.courses=courses;
+            //return res.end(JSON.stringify(all));
+            //console.log(courses[0].ratings);
+        })
+    .finally(function() {
+
+    Professor.aggregate([
+        {"$match":query.query},
+        {"$limit":20},
+        {"$lookup": {
+            "from": "ratings",
+            "localField": "ratings",
+            "foreignField": "_id",
+            "as": "ratings"
+        }},
+        {"$project": {
+            "professor": "$name",
+            "sections": {"$map": {
+                input:"$ratings",
+                as:"rating",
+                in: {
+                    "section_name": "$$rating.class_id",
+                    "average_overall": {"$cond": [ {"$eq": [ "$$rating.rating_count", 0 ] }, "N/A", {"$divide": ["$$rating.total_overall", "$$rating.rating_count"]} ]}
+                }
+            }}
+            //"course_avg_overall": {"$avg": "$ratings.average_overall"},
+
+        }},
+
+
+        {"$addFields": {
+            "course_avg_overall": {"$avg": "$sections.average_overall"}//{"$divide": ["$total_overall", "$rating_count"]}
+        }}
+
+        ]).exec((err, profs) => {
+            if (err) throw err;
+            console.log(profs);
+            all.profs=profs;
+            //console.log(courses[0].ratings);
+            
+        })
+        .finally(function(){
+        return res.end(JSON.stringify(all));
+    });
+    })
     
     
+
+    //old query
+    /*
     var all={
             courses:[],
             profs:[]
@@ -62,6 +161,9 @@ module.exports = function(req, res,next) {
     var course_resp=[];
     var prof_resp=[];
     var sendCount=0;
+    console.log(query);
+    console.log(query.query);
+    console.log(query.query.keywords=="cs 323");
     Course.find(query.query, query.select, query.cursor).lean().then(function(courses) {
 
         var count=courses.length;
