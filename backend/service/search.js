@@ -63,25 +63,11 @@ module.exports = function(req, res,next) {
     console.log(query);
     Course.aggregate([
         {"$match":query.query},
-        {"$lookup": {
-            "from": "ratings",
-            "localField": "ratings",
-            "foreignField": "_id",
-            "as": "ratings"
-        }},
+        
         {"$project": {
             "course_num": 1,
             "course_name": 1,
-            "sections": {"$map": {
-                input:"$ratings",
-                as:"rating",
-                in: {
-                    "section_name": "$$rating.prof_id",
-                    "average_overall": {"$cond": [ {"$eq": [ "$$rating.rating_count", 0 ] }, "N/A", {"$divide": ["$$rating.total_overall", "$$rating.rating_count"]} ]}
-                }
-            }},
-            //"course_avg_overall": {"$avg": "$ratings.average_overall"},
-
+            "ratings":1,
             "weight": {
                 "$add": [
                 { "$cond": {
@@ -93,20 +79,40 @@ module.exports = function(req, res,next) {
           }
         }},
 
+        { "$sort": { "weight": -1 } },
+        {"$limit": 40},
 
-        {"$addFields": {
-            "course_avg_overall": {"$avg": "$sections.average_overall"}//{"$divide": ["$total_overall", "$rating_count"]}
+        {"$lookup": {
+            "from": "ratings",
+            "localField": "ratings",
+            "foreignField": "_id",
+            "as": "ratings"
         }},
 
-        { "$sort": { "weight": -1 } },
-        {"$limit": 40}
+        {"$project": {
+            "course_num": 1,
+            "course_name": 1,
+            "sections": {"$map": {
+                input:"$ratings",
+                as:"rating",
+                in: {
+                    "section_name": "$$rating.prof_id",
+                    "average_overall": {"$cond": [ {"$eq": [ "$$rating.rating_count", 0 ] }, "N/A", {"$divide": ["$$rating.total_overall", "$$rating.rating_count"]} ]}
+                }
+            }}
+            
+        }},
+
+
+        {"$addFields": {
+            "course_avg_overall": {"$avg": "$sections.average_overall"}
+        }}
 
         ]).exec((err, courses) => {
             if (err) throw err;
             console.log(courses);
             all.courses=courses;
-            //return res.end(JSON.stringify(all));
-            //console.log(courses[0].ratings);
+            
         })
     .finally(function() {
 
@@ -129,20 +135,18 @@ module.exports = function(req, res,next) {
                     "average_overall": {"$cond": [ {"$eq": [ "$$rating.rating_count", 0 ] }, "N/A", {"$divide": ["$$rating.total_overall", "$$rating.rating_count"]} ]}
                 }
             }}
-            //"course_avg_overall": {"$avg": "$ratings.average_overall"},
 
         }},
 
 
         {"$addFields": {
-            "course_avg_overall": {"$avg": "$sections.average_overall"}//{"$divide": ["$total_overall", "$rating_count"]}
+            "course_avg_overall": {"$avg": "$sections.average_overall"}
         }}
 
         ]).exec((err, profs) => {
             if (err) throw err;
             console.log(profs);
             all.profs=profs;
-            //console.log(courses[0].ratings);
             
         })
         .finally(function(){
