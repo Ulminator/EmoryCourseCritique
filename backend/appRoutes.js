@@ -80,7 +80,7 @@ module.exports = function(app,passport,nev,transport){
 
     // Get a course list from the search on the main page
     // e.g. /search?q=AAS100&page=1&sort=course_num
-    app.get('/test', querymen.middleware(), function(req, res,next) {
+    app.get('/test', querymen.middleware({filter: {type:String, paths: ['filter'], bindTo:['cursor']}}), function(req, res,next) {
         require('./service/search.js')(req, res,next);
     });
 

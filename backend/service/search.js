@@ -60,7 +60,17 @@ module.exports = function(req, res,next) {
             courses:[],
             profs:[]
         };
-    console.log(query);
+    var profQuery={keywords:query.query.keywords};
+    if(query.cursor.filter)
+    {
+        query.query.course_num= new RegExp("^"+query.cursor.filter, "i");
+    }
+    var sort;
+    if(query.cursor.sort.overall===1)
+        sort={ "$sort": { "course_avg_overall": -1 } }
+    else
+        sort={"$limit": 40}
+
     Course.aggregate([
         {"$match":query.query},
         
@@ -106,7 +116,8 @@ module.exports = function(req, res,next) {
 
         {"$addFields": {
             "course_avg_overall": {"$avg": "$sections.average_overall"}
-        }}
+        }},
+        sort
 
         ]).exec((err, courses) => {
             if (err) throw err;
@@ -117,7 +128,7 @@ module.exports = function(req, res,next) {
     .finally(function() {
 
     Professor.aggregate([
-        {"$match":query.query},
+        {"$match":profQuery},
         {"$limit":20},
         {"$lookup": {
             "from": "ratings",
@@ -141,7 +152,8 @@ module.exports = function(req, res,next) {
 
         {"$addFields": {
             "course_avg_overall": {"$avg": "$sections.average_overall"}
-        }}
+        }},
+        sort
 
         ]).exec((err, profs) => {
             if (err) throw err;
