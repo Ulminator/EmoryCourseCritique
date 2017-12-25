@@ -61,18 +61,22 @@ module.exports = function(req, res,next) {
             profs:[]
         };
     var profQuery={keywords:query.query.keywords};
-    if(query.cursor.filter)
+    console.log(query);
+    /*if(query.cursor.filter)
     {
-        query.query.course_num= new RegExp("^"+query.cursor.filter, "i");
-    }
+        query.query.dept= query.cursor.filter;
+    }*/
     var sort;
     if(query.cursor.sort.overall===1)
         sort={ "$sort": { "course_avg_overall": -1 } }
     else
         sort={"$limit": 40}
 
+    console.log(query.query);
+
+
     Course.aggregate([
-        {"$match":query.query},
+        {"$match": query.query},
         
         {"$project": {
             "course_num": 1,
