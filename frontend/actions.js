@@ -8,6 +8,12 @@ export function LoginAction() {
 }
 
 export function LogoutAction() {
-  console.log('Logout Action');
   return { type: 'logout' }
+}
+
+export function filterOn(url) {
+  return {
+    type: 'FILTER_ON',
+    url: url
+  }
 }

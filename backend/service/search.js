@@ -62,21 +62,37 @@ module.exports = function(req, res,next) {
         };
     var profQuery={keywords:query.query.keywords};
     console.log(query);
+    console.log(query.cursor);
     /*if(query.cursor.filter)
     {
         query.query.dept= query.cursor.filter;
     }*/
     var sort;
     if(query.cursor.sort.overall===1)
-        sort={ "$sort": { "course_avg_overall": -1 } }
+        sort={ "$sort": { "course_avg_overall": -1 } };
     else
         sort={"$limit": 40}
+
+    if(query.query.course_num)
+    {
+        if(query.query.course_num.$in)
+        {
+            for(var i=0;i<query.query.course_num.$in.length;i++)
+            {
+                query.query.course_num.$in[i]=new RegExp("^[A-Z]*"+query.query.course_num.$in[i]);
+            }
+        }
+        else
+            query.query.course_num=new RegExp("^[A-Z]*"+query.query.course_num);
+    }
+
 
     console.log(query.query);
 
 
     Course.aggregate([
         {"$match": query.query},
+
         
         {"$project": {
             "course_num": 1,
