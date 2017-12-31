@@ -81,7 +81,7 @@ module.exports = function(app,passport,nev,transport){
     // Get a course list from the search on the main page
     // e.g. /search?q=AAS100&page=1&sort=course_num
     app.get('/test', querymen.middleware({dept: {type:[String], paths: ['dept'], bindTo:['query']}, 
-      level: {type:[String], paths: ['course_num'], bindTo:['query']}}), function(req, res,next) {
+      level: {type:[String], paths: ['course_num'], bindTo:['query']}, ger: {type:[String], paths: ['ger'], bindTo: ['query']}}), function(req, res,next) {
         require('./service/search.js')(req, res,next);
     });
 

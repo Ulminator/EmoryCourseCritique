@@ -13,14 +13,18 @@ class SearchBody extends React.Component {
     this.state = {
       courses: [],
       profs: [],
-      depts: [{id:"AAS", name:"African American Studies", checked:false},{id:"AFS", name:"African Studies", checked:false}],
+      depts: [{id:"AAS", name:"African American Studies", checked:false},{id:"AFS", name:"African Studies", checked:false},{id:"AMST", name:"American Studies", checked:false},{id:"ANCMED", name:"Ancient Mediterranean Studies", checked:false},{id:"ANT", name:"Anthropology", checked:false},{id:"ARAB", name:"Arabic", checked:false},{id:"ARTHIST", name:"Art History", checked:false},{id:"ARTVIS", name:"Visual Arts", checked:false},{id:"BIOL", name:"Biology", checked:false},{id:"CBSC", name:"Community Bldg & Social Change", checked:false},{id:"CHEM", name:"Chemistry", checked:false},{id:"CHN", name:"Chinese Language", checked:false},{id:"CL", name:"Classics", checked:false},{id:"CPLT", name:"Comparative Literature", checked:false},{id:"CS", name:"Computer Science", checked:false},{id:"DANC", name:"Dance", checked:false},{id:"EAS", name:"East Asian Studies", checked:false},{id:"ECON", name:"Economics", checked:false},{id:"ECS", name:"Emory College Seminar", checked:false},{id:"ENG", name:"English", checked:false},{id:"ENGCW", name:"Creative Writing", checked:false},{id:"ENVS", name:"Environmental Studies", checked:false},{id:"FILM", name:"Film and Media Studies", checked:false},{id:"FREN", name:"French", checked:false},{id:"GER", name:"German", checked:false},{id:"GRK", name:"Greek", checked:false},{id:"HEBR", name:"Hebrew", checked:false},{id:"HIST", name:"History", checked:false},{id:"HLTH", name:"Human Health Program", checked:false},{id:"HNDI", name:"Hindi", checked:false},{id:"IDS", name:"Interdisciplinary Studies", checked:false},{id:"ITAL", name:"Italian", checked:false},{id:"JPN", name:"Japanese", checked:false},{id:"JS", name:"Jewish Studies", checked:false},{id:"KRN", name:"Korean", checked:false},{id:"LACS", name:"Latin Amer & Caribbean Studies", checked:false},{id:"LAT", name:"Latin", checked:false},{id:"LING", name:"Linguistics", checked:false},{id:"MATH", name:"Mathematics", checked:false},{id:"MESAS", name:"Middle Eastern & South Asian", checked:false},{id:"MUS", name:"Music", checked:false},{id:"NBB", name:"Neuroscience & Behavioral Sci", checked:false},{id:"NRSG", name:"Nursing", checked:false},{id:"OISP", name:"Academic Study Abroad Course", checked:false},{id:"PACE", name:"PACE", checked:false},{id:"PE", name:"Health and Physical Education", checked:false},{id:"PERS", name:"Persian", checked:false},{id:"PHIL", name:"Philosophy", checked:false},{id:"PHYS", name:"Physics", checked:false},{id:"POLS", name:"Political Science", checked:false},{id:"PORT", name:"Portuguese", checked:false},{id:"PSYC", name:"Psychology", checked:false},{id:"QTM", name:"Quantitative Theory & Methods", checked:false},{id:"REES", name:"Russian, E European, Eurasian", checked:false},{id:"REL", name:"Religion - Undergraduate", checked:false},{id:"RUSS", name:"Russian", checked:false},{id:"SIRE", name:"Scholarly Inquiry and Research", checked:false},{id:"SOC", name:"Sociology", checked:false},{id:"SPAN", name:"Spanish", checked:false},{id:"TBT", name:"Tibetan", checked:false},{id:"THEA", name:"Theater Studies", checked:false},{id:"WGS", name:"Women's Gender & Sexuality", checked:false}],
       lookup: {AAS:0, AFS:1},
-      levels: [false, false, false, false]
+      ger: {FSEM:false, FWRT:false, WRT:false, MQR:false, SNT:false, HSC:false, HAP:false, HAL:false, HTH:false, PED:false},
+      levels: [false, false, false, false],
+      sortOverall: false
 
 
     }
     this.handleCheck = this.handleCheck.bind(this);
     this.handleLevel = this.handleLevel.bind(this);
+    this.handleGER = this.handleGER.bind(this);
+    this.handleSort = this.handleSort.bind(this);
 
   }
 
@@ -34,6 +38,8 @@ class SearchBody extends React.Component {
 
     var urlDepts = parsed.dept;
     var urlLevels = parsed.level;
+    var urlGERs =parsed.ger;
+    var urlSort = parsed.sort;
 
     var paramExist=false;
 
@@ -68,6 +74,32 @@ class SearchBody extends React.Component {
         var tempLevels=this.state.levels;
         tempLevels[urlLevels-1]=true;
         this.setState({levels:tempLevels});
+      }
+    }
+
+    if(urlGERs)
+    {
+      paramExist=true;
+      if(urlGERs.constructor===Array) {
+        var tempGERs=this.state.ger;
+        for(var i=0;i<urlGERs.length;i++) {
+          tempGERs[urlGERs[i]]=true;
+        }
+        this.setState({ger:tempGERs});
+      }
+      else {
+        var tempGERs=this.state.ger;
+        tempGERs[urlGERs]=true;
+        this.setState({ger:tempGERs});
+      }
+    }
+
+    if(urlSort)
+    {
+      
+      if(urlSort==="overall") {
+        paramExist=true;
+        this.setState({sortOverall:true});
       }
     }
 
@@ -194,6 +226,61 @@ class SearchBody extends React.Component {
         });
   }
 
+  handleGER(event) {
+    console.log(event.currentTarget);
+    var newUrl;
+    var querystring = require('querystring');
+    var parsed = querystring.parse(location.search.slice(1));
+    if(event.target.checked)
+    {
+      if(parsed.ger)
+      {
+        if(parsed.ger.constructor===Array)
+          parsed.ger.push(event.currentTarget.id);
+        else 
+        {
+          var ger=[];
+          ger.push(parsed.ger);
+          ger.push(event.currentTarget.id);
+          parsed.ger=ger;
+        }
+      }
+      else
+        parsed.ger=event.currentTarget.id;
+      newUrl=querystring.stringify(parsed);
+    }
+    else
+    {
+      if(parsed.ger.constructor===Array)
+      {
+        var index=parsed.ger.indexOf(event.currentTarget.id);
+        parsed.ger.splice(index,1);
+        newUrl=querystring.stringify(parsed);
+      }
+      else
+      {
+        delete parsed.ger;
+        newUrl=querystring.stringify(parsed);
+      }
+    }
+
+    window.history.replaceState('','', "search?"+newUrl);
+    var self=this;
+      axios.get('/test'+location.search)
+        .then(function (response) {
+          
+            self.setState({
+              courses:response.data.courses,
+              profs:response.data.profs
+            })
+          
+          
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
+
   handleLevel(event) {
     console.log(event.currentTarget);
     var newUrl;
@@ -249,6 +336,44 @@ class SearchBody extends React.Component {
         });
   }
 
+  handleSort(event) {
+    console.log(event.currentTarget);
+    var newUrl;
+    var querystring = require('querystring');
+    var parsed = querystring.parse(location.search.slice(1));
+    if(event.target.value==="overall")
+    {
+      
+      parsed.sort=event.target.value;
+      newUrl=querystring.stringify(parsed);
+    }
+    else
+    {
+      if(parsed.sort)
+      {
+        delete parsed.sort;
+        newUrl=querystring.stringify(parsed);
+      }
+      
+    }
+
+    window.history.replaceState('','', "search?"+newUrl);
+    var self=this;
+      axios.get('/test'+location.search)
+        .then(function (response) {
+          
+            self.setState({
+              courses:response.data.courses,
+              profs:response.data.profs
+            })
+          
+          
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
+
 
 
   render() {
@@ -281,6 +406,24 @@ class SearchBody extends React.Component {
       else
         levels.push(<li key={i+0.2}><input id={i+1} onClick={this.handleLevel} type="checkbox" key={i}/><label htmlFor={i+1} key={i+0.5}>{i+1}00</label></li>);
     }
+
+    var gers = [];
+    var i=0;
+    for(var key in this.state.ger)
+    {
+
+      if(this.state.ger[key])
+        gers.push(<li key={i+0.2}><input id={key} onClick={this.handleGER} type="checkbox" defaultChecked key={i}/><label htmlFor={key} key={i+0.5}>{key}</label></li>);
+      else
+        gers.push(<li key={i+0.2}><input id={key} onClick={this.handleGER} type="checkbox" key={i}/><label htmlFor={key} key={i+0.5}>{key}</label></li>);
+      i++;
+    }
+
+    var overallOption;
+    if(this.state.sortOverall)
+      overallOption=<option value="overall" selected>Overall</option>;
+    else
+      overallOption=<option value="overall">Overall</option>;
       
       if(this.state.courses)
       {
@@ -306,8 +449,12 @@ class SearchBody extends React.Component {
           
           
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
-            <div className="col hide-on-small-only m2">
-              <div className="card-panel white nohover2 hide-on-med-and-down" style={{position:"fixed", padding:"15px"}}>
+            <div className="col hide-on-small-only m3 l2">
+              <ul className="section table-of-contents" style={{marginTop:"72px"}}>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#professors">Professors</a></li>
+              </ul>
+              <div className="card-panel white nohover2 show-on-med-and-up" style={{position:"fixed", padding:"15px", marginTop:"100px"}}>
                 <span
                   style={{
                     fontWeight: 500,
@@ -361,16 +508,7 @@ class SearchBody extends React.Component {
                     <div className="dropdown-list" style={{display: "none", fontSize:"12px"}}>
                         <input type="search" placeholder="Search" className="dropdown-search browser-default"/>
                         <ul style={{fontSize:"10px"}}>
-                          <li><input id="FSEM" type="checkbox"/><label htmlFor="FSEM">FSEM</label></li>
-                          <li><input id="FWRT" type="checkbox"/><label htmlFor="FWRT">FWRT</label></li>
-                          <li><input id="WRT" type="checkbox"/><label htmlFor="WRT">WRT</label></li>
-                          <li><input id="MQR" type="checkbox"/><label htmlFor="MQR">MQR</label></li>
-                          <li><input id="SNT" type="checkbox"/><label htmlFor="SNT">SNT</label></li>
-                          <li><input id="HSC" type="checkbox"/><label htmlFor="HSC">HSC</label></li>
-                          <li><input id="HAP" type="checkbox"/><label htmlFor="HAP">HAP</label></li>
-                          <li><input id="HAL" type="checkbox"/><label htmlFor="HAL">HAL</label></li>
-                          <li><input id="HTH" type="checkbox"/><label htmlFor="HTH">HTH</label></li>
-                          <li><input id="PED" type="checkbox"/><label htmlFor="PED">PED</label></li>
+                          {gers}
                         </ul>
                     </div>
                 </div>
@@ -401,7 +539,7 @@ class SearchBody extends React.Component {
                 <li className="divider" />
                 <br/>
                 <div>
-                  <div style={{color:"black", fontSize:"12px", display:"inline-block"}}>Start new search or</div>
+                  <div style={{color:"black", fontSize:"12px", display:"inline-block"}}>Search for all courses</div>
                   <div style={{display: "inline-block",
                               fontSize: "12px",
                               padding: "2px",
@@ -415,18 +553,16 @@ class SearchBody extends React.Component {
                 </div>
                 <div className="hide-on-med-and-down" style={{position:"fixed", marginTop:"36px"}}>
                   <label>Sort By:</label>
-                    <select className="browser-default">
+                    <select className="browser-default" onChange={this.handleSort}>
                       <option value="">Relevance</option>
-                      <option value="1">Overall</option>
-                      <option value="2">Workload</option>
-                      <option value="3">Difficulty</option>
+                      {overallOption}
                     </select>
                 </div>
               </div>
               
             </div>
             <div className="col hide-on-med-and-down l1" style={{width:"0px", marginRight:"15px"}}/>
-            <div className="col s12 m8" >
+            <div className="col s12 m9 l8" >
               <h5 className="center grey-text text-darken-2"
                 style={{
                   fontWeight: 300
@@ -453,10 +589,7 @@ class SearchBody extends React.Component {
             </div>
             <div className="col hide-on-small-only m2 l1">
               
-              <ul className="section table-of-contents" style={{marginTop:"72px"}}>
-                <li><a href="#courses">Courses</a></li>
-                <li><a href="#professors">Professors</a></li>
-              </ul>
+              
             </div>
           </div>
         </div>
