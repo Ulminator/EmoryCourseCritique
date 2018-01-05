@@ -552,7 +552,7 @@ class SearchBody extends React.Component {
                               cursor: "pointer"}}>Apply
                   </div>
                 </div>
-                <div className="hide-on-med-and-down" style={{position:"fixed", marginTop:"36px"}}>
+                <div className="show-on-med-and-up" style={{position:"fixed", marginTop:"36px"}}>
                   <label>Sort By:</label>
                     <select className="browser-default" onChange={this.handleSort}>
                       <option value="">Relevance</option>
