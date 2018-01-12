@@ -37,7 +37,7 @@ class NavBar extends React.Component {
  render() {
     var link;
     var link2;
-    if(this.props.state.loginStatus){
+    if(this.props.state.logins.loginStatus){
       Materialize.toast('You are Logged in!', 4000);
 
       link = <li onClick={() => this.logout()} style={{cursor: "pointer"}}>Logout</li>;

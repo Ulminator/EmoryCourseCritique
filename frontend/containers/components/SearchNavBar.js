@@ -29,7 +29,7 @@ class SearchNavBar extends React.Component {
     var b=true;
     var link;
     var link2;
-    if(this.props.state.loginStatus){
+    if(this.props.state.logins.loginStatus){
       link = <li onClick={() => this.logout()} style={{fontWeight:300,height:56, lineHeight:"60px", paddingRight: "12px", cursor: "pointer", color: "#d38e02"}}>LOGOUT</li>
     }
     else{

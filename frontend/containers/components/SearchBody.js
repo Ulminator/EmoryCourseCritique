@@ -49,7 +49,7 @@ class SearchBody extends React.Component {
       if(urlDepts.constructor===Array) {     
         var tempDepts=this.state.depts;
         for(var i=0;i<urlDepts.length;i++) {
-          tempDepts[this.state.lookup.urlDepts[i]].checked=true;
+          tempDepts[this.state.lookup[urlDepts[i]]].checked=true;
         }
         this.setState({depts:tempDepts});
       }
