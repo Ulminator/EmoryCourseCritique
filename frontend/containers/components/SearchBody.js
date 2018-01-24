@@ -25,6 +25,8 @@ class SearchBody extends React.Component {
     this.handleLevel = this.handleLevel.bind(this);
     this.handleGER = this.handleGER.bind(this);
     this.handleSort = this.handleSort.bind(this);
+    this.clearFilter = this.clearFilter.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
 
   }
 
@@ -126,12 +128,9 @@ class SearchBody extends React.Component {
         .catch(function (error) {
           console.log(error);
         });
-      $(document).ready(function(){
-        $('.section.table-of-contents').pushpin({
-          top: 0,
-          offset: 0
-        });
-      }); 
+
+
+
       $(document).ready(function(){
         $('.scrollspy').scrollSpy();
       });
@@ -167,10 +166,55 @@ class SearchBody extends React.Component {
 
 
   }
+
+  componentDidMount() {
+    $(document).ready(function(){
+        $('.wrapper').pushpin({
+          top: 0,
+          bottom: $('.page-footer').offset().top - $(window).height(),
+          offset: 0
+        });
+        
+      }); 
+  }
+
+  componentDidUpdate() {
+    $(document).ready(function(){
+        $('.wrapper').pushpin({
+          top: 0,
+          bottom: $('.page-footer').offset().top - $(window).height(),
+          offset: 0
+        });
+        
+      }); 
+  }
 /*
   componentWillReceiveProps(nextProps){
     this.setState({user: nextProps.user})
   }*/
+
+  clearFilter() {
+    var newUrl;
+    var querystring = require('querystring');
+    var parsed = querystring.parse(location.search.slice(1));
+    var newparse = {q:parsed.q};
+    newUrl="search?"+querystring.stringify(newparse);
+    
+
+    window.location.href= newUrl;
+    
+  }
+
+  clearSearch() {
+    var newUrl;
+    var querystring = require('querystring');
+    var parsed = querystring.parse(location.search.slice(1));
+    parsed["q"] ="";
+    newUrl="search?"+querystring.stringify(parsed);
+    
+
+    window.location.href= newUrl;
+  }
 
   handleCheck(event) {
     console.log(event.currentTarget);
@@ -211,6 +255,7 @@ class SearchBody extends React.Component {
     }
 
     window.history.replaceState('','', "search?"+newUrl);
+    this.props.saveFilter(location.search);
     var self=this;
       axios.get('/test'+location.search)
         .then(function (response) {
@@ -266,6 +311,7 @@ class SearchBody extends React.Component {
     }
 
     window.history.replaceState('','', "search?"+newUrl);
+    this.props.saveFilter(location.search);
     var self=this;
       axios.get('/test'+location.search)
         .then(function (response) {
@@ -321,6 +367,7 @@ class SearchBody extends React.Component {
     }
 
     window.history.replaceState('','', "search?"+newUrl);
+    this.props.saveFilter(location.search);
     var self=this;
       axios.get('/test'+location.search)
         .then(function (response) {
@@ -359,6 +406,7 @@ class SearchBody extends React.Component {
     }
 
     window.history.replaceState('','', "search?"+newUrl);
+    this.props.saveFilter(location.search);
     var self=this;
       axios.get('/test'+location.search)
         .then(function (response) {
@@ -451,116 +499,128 @@ class SearchBody extends React.Component {
           
           <div className="row" style={{minHeight: "-webkit-fill-available"}}>
             <div className="col hide-on-small-only m3 l2">
-              <ul className="section table-of-contents" style={{marginTop:"72px"}}>
-                <li><a href="#courses">Courses</a></li>
-                <li><a href="#professors">Professors</a></li>
-              </ul>
-              <div className="card-panel white nohover2 show-on-med-and-up" style={{position:"fixed", padding:"15px", marginTop:"100px"}}>
-                <span
-                  style={{
-                    fontWeight: 500,
-                    fontSize: '0.9rem'
-                    
-                  }}
-                >
-                  Filters
-                </span>
-                <li className="divider" />
-                <br/>
-                <span
-                  style={{
-                    fontWeight: 5400,
-                    fontSize: '0.9rem'
-                    
-                  }}
-                >
-                Subjects:
-                </span>
-                <div className="dropdown-container">
-                    <div className="filter-button noSelect" style={{fontSize:"12px"}}>
-                        <div className="dropdown-label">Subjects</div>
-                        <div className="dropdown-quantity">(<span className="quantity">Any</span>)</div>
-                        <i className="fa fa-filter"></i>
-                    </div>
-                    <div className="dropdown-list" style={{display: "none", fontSize:"12px"}}>
-                        <input type="search" placeholder="Search" className="dropdown-search browser-default"/>
-                        <ul style={{fontSize:"10px"}}>
-                          {subjects}
-                        </ul>
-                    </div>
-                </div>
-                <li className="divider" />
-                <br/>
-                <span
-                  style={{
-                    fontWeight: 5400,
-                    fontSize: '0.9rem'
-                    
-                  }}
-                >
-                  GER:
-                </span>
-                <div className="dropdown-container">
-                    <div className="filter-button noSelect" style={{fontSize:"12px"}}>
-                        <div className="dropdown-label">GER</div>
-                        <div className="dropdown-quantity">(<span className="quantity">Any</span>)</div>
-                        <i className="fa fa-filter"></i>
-                    </div>
-                    <div className="dropdown-list" style={{display: "none", fontSize:"12px"}}>
-                        <input type="search" placeholder="Search" className="dropdown-search browser-default"/>
-                        <ul style={{fontSize:"10px"}}>
-                          {gers}
-                        </ul>
-                    </div>
-                </div>
-                <li className="divider" />
-                <br/>
-                <span
-                  style={{
-                    fontWeight: 5400,
-                    fontSize: '0.9rem'
-                    
-                  }}
-                >
-                  Course-level: &emsp;
-                </span>
-                <div className="dropdown-container">
-                    <div className="filter-button noSelect" style={{fontSize:"12px"}}>
-                        <div className="dropdown-label">Levels</div>
-                        <div className="dropdown-quantity">(<span className="quantity">Any</span>)</div>
-                        <i className="fa fa-filter"></i>
-                    </div>
-                    <div className="dropdown-list" style={{display: "none", fontSize:"12px"}}>
-                        <input type="search" placeholder="Search" className="dropdown-search browser-default"/>
-                        <ul style={{fontSize:"10px"}}>
-                          {levels}
-                        </ul>
-                    </div>
-                </div>
-                <li className="divider" />
-                <br/>
-                <div>
-                  <div style={{color:"black", fontSize:"12px", display:"inline-block"}}>Search for all courses</div>
+              <div className="wrapper" style={{minWidth:"fit-content"}}>
+                <ul className="section table-of-contents" style={{marginTop:"72px"}}>
+                  <li><a href="#courses">Courses</a></li>
+                  <li><a href="#professors">Professors</a></li>
+                </ul>
+                <div className="card-panel white nohover2 show-on-med-and-up" style={{padding:"15px"}}>
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      fontSize: '0.9rem'
+                      
+                    }}
+                  >
+                    Filters
+                  </span>
                   <div style={{display: "inline-block",
-                              fontSize: "12px",
-                              padding: "2px",
-                              background: "#2c64a4",
-                              border: "#2c64a4",
-                              borderRadius: "5px",
-                              float: "right",
-                              color: "white",
-                              cursor: "pointer"}}>Apply
+                                fontSize: "12px",
+                                padding: "1px 4px",
+                                background: "#2c64a4",
+                                border: "#2c64a4",
+                                borderRadius: "5px",
+                                float: "right",
+                                color: "white",
+                                cursor: "pointer"}} onClick={this.clearFilter}>Clear
+                    </div>
+                  <li className="divider" />
+                  <br/>
+                  <span
+                    style={{
+                      fontWeight: 5400,
+                      fontSize: '0.9rem'
+                      
+                    }}
+                  >
+                  Subjects:
+                  </span>
+                  <div className="dropdown-container">
+                      <div className="filter-button noSelect" style={{fontSize:"12px"}}>
+                          <div className="dropdown-label">Subjects</div>
+                          <div className="dropdown-quantity">(<span className="quantity">Any</span>)</div>
+                          <i className="fa fa-filter"></i>
+                      </div>
+                      <div className="dropdown-list" style={{display: "none", fontSize:"12px"}}>
+                          <input type="search" placeholder="Search" className="dropdown-search browser-default"/>
+                          <ul style={{fontSize:"10px"}}>
+                            {subjects}
+                          </ul>
+                      </div>
                   </div>
+                  <li className="divider" />
+                  <br/>
+                  <span
+                    style={{
+                      fontWeight: 5400,
+                      fontSize: '0.9rem'
+                      
+                    }}
+                  >
+                    GER:
+                  </span>
+                  <div className="dropdown-container">
+                      <div className="filter-button noSelect" style={{fontSize:"12px"}}>
+                          <div className="dropdown-label">GER</div>
+                          <div className="dropdown-quantity">(<span className="quantity">Any</span>)</div>
+                          <i className="fa fa-filter"></i>
+                      </div>
+                      <div className="dropdown-list" style={{display: "none", fontSize:"12px"}}>
+                          <input type="search" placeholder="Search" className="dropdown-search browser-default"/>
+                          <ul style={{fontSize:"10px"}}>
+                            {gers}
+                          </ul>
+                      </div>
+                  </div>
+                  <li className="divider" />
+                  <br/>
+                  <span
+                    style={{
+                      fontWeight: 5400,
+                      fontSize: '0.9rem'
+                      
+                    }}
+                  >
+                    Course-level: &emsp;
+                  </span>
+                  <div className="dropdown-container">
+                      <div className="filter-button noSelect" style={{fontSize:"12px"}}>
+                          <div className="dropdown-label">Levels</div>
+                          <div className="dropdown-quantity">(<span className="quantity">Any</span>)</div>
+                          <i className="fa fa-filter"></i>
+                      </div>
+                      <div className="dropdown-list" style={{display: "none", fontSize:"12px"}}>
+                          <input type="search" placeholder="Search" className="dropdown-search browser-default"/>
+                          <ul style={{fontSize:"10px"}}>
+                            {levels}
+                          </ul>
+                      </div>
+                  </div>
+                  <li className="divider" />
+                  <br/>
+                  <div>
+                    <div style={{color:"black", fontSize:"12px", display:"inline-block"}}>Clear Search Input:</div>
+                    <div style={{display: "inline-block",
+                                fontSize: "12px",
+                                padding: "1px 6px",
+                                background: "#2c64a4",
+                                border: "#2c64a4",
+                                borderRadius: "5px",
+                                float: "right",
+                                color: "white",
+                                cursor: "pointer"}} onClick={this.clearSearch}>Go
+                    </div>
+                  </div>
+                  
                 </div>
-                <div className="show-on-med-and-up" style={{position:"fixed", marginTop:"36px"}}>
-                  <label>Sort By:</label>
-                    <select className="browser-default" onChange={this.handleSort}>
-                      <option value="">Relevance</option>
-                      {overallOption}
-                    </select>
-                </div>
-              </div>
-              
+                <div className="show-on-med-and-up" style={{marginTop:"36px"}}>
+                    <label>Sort By:</label>
+                      <select className="browser-default" onChange={this.handleSort}>
+                        <option value="">Relevance</option>
+                        {overallOption}
+                      </select>
+                  </div>
+              </div> 
             </div>
             <div className="col hide-on-med-and-down l1" style={{width:"0px", marginRight:"15px"}}/>
             <div className="col s12 m9 l8" >

@@ -250,8 +250,10 @@ fieldset, label { margin: 0; padding: 0; }
 
 .dropdown-list {
     float: left;
-    width: 100%;
-
+    width: inherit;
+    position: absolute;
+    background: white;
+    margin-top:40px;
     border: 1px solid lightgray;
     border-top: none;
     box-sizing: border-box;
@@ -265,6 +267,7 @@ fieldset, label { margin: 0; padding: 0; }
         margin: 10px 0;
         max-height: 200px;
         overflow-y: auto;
+        position: relative;
         
     }
     ul li {

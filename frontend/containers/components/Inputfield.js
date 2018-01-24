@@ -30,12 +30,24 @@ class Inputfield extends React.Component {
       e.preventDefault();
       //console.log(this);
       var querystring = require('querystring');
-        var url = '/search?'+querystring.stringify({
+      var url;
+
+      if(this.props.state.filters.active)
+      {
+        var parsed = querystring.parse(this.props.state.filters.url.replace("?",""));
+        parsed["q"] = this.state.inputValue;
+        url = '/search?'+querystring.stringify(parsed);
+      }
+      else
+      {
+        url = '/search?'+querystring.stringify({
             q: this.state.inputValue
         });
+      }
+
         //this.props.history.push(url);
       window.location.href= url;
-      console.log(url);
+      console.log(this.props);
       
       
     }
